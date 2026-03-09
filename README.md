@@ -103,6 +103,7 @@ Leia o [`metodo/07-desafio-7-dias.md`](metodo/07-desafio-7-dias.md) e faça um p
 ia-sem-medo/
 │
 ├── 📖 metodo/                    O MÉTODO COMPLETO
+│   ├── 00-fase-pesquisa.md       Como pesquisar ANTES de programar
 │   ├── 01-filosofia.md           Por que a IA precisa de disciplina
 │   ├── 02-fluxo-completo.md      As 7+1 fases: do zero à produção
 │   ├── 03-tdd-com-ia.md          Testes como rede de segurança

@@ -1,7 +1,7 @@
 # Relatório de Pesquisa Analítica: O Método Fábio Akita de Engenharia de Software com Inteligência Artificial
 
 > Fonte: Gemini Deep Research — 09/03/2026
-> Google Doc: https://docs.google.com/document/d/15JYcR-NT9_sJIwox8V7IOsbC-lWbqo686iErb2xeplg/edit
+> (pesquisa interna — documento privado)
 
 ---
 

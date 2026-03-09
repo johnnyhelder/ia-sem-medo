@@ -41,10 +41,14 @@ Antes de qualquer coisa, coletar e organizar todas as informações:
 1. Entrevistar o utilizador sobre o projeto (objetivo, público, funcionalidades)
 2. Criar `DADOS-PROJETO.md` com todas as informações coletadas
 3. Sugerir pesquisas complementares se necessário (mercado, SEO, concorrência)
+3.1. Usar IA para gerar prompts de pesquisa profunda (mercado, SEO, concorrência)
+3.2. Executar as pesquisas e salvar os resultados em `pesquisas/`
 4. Discutir opções de ferramentas/stack com justificativas
 5. Criar `DECISOES-STACK.md` com escolhas justificadas
 
 **Template:** Ler `templates/DADOS-PROJETO-TEMPLATE.md` nesta pasta da skill.
+
+**Guia de pesquisa:** Ler `metodo/00-fase-pesquisa.md` para exemplos de prompts e tipos de pesquisa.
 
 **Entregável:** Documentação completa do projeto antes de qualquer código.
 

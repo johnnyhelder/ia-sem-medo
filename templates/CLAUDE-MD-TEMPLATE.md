@@ -68,7 +68,7 @@ projeto/
 (Regras específicas do negócio que a IA precisa saber)
 
 Exemplo:
-- "O nome correto é 'Diene Marinho', NÃO 'Dienne'"
+- "O nome correto é 'Maria da Silva', NÃO 'Maria Silva'"
 - "Preços sempre em euros (€), formato: €XX,XX"
 - "Tom de comunicação: profissional mas acolhedor"
 

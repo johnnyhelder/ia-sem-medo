@@ -45,7 +45,18 @@ cp ia-sem-medo/templates/DADOS-PROJETO-TEMPLATE.md seu-projeto/DADOS-PROJETO.md
 
 ---
 
-## Passo 3 — Preencha o PLAN.md
+## Passo 3 — Faça as pesquisas de base
+
+Antes de preencher o PLAN.md, use IA para pesquisar:
+- O mercado onde o projeto vai existir
+- O que o público busca no Google sobre o tema
+- O que os concorrentes estão fazendo
+
+Guia completo com prompts prontos: [`metodo/00-fase-pesquisa.md`](metodo/00-fase-pesquisa.md)
+
+---
+
+## Passo 4 — Preencha o PLAN.md
 
 Abra o PLAN.md e responda com sinceridade:
 
@@ -58,7 +69,7 @@ Não precisa ser bonito. Precisa ser claro.
 
 ---
 
-## Passo 4 — Preencha o CLAUDE.md
+## Passo 5 — Preencha o CLAUDE.md
 
 Este é o ficheiro que a IA vai ler para entender seu projeto. Quanto mais detalhado, melhores os resultados. No mínimo, preencha:
 
@@ -70,7 +81,7 @@ Se não sabe que tecnologias usar, pergunte à IA: *"Quero criar [seu projeto]. 
 
 ---
 
-## Passo 5 — Siga o Desafio dos 7 Dias
+## Passo 6 — Siga o Desafio dos 7 Dias
 
 Com o PLAN.md e CLAUDE.md prontos, siga o desafio:
 

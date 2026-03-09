@@ -13,7 +13,7 @@ Nenhuma linha de código é gerada antes do planejamento estar completo.
 ## As 7+1 Fases
 
 ### Fase 0 — Coleta e Inteligência (pré-projeto)
-Coletar todas as informações, fazer pesquisas, decidir ferramentas. Template: `DADOS-PROJETO-TEMPLATE.md`
+A fase mais subestimada e mais importante. Pesquisar o mercado, o público, as palavras-chave, a concorrência e as ferramentas ANTES de qualquer decisão técnica. Guia completo com exemplos de prompts: [`metodo/00-fase-pesquisa.md`](00-fase-pesquisa.md). Template de coleta: `DADOS-PROJETO-TEMPLATE.md`.
 
 ### Fase 1 — Isolamento (AI Jail)
 Criar ambiente seguro. Container Docker ou pasta isolada. A IA não precisa de acesso a tudo.

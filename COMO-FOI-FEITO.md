@@ -60,10 +60,10 @@ Para cada fase do método, criamos templates copiáveis:
 
 ## Testar na prática
 
-### Simulação: Projeto Diene Marinho
+### Simulação: Projeto de uma cliente
 Primeiro fizemos uma simulação teórica — pegamos um projeto real (site de uma massoterapeuta em Lisboa, já em produção) e mapeamos como seria aplicar o método retroativamente. Isso revelou o conceito de "Resgate": aplicar o método em projetos que já existem.
 
-### Resgate real: Diene Marinho
+### Resgate real: Projeto de uma cliente
 Aplicamos o Sprint 1 do resgate no projeto real — instalamos Vitest, criamos 15-20 testes automatizados cobrindo build, blog, SEO, APIs e acessibilidade. Resultado: o projeto que tinha ZERO testes passou a ter uma rede de segurança funcional.
 
 ### Resgate real: johnnyhelder.com
