@@ -36,6 +36,9 @@ projeto/
 │   └── ...
 ├── tests/
 │   └── ...
+├── docs/
+│   └── ...
+├── docker-compose.yml (se aplicável)
 └── .github/workflows/ (se aplicável)
 ```
 
@@ -50,18 +53,37 @@ projeto/
 ## Regras de Código
 
 ### Obrigatórias:
-- (Regras de nomenclatura: ficheiros, variáveis, classes)
-- (Regras de formatação: tabs vs spaces, max line length)
-- (Regras de organização: onde colocar models, services, utils)
+- (Regras de nomenclatura: ficheiros, variáveis, classes, etc.)
+- (Regras de formatação: tabs vs spaces, max line length, etc.)
+- (Regras de organização: onde colocar models, services, utils, etc.)
+- (Regras de commits: conventional commits, tamanho, frequência)
 
 ### Proibidas:
-- (O que a IA NÃO deve fazer)
-- (Padrões a evitar)
-- (Dependências proibidas)
+- (O que a IA NÃO deve fazer: ex: "nunca usar any em TypeScript")
+- (Padrões a evitar: ex: "nunca criar God classes com +500 linhas")
+- (Dependências proibidas: ex: "não instalar jQuery")
 
 ## Regras de Domínio / Negócio
 
 (Regras específicas do negócio que a IA precisa saber)
+
+Exemplo:
+- "O nome correto é 'Diene Marinho', NÃO 'Dienne'"
+- "Preços sempre em euros (€), formato: €XX,XX"
+- "Tom de comunicação: profissional mas acolhedor"
+
+## Regras de Conteúdo (se o projeto tem blog/textos)
+
+- (Template de artigo: estrutura, tamanho, etc.)
+- (Regras de SEO: keywords, meta tags, etc.)
+- (Regras de tom: formal, informal, educativo, etc.)
+- (Marcações internas: se usa algum sistema de tags)
+
+## Integrações Externas
+
+| Serviço | Uso | Documentação | Limites |
+|---------|-----|-------------|---------|
+| | | | |
 
 ## Comandos Frequentes
 
@@ -76,11 +98,17 @@ projeto/
 (comando para fazer build)
 
 # Deploy
-(comando para deploy)
+(comando para deploy, se manual)
+
+# Lint
+(comando para verificar qualidade do código)
 ```
 
 ## Estado Atual do Projeto
 
+(Atualizar esta seção à medida que o projeto evolui)
+
+### Fases concluídas:
 - [ ] Fase 0 — Coleta
 - [ ] Fase 1 — Isolamento
 - [ ] Fase 2 — Fundação
@@ -90,10 +118,27 @@ projeto/
 - [ ] Fase 6 — Interface
 - [ ] Fase 7 — Deploy
 
+### Features implementadas:
+- [ ] (feature 1)
+- [ ] (feature 2)
+
+### Pendências:
+- (o que falta fazer)
+
 ## Erros Conhecidos da IA
 
-> ⚠️ Atualizar TODA VEZ que a IA alucinar ou errar.
+> ⚠️ SEÇÃO CRÍTICA — Atualizar TODA VEZ que a IA alucinar ou errar.
+> Isso evita que o mesmo erro se repita.
 
 | Data | Erro | Correção | Contexto |
 |------|------|----------|----------|
 | | | | |
+
+Exemplo:
+| 2026-03-09 | IA usou import de módulo que não existe | Explicar que só usar imports nativos do framework | Tentou importar lib não instalada |
+
+## Notas Importantes
+
+- (Qualquer contexto adicional que ajude a IA a trabalhar melhor)
+- (Decisões tomadas que não são óbvias)
+- (Links úteis para documentação)
