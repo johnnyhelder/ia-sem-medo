@@ -16,17 +16,33 @@ Não precisa saber programar para começar. O método guia você.
 
 ---
 
-## Passo 1 — Instale o claude-code-poderoso
+## Passo 1 — Instale o Claude Code Super Power
 
-Uma única linha no terminal:
+### Modo fácil (sem terminal)
 
-```bash
-curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-poderoso/main/install.sh | bash
+Abra o Claude Code (em qualquer pasta) e cole exactamente isto:
+
+```
+Instala o Claude Code Super Power para mim.
+Repositório: https://github.com/johnnyhelder/claude-code-super-power
+
+Segue as instruções de INSTALL.md no repositório.
+Confirma comigo antes de qualquer comando destrutivo.
 ```
 
-Em 30 segundos você tem:
+O agente trata de tudo: clone, copy, configure. Em 30 segundos está pronto.
+
+### Modo terminal (alternativa)
+
+Se preferir, ou se o agente não tiver permissões:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash
+```
+
+Em qualquer dos modos, você fica com:
 - Skill `akita-method` em `~/.claude/skills/`
-- 5 slash commands `/poderoso:*` em `~/.claude/commands/`
+- 5 slash commands `/super-power:*` em `~/.claude/commands/super-power/`
 
 ---
 
@@ -58,7 +74,7 @@ claude
 Dentro do Claude Code:
 
 ```
-/poderoso:research
+/super-power:research
 ```
 
 A skill cria 4 ficheiros em `pesquisas/` com prompts prontos para você colar no Gemini Deep Research, ChatGPT ou Perplexity:
@@ -77,7 +93,7 @@ Cole cada prompt na ferramenta de pesquisa, copie a resposta de volta para o fic
 Quando os 4 ficheiros tiverem respostas reais:
 
 ```
-/poderoso:plan
+/super-power:plan
 ```
 
 A skill gera **4 ficheiros base** na raiz:
@@ -98,7 +114,7 @@ Os 4 princípios universais do CLAUDE.md são:
 ## Passo 6 — Comece a Fase 1
 
 ```
-/poderoso:start
+/super-power:start
 ```
 
 Configura `.claude/settings.json` com permissões granulares, cria estrutura de pastas, inicializa git. **ZERO código de negócio.**
@@ -109,17 +125,17 @@ Configura `.claude/settings.json` com permissões granulares, cria estrutura de 
 
 | Comando | Fase |
 |---------|------|
-| `/poderoso:phase 2` | Fundação — CLAUDE.md 200+ linhas |
-| `/poderoso:phase 3` | Testes — TDD puro, todos falhando |
-| `/poderoso:phase 4` | Implementação — código guiado pelos testes |
-| `/poderoso:phase 5` | Otimização — performance e refactoring |
-| `/poderoso:phase 6` | Interface — polir apresentação |
-| `/poderoso:phase 7` | Deploy — CI/CD automatizado |
+| `/super-power:phase 2` | Fundação — CLAUDE.md 200+ linhas |
+| `/super-power:phase 3` | Testes — TDD puro, todos falhando |
+| `/super-power:phase 4` | Implementação — código guiado pelos testes |
+| `/super-power:phase 5` | Otimização — performance e refactoring |
+| `/super-power:phase 6` | Interface — polir apresentação |
+| `/super-power:phase 7` | Deploy — CI/CD automatizado |
 
 A qualquer momento:
 
 ```
-/poderoso:status
+/super-power:status
 ```
 
 Mostra onde você está, o que falta, e o próximo comando recomendado.
@@ -153,7 +169,7 @@ Depois de completar o Desafio dos 7 Dias:
 ## Dúvidas frequentes
 
 **"Qual IA devo usar?"**
-Este repo é optimizado para **Claude Code**. O método funciona com outras IAs (ChatGPT, Cursor, etc.), mas os slash commands `/poderoso:*` são específicos do Claude Code.
+Este repo é optimizado para **Claude Code**. O método funciona com outras IAs (ChatGPT, Cursor, etc.), mas os slash commands `/super-power:*` são específicos do Claude Code.
 
 **"Preciso saber programar?"**
 Ajuda, mas não é obrigatório. O método ensina você a **pensar como engenheiro** antes de escrever código. A IA faz a parte técnica, você faz a parte estratégica.
@@ -165,4 +181,4 @@ O Desafio dos 7 Dias pode ser feito em 7-14 dias reais, dedicando 1-2 horas por 
 Melhor ainda. Pule o básico e foque nos testes (Fase 3) e no CI/CD (Fase 7) — que é provavelmente o que está faltando nos seus projetos.
 
 **"Posso usar isso em projetos existentes?"**
-Sim. Em vez de `/poderoso:research`, comece com `/graphify .` para mapear o que já existe, depois rode `/poderoso:plan` para gerar PLAN.md/CLAUDE.md retroactivamente.
+Sim. Em vez de `/super-power:research`, comece com `/graphify .` para mapear o que já existe, depois rode `/super-power:plan` para gerar PLAN.md/CLAUDE.md retroactivamente.

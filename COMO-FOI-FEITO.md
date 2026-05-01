@@ -85,7 +85,7 @@ Com o método testado na prática, decidimos abrir tudo:
 
 ---
 
-## Reestruturação para `claude-code-poderoso`
+## Reestruturação para `claude-code-super-power`
 
 Em maio de 2026, fizemos uma reestruturação completa para transformar o repositório de uma documentação do método Akita num **kit de instalação único para Claude Code**. Os passos:
 
@@ -102,18 +102,18 @@ Identificamos quatro fontes públicas de alta qualidade que complementam o méto
 Escrevemos um `install.sh` que pode ser executado via:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-poderoso/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash
 ```
 
-O script clona o repositório, instala a skill em `~/.claude/skills/akita-method/` e os slash commands em `~/.claude/commands/poderoso/`. Uma única linha resolve toda a configuração.
+O script clona o repositório, instala a skill em `~/.claude/skills/akita-method/` e os slash commands em `~/.claude/commands/super-power/`. Uma única linha resolve toda a configuração.
 
 ### 3. Criar 5 slash commands
 
-- `/poderoso:research` — gera prompts de pesquisa Fase 0
-- `/poderoso:plan` — consolida pesquisas em PLAN.md + CLAUDE.md + PROJECT.md + NOW.md
-- `/poderoso:start` — Fase 1 (setup seguro)
-- `/poderoso:phase N` — avança para fase N (2-7)
-- `/poderoso:status` — mostra estado actual
+- `/super-power:research` — gera prompts de pesquisa Fase 0
+- `/super-power:plan` — consolida pesquisas em PLAN.md + CLAUDE.md + PROJECT.md + NOW.md
+- `/super-power:start` — Fase 1 (setup seguro)
+- `/super-power:phase N` — avança para fase N (2-7)
+- `/super-power:status` — mostra estado actual
 
 ### 4. Genericizar referências a infra própria
 A versão original do método Akita falava em "AI Jail" e Docker como camada obrigatória. Para tornar acessível a iniciantes, transformamos isto em "Setup Seguro do Claude Code" focado em `.claude/settings.json` com permissões granulares. Docker passou a ser opcional para projetos de alto risco.

@@ -17,8 +17,8 @@
 
 - Criar uma pasta para o projeto
 - Instalar as ferramentas necessárias (Node, Python, etc.)
-- Instalar o `claude-code-poderoso` (`curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-poderoso/main/install.sh | bash`)
-- Abrir Claude Code na pasta e rodar `/poderoso:research` para começar
+- Instalar o `claude-code-super-power` (`curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash`)
+- Abrir Claude Code na pasta e rodar `/super-power:research` para começar
 - Configurar `.claude/settings.json` (o instalador cria um base que pode ajustar)
 - (Opcional, projetos de alto risco) Configurar Docker como isolamento extra
 

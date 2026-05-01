@@ -3,7 +3,7 @@ description: Avança para a Fase N do método (2-7) com regras específicas
 argument-hint: "<número da fase: 2, 3, 4, 5, 6 ou 7>"
 ---
 
-# /poderoso:phase
+# /super-power:phase
 
 Executa a Fase N do método. Cada fase tem entregáveis específicos e regras inegociáveis.
 

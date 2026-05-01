@@ -96,7 +96,7 @@ Critérios de sucesso fortes permitem que o agente itere de forma independente. 
 
 ## Como integrar no seu projeto
 
-Estes 4 princípios já estão pré-injetados no `CLAUDE-MD-TEMPLATE.md` deste repositório. Quando você roda `/poderoso:plan`, eles entram automaticamente no `CLAUDE.md` do seu projeto.
+Estes 4 princípios já estão pré-injetados no `CLAUDE-MD-TEMPLATE.md` deste repositório. Quando você roda `/super-power:plan`, eles entram automaticamente no `CLAUDE.md` do seu projeto.
 
 Para projetos existentes, basta colar a Parte A do template no seu `CLAUDE.md` actual.
 

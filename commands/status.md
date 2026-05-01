@@ -3,7 +3,7 @@ description: Lê CLAUDE.md + NOW.md e mostra estado do projeto
 argument-hint: ""
 ---
 
-# /poderoso:status
+# /super-power:status
 
 Resumo rápido do projeto. Útil ao retomar trabalho ou abrir nova sessão.
 
@@ -59,7 +59,7 @@ Comando sugerido:
 ### 3. Se faltar contexto
 
 Se NÃO existir `CLAUDE.md`:
-> "Este projeto ainda não tem CLAUDE.md. Comece com `/poderoso:research` ou `/poderoso:plan`."
+> "Este projeto ainda não tem CLAUDE.md. Comece com `/super-power:research` ou `/super-power:plan`."
 
 Se existir CLAUDE.md mas não NOW.md:
 > "CLAUDE.md existe mas NOW.md não. Vou criar agora baseado no estado actual."

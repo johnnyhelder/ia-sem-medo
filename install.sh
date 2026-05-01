@@ -1,25 +1,25 @@
 #!/usr/bin/env bash
-# claude-code-poderoso — instalador
+# claude-code-super-power — instalador
 #
 # Uso:
-#   curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-poderoso/main/install.sh | bash
+#   curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash
 #
 # O que faz:
 #   1. Clona o repositório para uma pasta temporária
 #   2. Copia a skill `akita-method` para ~/.claude/skills/
-#   3. Copia os slash commands para ~/.claude/commands/poderoso/
-#   4. Sugere próximo passo: /poderoso:research
+#   3. Copia os slash commands para ~/.claude/commands/super-power/
+#   4. Sugere próximo passo: /super-power:research
 #
 # Não toca em nenhum projeto. Só configura o Claude Code globalmente.
 
 set -euo pipefail
 
-REPO="https://github.com/johnnyhelder/claude-code-poderoso.git"
+REPO="https://github.com/johnnyhelder/claude-code-super-power.git"
 BRANCH="main"
 SKILLS_DIR="${HOME}/.claude/skills"
 COMMANDS_DIR="${HOME}/.claude/commands"
 TARGET_SKILL="${SKILLS_DIR}/akita-method"
-TARGET_COMMANDS="${COMMANDS_DIR}/poderoso"
+TARGET_COMMANDS="${COMMANDS_DIR}/super-power"
 
 # Cores
 G='\033[0;32m'
@@ -30,7 +30,7 @@ N='\033[0m'
 
 echo ""
 echo -e "${B}╔════════════════════════════════════════════╗${N}"
-echo -e "${B}║   claude-code-poderoso — instalador        ║${N}"
+echo -e "${B}║   🦾 Claude Code Super Power — instalador  ║${N}"
 echo -e "${B}╚════════════════════════════════════════════╝${N}"
 echo ""
 
@@ -107,14 +107,14 @@ echo "  2. Abra o Claude Code:"
 echo -e "     ${G}claude${N}"
 echo ""
 echo "  3. Inicie a Fase 0 (pesquisa antes de programar):"
-echo -e "     ${G}/poderoso:research${N}"
+echo -e "     ${G}/super-power:research${N}"
 echo ""
 echo "  Comandos disponíveis:"
-echo "    /poderoso:research  — Fase 0: pesquisa de mercado, SEO, concorrência"
-echo "    /poderoso:plan      — gera PLAN.md + CLAUDE.md + PROJECT.md + NOW.md"
-echo "    /poderoso:start     — Fase 1: setup seguro + stack"
-echo "    /poderoso:phase N   — avança para a Fase N (1-7)"
-echo "    /poderoso:status    — lê CLAUDE.md + NOW.md e mostra estado"
+echo "    /super-power:research  — Fase 0: pesquisa de mercado, SEO, concorrência"
+echo "    /super-power:plan      — gera PLAN.md + CLAUDE.md + PROJECT.md + NOW.md"
+echo "    /super-power:start     — Fase 1: setup seguro + stack"
+echo "    /super-power:phase N   — avança para a Fase N (1-7)"
+echo "    /super-power:status    — lê CLAUDE.md + NOW.md e mostra estado"
 echo ""
-echo -e "Documentação completa: ${B}https://github.com/johnnyhelder/claude-code-poderoso${N}"
+echo -e "Documentação completa: ${B}https://github.com/johnnyhelder/claude-code-super-power${N}"
 echo ""

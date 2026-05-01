@@ -3,13 +3,13 @@ description: Fase 0 — pesquisa de mercado, SEO, concorrência e ferramentas an
 argument-hint: "[descrição breve do projeto]"
 ---
 
-# /poderoso:research
+# /super-power:research
 
 Conduz a **Fase 0** do método: pesquisa estruturada antes de tomar qualquer decisão técnica.
 
 ## Quando o utilizador chama este comando
 
-1. **Se o utilizador deu argumento** (ex: `/poderoso:research site para massoterapeuta em Lisboa`):
+1. **Se o utilizador deu argumento** (ex: `/super-power:research site para massoterapeuta em Lisboa`):
    - Use a descrição como contexto para todos os 4 prompts abaixo
    - Pergunte 2-3 esclarecimentos rápidos se necessário (público-alvo, região exacta, prazo)
 
@@ -52,7 +52,7 @@ Próximos passos:
   2. Cole o prompt no Gemini Deep Research (ou ChatGPT / Perplexity)
   3. Cole a resposta DE VOLTA no mesmo ficheiro (substituindo o prompt)
   4. Quando os 4 ficheiros tiverem respostas reais, rode:
-     /poderoso:plan
+     /super-power:plan
 
 Ferramentas recomendadas:
   - Gemini Deep Research (gratuito, melhor para relatórios longos)

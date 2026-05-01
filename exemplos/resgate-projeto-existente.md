@@ -4,10 +4,10 @@
 
 Você já tem um projeto a rodar — talvez até em produção. O problema: sem testes, sem CI/CD, sem documentação. Qualquer mudança pode quebrar algo.
 
-## Pré-requisito: instalar o `claude-code-poderoso`
+## Pré-requisito: instalar o `claude-code-super-power`
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-poderoso/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash
 ```
 
 ## O fluxo de resgate
@@ -66,7 +66,7 @@ cat ~/.claude/skills/akita-method/templates/TESTES-BASE.md
 
 ### 4. Sprint 2 — Documentação retroactiva
 
-Em vez de `/poderoso:plan` (que assume projeto novo), crie o CLAUDE.md à mão documentando o projeto COMO ELE É HOJE:
+Em vez de `/super-power:plan` (que assume projeto novo), crie o CLAUDE.md à mão documentando o projeto COMO ELE É HOJE:
 - Stack actual (versões exactas)
 - Estrutura de pastas
 - APIs e endpoints
@@ -82,7 +82,7 @@ cp ~/.claude/skills/akita-method/templates/CLAUDE-MD-TEMPLATE.md CLAUDE.md
 ### 5. Sprint 3 — Setup Seguro retroactivo
 
 ```
-/poderoso:start
+/super-power:start
 ```
 
 Vai criar `.claude/settings.json` com permissões. Adapte à stack do seu projeto.
@@ -102,8 +102,8 @@ Templates: `~/.claude/skills/akita-method/templates/CI-CD-TEMPLATE.md`
 Com testes, CI/CD, CLAUDE.md e settings configurados, o projeto está "resgatado". Novas features seguem o fluxo normal:
 
 ```
-/poderoso:phase 3    # Escrever teste
-/poderoso:phase 4    # Implementar
+/super-power:phase 3    # Escrever teste
+/super-power:phase 4    # Implementar
 ```
 
 ## Casos reais

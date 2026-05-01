@@ -1,18 +1,18 @@
-# claude-code-poderoso
+# 🦾 Claude Code Super Power
 
-### Comece seu projeto Claude Code já poderoso desde o primeiro commit.
+### O kit que transforma Claude Code num parceiro de engenharia sénior — instalável em UMA frase.
 
 [![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-green.svg)](LICENSE)
 [![PRs Bem-vindos](https://img.shields.io/badge/PRs-bem--vindos-brightgreen.svg)](CONTRIBUTING.md)
 
-> **Anti-vibe coding em uma linha de comando.**
-> Em 5 minutos você instala um sistema completo: skill que orquestra 7 fases de engenharia, slash commands para pesquisa antes de programar, princípios anti-erro do Karpathy, e ferramentas auxiliares (Context7, LLM Council, Graphify).
+> **Anti-vibe coding sem dor de cabeça.**
+> Você cola UMA frase no Claude Code. Em 30 segundos o agente instala skill, slash commands e templates. Pronto para projetos sérios desde o primeiro commit.
 
 ---
 
 ## Por que existe
 
-| Problema clássico de "vibe coding" | O que o claude-code-poderoso resolve |
+| Problema clássico de "vibe coding" | O que o Claude Code Super Power resolve |
 |--|--|
 | "A IA fez um monte de código e eu não entendi nada" | Você decide. A IA executa. Pair programming real. |
 | "Funcionou... mas tenho medo de mexer" | TDD obrigatório. Testes primeiro, código depois. |
@@ -28,30 +28,49 @@ Este repositório compila num só lugar:
 
 ---
 
-## Instalação em 1 linha
+## ✨ FASE 01 — Instale (sem terminal)
 
-> **DICA — O QUE VOCÊ VAI CONSEGUIR FAZER**
-> Configurar Claude Code globalmente com método, princípios e slash commands. Tudo em ~30 segundos. Não toca nos seus projetos existentes — só configura o `~/.claude/`.
+> **DICA — O CLAUDE FAZ TUDO POR VOCÊ**
+> Você não precisa saber nada de terminal, git ou shell. Só precisa abrir o Claude Code e colar uma frase.
+
+### Passo único
+
+1. Abra o **Claude Code** numa pasta qualquer (pode ser `~/`):
+
+   ```bash
+   claude
+   ```
+
+2. Cole exactamente isto na conversa:
+
+   ```
+   Instala o Claude Code Super Power para mim.
+   Repositório: https://github.com/johnnyhelder/claude-code-super-power
+
+   Segue as instruções de INSTALL.md no repositório.
+   Confirma comigo antes de qualquer comando destrutivo.
+   ```
+
+3. **Pronto.** O agente vai:
+   - Clonar o repositório
+   - Copiar a skill para `~/.claude/skills/akita-method/`
+   - Copiar 5 slash commands para `~/.claude/commands/super-power/`
+   - Confirmar que está tudo no sítio
+
+Tempo: ~30 segundos. Não toca nos seus projetos existentes — só configura o `~/.claude/` global.
+
+> **ATENÇÃO — SE O CLAUDE NÃO INSTALAR SOZINHO**
+> Algumas configurações de permissões impedem o agente de clonar repositórios. Nesse caso, use o método alternativo abaixo.
+
+### 🛠️ Alternativa — terminal (uma linha)
+
+Se preferir terminal, ou se o método acima não funcionar:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-poderoso/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash
 ```
 
-O instalador:
-- ✓ Verifica dependências (git, claude-code)
-- ✓ Instala a skill `akita-method` em `~/.claude/skills/`
-- ✓ Instala 5 slash commands em `~/.claude/commands/poderoso/`
-- ✓ Faz backup automático se já tiver versão anterior
-
----
-
-## FASE 01 — Você no terminal
-
-| Passo | Acção |
-|---|---|
-| **1** | Abra o terminal e cole o `curl` acima |
-| **2** | Espere 30 segundos |
-| **3** | Pronto. A skill e os comandos estão instalados globalmente |
+O `install.sh` faz exactamente o mesmo: clone, copy, configure. Ideal para máquinas sem Claude Code ainda configurado.
 
 ---
 
@@ -68,24 +87,24 @@ Depois, dentro do Claude Code:
 
 | Passo | Comando | O que acontece |
 |---|---|---|
-| **1** | `/poderoso:research` | Gera 4 prompts de pesquisa em `pesquisas/` (mercado, SEO, concorrência, ferramentas) |
+| **1** | `/super-power:research` | Gera 4 prompts de pesquisa em `pesquisas/` (mercado, SEO, concorrência, ferramentas) |
 | **2** | (cole os prompts no Gemini Deep Research, copie as respostas de volta) | |
-| **3** | `/poderoso:plan` | Consolida pesquisas em `PLAN.md` + `CLAUDE.md` + `PROJECT.md` + `NOW.md` |
-| **4** | `/poderoso:start` | Fase 1 — `.claude/settings.json` com permissões + estrutura inicial |
-| **5** | `/poderoso:phase 2` | Fase 2 — Fundação completa (CLAUDE.md 200+ linhas) |
-| **6** | `/poderoso:phase 3` | Fase 3 — TDD: todos os testes ANTES de qualquer código |
-| **7** | `/poderoso:phase 4` | Fase 4 — código implementado, testes verdes |
-| **8** | `/poderoso:phase 5` | Fase 5 — otimização |
-| **9** | `/poderoso:phase 6` | Fase 6 — interface e conteúdo |
-| **10** | `/poderoso:phase 7` | Fase 7 — deploy com CI/CD |
+| **3** | `/super-power:plan` | Consolida pesquisas em `PLAN.md` + `CLAUDE.md` + `PROJECT.md` + `NOW.md` |
+| **4** | `/super-power:start` | Fase 1 — `.claude/settings.json` com permissões + estrutura inicial |
+| **5** | `/super-power:phase 2` | Fase 2 — Fundação completa (CLAUDE.md 200+ linhas) |
+| **6** | `/super-power:phase 3` | Fase 3 — TDD: todos os testes ANTES de qualquer código |
+| **7** | `/super-power:phase 4` | Fase 4 — código implementado, testes verdes |
+| **8** | `/super-power:phase 5` | Fase 5 — otimização |
+| **9** | `/super-power:phase 6` | Fase 6 — interface e conteúdo |
+| **10** | `/super-power:phase 7` | Fase 7 — deploy com CI/CD |
 
-> **A QUALQUER momento:** `/poderoso:status` mostra onde você está, o que falta, e o que fazer a seguir.
+> **A QUALQUER momento:** `/super-power:status` mostra onde você está, o que falta, e o que fazer a seguir.
 
 ---
 
 ## FASE 03 — Os 4 princípios universais
 
-Toda vez que `/poderoso:plan` gera um `CLAUDE.md`, estes 4 princípios são pré-injetados no topo. O agente lê e segue automaticamente:
+Toda vez que `/super-power:plan` gera um `CLAUDE.md`, estes 4 princípios são pré-injetados no topo. O agente lê e segue automaticamente:
 
 | Princípio | O que faz |
 |---|---|
@@ -116,7 +135,7 @@ Três ferramentas curadas que se integram ao método. Use quando o cenário pedi
 ## O que tem dentro deste repositório
 
 ```
-claude-code-poderoso/
+claude-code-super-power/
 │
 ├── install.sh                       INSTALADOR (curl-able)
 ├── README.md                        este ficheiro
@@ -149,11 +168,11 @@ claude-code-poderoso/
 │       └── CI-CD-TEMPLATE.md
 │
 ├── commands/                        SLASH COMMANDS
-│   ├── research.md                  /poderoso:research
-│   ├── plan.md                      /poderoso:plan
-│   ├── start.md                     /poderoso:start
-│   ├── phase.md                     /poderoso:phase N
-│   └── status.md                    /poderoso:status
+│   ├── research.md                  /super-power:research
+│   ├── plan.md                      /super-power:plan
+│   ├── start.md                     /super-power:start
+│   ├── phase.md                     /super-power:phase N
+│   └── status.md                    /super-power:status
 │
 ├── exemplos/                        CASOS PRÁTICOS
 ├── fontes/                          MATERIAL DE PESQUISA
@@ -196,13 +215,13 @@ O coração deste método é o **Desafio dos 7 Dias** proposto pelo Akita: criar
 
 | Dia | Foco | Comando |
 |-----|------|---------|
-| 1 | Setup seguro | `/poderoso:start` |
-| 2 | Fundação completa | `/poderoso:phase 2` |
-| 3 | Testes (Red) | `/poderoso:phase 3` |
-| 4 | Código (Green) | `/poderoso:phase 4` |
-| 5 | Otimização | `/poderoso:phase 5` |
-| 6 | Interface | `/poderoso:phase 6` |
-| 7 | Deploy + CI/CD | `/poderoso:phase 7` |
+| 1 | Setup seguro | `/super-power:start` |
+| 2 | Fundação completa | `/super-power:phase 2` |
+| 3 | Testes (Red) | `/super-power:phase 3` |
+| 4 | Código (Green) | `/super-power:phase 4` |
+| 5 | Otimização | `/super-power:phase 5` |
+| 6 | Interface | `/super-power:phase 6` |
+| 7 | Deploy + CI/CD | `/super-power:phase 7` |
 
 Detalhe: [`metodo/07-desafio-7-dias.md`](metodo/07-desafio-7-dias.md)
 

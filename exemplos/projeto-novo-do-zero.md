@@ -4,15 +4,15 @@
 
 Você vai criar algo novo — um site, uma app, uma API, um bot. Ainda não existe código nenhum.
 
-## Pré-requisito: instalar o `claude-code-poderoso`
+## Pré-requisito: instalar o `claude-code-super-power`
 
 Uma única linha no terminal (uma vez por máquina):
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-poderoso/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash
 ```
 
-Em ~30 segundos, a skill `akita-method` e os 5 slash commands `/poderoso:*` ficam disponíveis em todos os seus projetos Claude Code.
+Em ~30 segundos, a skill `akita-method` e os 5 slash commands `/super-power:*` ficam disponíveis em todos os seus projetos Claude Code.
 
 ## O fluxo completo
 
@@ -26,7 +26,7 @@ claude
 ### 2. Fase 0 — Pesquisa antes de programar
 
 ```
-/poderoso:research
+/super-power:research
 ```
 
 A skill cria 4 ficheiros em `pesquisas/` com prompts prontos:
@@ -41,7 +41,7 @@ Cole cada prompt no Gemini Deep Research (ou ChatGPT/Perplexity), copie a respos
 ### 3. Fase de Plano — Consolidar pesquisas
 
 ```
-/poderoso:plan
+/super-power:plan
 ```
 
 Gera 4 ficheiros base com base nas pesquisas:
@@ -53,7 +53,7 @@ Gera 4 ficheiros base com base nas pesquisas:
 ### 4. Fase 1 — Setup Seguro
 
 ```
-/poderoso:start
+/super-power:start
 ```
 
 Configura `.claude/settings.json` com permissões granulares, cria estrutura de pastas, inicializa git. **Zero código de negócio.**
@@ -61,18 +61,18 @@ Configura `.claude/settings.json` com permissões granulares, cria estrutura de 
 ### 5. Avance fase por fase
 
 ```
-/poderoso:phase 2    # Fundação completa
-/poderoso:phase 3    # Testes (TDD puro, todos falhando)
-/poderoso:phase 4    # Código guiado pelos testes
-/poderoso:phase 5    # Otimização
-/poderoso:phase 6    # Interface
-/poderoso:phase 7    # Deploy + CI/CD
+/super-power:phase 2    # Fundação completa
+/super-power:phase 3    # Testes (TDD puro, todos falhando)
+/super-power:phase 4    # Código guiado pelos testes
+/super-power:phase 5    # Otimização
+/super-power:phase 6    # Interface
+/super-power:phase 7    # Deploy + CI/CD
 ```
 
 A qualquer momento:
 
 ```
-/poderoso:status
+/super-power:status
 ```
 
 Mostra onde você está e o próximo comando recomendado.

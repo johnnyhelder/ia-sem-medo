@@ -1,6 +1,6 @@
 ---
 name: akita-method
-description: "Método estruturado para criar e executar projetos Claude Code com disciplina de engenharia sénior. Combina os 4 princípios anti-erro de Karpathy/Anthropic, o Akita Way (Anti-Vibe Coding + XP), e ferramentas auxiliares (Context7, LLM Council, Graphify). Acionar SEMPRE que o utilizador quiser começar um projeto novo, reestruturar um existente, ou pedir ajuda para planear antes de programar. Triggers: 'novo projeto', 'começar do zero', 'criar um site', 'montar uma aplicação', 'CLAUDE.md', 'PLAN.md', 'TDD com IA', 'pair programming com IA', 'método Akita', '/poderoso:*'."
+description: "Método estruturado para criar e executar projetos Claude Code com disciplina de engenharia sénior. Combina os 4 princípios anti-erro de Karpathy/Anthropic, o Akita Way (Anti-Vibe Coding + XP), e ferramentas auxiliares (Context7, LLM Council, Graphify). Acionar SEMPRE que o utilizador quiser começar um projeto novo, reestruturar um existente, ou pedir ajuda para planear antes de programar. Triggers: 'novo projeto', 'começar do zero', 'criar um site', 'montar uma aplicação', 'CLAUDE.md', 'PLAN.md', 'TDD com IA', 'pair programming com IA', 'método Akita', '/super-power:*'."
 ---
 
 # Akita Method — Skill Orquestradora
@@ -32,7 +32,7 @@ Estes 4 são injetados automaticamente no `CLAUDE.md` de cada projeto.
 
 ## Quando esta Skill é acionada
 
-- Utilizador chama qualquer `/poderoso:*` slash command
+- Utilizador chama qualquer `/super-power:*` slash command
 - Utilizador menciona criar/reestruturar projeto
 - Utilizador pede ajuda para planear antes de programar
 - Qualquer cenário onde o agente vai gerar código para um projeto
@@ -45,11 +45,11 @@ A Skill orquestra os comandos. Detalhes em cada ficheiro `.md`:
 
 | Comando | Faz |
 |---------|-----|
-| `/poderoso:research` | Fase 0 — gera 4 prompts de pesquisa em `pesquisas/` |
-| `/poderoso:plan` | Consolida pesquisas em PLAN.md + CLAUDE.md + PROJECT.md + NOW.md |
-| `/poderoso:start` | Fase 1 — setup seguro (`.claude/settings.json`, estrutura) |
-| `/poderoso:phase N` | Avança para a Fase N (2-7) com regras específicas |
-| `/poderoso:status` | Lê CLAUDE.md + NOW.md e resume estado |
+| `/super-power:research` | Fase 0 — gera 4 prompts de pesquisa em `pesquisas/` |
+| `/super-power:plan` | Consolida pesquisas em PLAN.md + CLAUDE.md + PROJECT.md + NOW.md |
+| `/super-power:start` | Fase 1 — setup seguro (`.claude/settings.json`, estrutura) |
+| `/super-power:phase N` | Avança para a Fase N (2-7) com regras específicas |
+| `/super-power:status` | Lê CLAUDE.md + NOW.md e resume estado |
 
 ---
 
@@ -57,37 +57,37 @@ A Skill orquestra os comandos. Detalhes em cada ficheiro `.md`:
 
 ### Fase 0 — Pesquisa
 Pesquisa de mercado, SEO, concorrência e ferramentas ANTES de qualquer decisão técnica.
-- Comando: `/poderoso:research`
+- Comando: `/super-power:research`
 - Saída: pasta `pesquisas/` com 4 ficheiros
 
 ### Fase 1 — Setup Seguro do Claude Code
 Configurar `.claude/settings.json` com permissões, criar estrutura de pastas, inicializar git. ZERO código.
-- Comando: `/poderoso:start`
+- Comando: `/super-power:start`
 
 ### Fase 2 — Fundação
 `PLAN.md` + `CLAUDE.md` (200+ linhas) totalmente preenchidos. Todas as variáveis de ambiente. Todas as integrações documentadas.
-- Comando: `/poderoso:phase 2`
+- Comando: `/super-power:phase 2`
 
 ### Fase 3 — Testes (TDD Puro)
 Escrever TODOS os testes ANTES da implementação. Categorias: build, funcionalidade, segurança, qualidade, integração.
-- Comando: `/poderoso:phase 3`
+- Comando: `/super-power:phase 3`
 - Regra: todos os testes devem FALHAR (Red) antes da implementação
 
 ### Fase 4 — Implementação
 Código guiado pelos testes. Feature por feature. Após cada feature, rodar testes.
-- Comando: `/poderoso:phase 4`
+- Comando: `/super-power:phase 4`
 
 ### Fase 5 — Otimização
 Performance, refactoring, quebrar ficheiros grandes. Considerar `/graphify .` para visualizar arquitectura.
-- Comando: `/poderoso:phase 5`
+- Comando: `/super-power:phase 5`
 
 ### Fase 6 — Interface
 Polir camada de apresentação (frontend/CLI/bot/API docs).
-- Comando: `/poderoso:phase 6`
+- Comando: `/super-power:phase 6`
 
 ### Fase 7 — Deploy + CI/CD
 Pipeline automatizada: lint → testes → build → deploy.
-- Comando: `/poderoso:phase 7`
+- Comando: `/super-power:phase 7`
 
 ---
 

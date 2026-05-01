@@ -7,7 +7,7 @@ Obrigado por considerar contribuir! Este é um projeto da comunidade e toda ajud
 ## Formas de contribuir
 
 ### 🐛 Encontrou um erro?
-Abra uma [Issue](https://github.com/johnnyhelder/claude-code-poderoso/issues) descrevendo:
+Abra uma [Issue](https://github.com/johnnyhelder/claude-code-super-power/issues) descrevendo:
 - Onde está o erro (qual ficheiro, qual seção)
 - O que está errado
 - O que deveria estar correto

@@ -3,7 +3,7 @@ description: Fase 1 — Setup Seguro do Claude Code (permissões, .claude/, estr
 argument-hint: ""
 ---
 
-# /poderoso:start
+# /super-power:start
 
 Inicia a **Fase 1**: configura o ambiente onde o agente vai trabalhar.
 
@@ -14,7 +14,7 @@ Verificar se existe:
 - `CLAUDE.md` na raiz
 
 Se faltar, sugerir:
-> "Antes de iniciar, rode `/poderoso:plan` para gerar os ficheiros base."
+> "Antes de iniciar, rode `/super-power:plan` para gerar os ficheiros base."
 
 ## O que fazer
 
@@ -77,7 +77,7 @@ projeto/
 ```bash
 git init
 git add .
-git commit -m "fase 1: setup inicial via claude-code-poderoso"
+git commit -m "fase 1: setup inicial via claude-code-super-power"
 ```
 
 ### 4. Atualizar CLAUDE.md
@@ -100,7 +100,7 @@ Marcar Fase 1 como concluída:
 - Fase 1 completa: .claude/settings.json criado, estrutura inicial montada
 
 ### Próximo passo imediato
-- Rodar /poderoso:phase 2 para começar a Fase 2 (Fundação completa)
+- Rodar /super-power:phase 2 para começar a Fase 2 (Fundação completa)
 ```
 
 ## Após executar
@@ -116,7 +116,7 @@ Mostre ao utilizador:
     git inicializado
 
 Próximo passo:
-  /poderoso:phase 2
+  /super-power:phase 2
 
 A Fase 2 vai expandir o CLAUDE.md para 200+ linhas com toda a lógica de negócio,
 e preparar a estrutura completa antes de começar testes (Fase 3).

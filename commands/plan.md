@@ -3,7 +3,7 @@ description: Consolida pesquisas em PLAN.md + CLAUDE.md + PROJECT.md + NOW.md
 argument-hint: ""
 ---
 
-# /poderoso:plan
+# /super-power:plan
 
 Lê todas as pesquisas e dados do projeto e gera os **4 ficheiros base** que toda sessão futura vai usar.
 
@@ -14,7 +14,7 @@ Antes de executar, verifique se existe:
 - OU contexto suficiente já dado pelo utilizador
 
 Se não houver pesquisas E o utilizador não tiver dado contexto suficiente:
-> "Falta contexto. Rode `/poderoso:research` primeiro, ou cole aqui um briefing do projeto."
+> "Falta contexto. Rode `/super-power:research` primeiro, ou cole aqui um briefing do projeto."
 
 ## O que fazer
 
@@ -102,7 +102,7 @@ Mostre ao utilizador:
 Estado do projeto: Fase 0 concluída ✓
 
 Próximo passo:
-  /poderoso:start
+  /super-power:start
 
 Isso inicia a Fase 1 (setup seguro do Claude Code) e abre o fluxo das 7 fases.
 ```
@@ -112,7 +112,7 @@ Isso inicia a Fase 1 (setup seguro do Claude Code) e abre o fluxo das 7 fases.
 - Se uma decisão for ambígua, PERGUNTE ao utilizador. Não invente.
 - Para a stack, baseie-se nas pesquisas de `pesquisas/04-ferramentas.md` se existir.
 - A Parte A do CLAUDE.md (4 princípios Karpathy) NUNCA é editada. Copia literal.
-- O `NOW.md` deve ter "Próximo passo: rodar `/poderoso:start`".
+- O `NOW.md` deve ter "Próximo passo: rodar `/super-power:start`".
 
 ## Referência
 
