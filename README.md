@@ -266,19 +266,39 @@ Cada satoshi conta. Os fundos vão para manter este e outros projectos públicos
 
 ## 🗑️ Desinstalar
 
-Mudaste de ideias? Sem ressentimentos. Numa linha de terminal:
+Mudaste de ideias? Sem ressentimentos. Tens **3 opções** (soft / hard / clean-all).
 
-```bash
-curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash
-```
-
-Ou via Claude Code:
+### Via Claude Code (recomendado — pergunta-te qual modo)
 
 ```
 /super-power:uninstall
 ```
 
-Remove `~/.claude/skills/akita-method/` e `~/.claude/commands/super-power/`. Os teus projetos não são tocados.
+O agente pergunta `soft` / `hard` / `clean-all` e executa Bash directo (funciona até sem TTY).
+
+### Via terminal — soft (com backup recuperável)
+
+```bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash
+```
+
+(Move para `.deleted.<timestamp>` em vez de apagar. Se mudares de ideias, basta renomear de volta.)
+
+### Via terminal — hard (sem backup, definitivo)
+
+```bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash -s -- --hard --yes
+```
+
+### Via terminal — limpeza total (hard + remove backups acumulados)
+
+```bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash -s -- --hard --yes --clean-backups
+```
+
+(Útil se já reinstalaste várias vezes e tens `.backup.*` e `.deleted.*` acumulados.)
+
+Em todos os modos: **os teus projetos não são tocados** — só remove a skill global e os slash commands.
 
 ---
 

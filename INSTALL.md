@@ -108,23 +108,40 @@ curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power
 
 ### Reverter instalação (desinstalar)
 
-**Opção A — Via Claude Code (recomendado):**
+3 modos disponíveis: **soft** (backup recuperável), **hard** (apaga definitivo), **clean-all** (apaga + remove backups acumulados).
+
+**Opção A — Via Claude Code (recomendado, pergunta-te o modo):**
 
 ```
 /super-power:uninstall
 ```
 
-**Opção B — Via terminal:**
+**Opção B — Terminal interactivo (soft default):**
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash
 ```
 
-**Opção C — Manualmente (apaga sem backup):**
+**Opção C — Hard sem confirmação (curl|bash, scripts, Claude Code `!`):**
+
+```bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash -s -- --hard --yes
+```
+
+**Opção D — Limpeza total (hard + remove `.backup.*` e `.deleted.*` acumulados):**
+
+```bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash -s -- --hard --yes --clean-backups
+```
+
+**Opção E — Manualmente (rm directo):**
 
 ```bash
 rm -rf ~/.claude/skills/akita-method
 rm -rf ~/.claude/commands/super-power
+# Limpar backups antigos (opcional)
+rm -rf ~/.claude/skills/akita-method.{backup,deleted}.*
+rm -rf ~/.claude/commands/super-power.{backup,deleted}.*
 ```
 
 As opções A e B fazem **backup** com timestamp em vez de apagar — recuperável se mudares de ideias.

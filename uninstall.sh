@@ -1,20 +1,30 @@
 #!/usr/bin/env bash
 # claude-code-super-power — desinstalador
 #
-# Uso:
-#   curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash
+# Uso (interactivo, terminal real):
+#   curl -sSL .../uninstall.sh | bash
 #
-# O que faz:
-#   1. Pede confirmação
-#   2. Remove ~/.claude/skills/akita-method/
-#   3. Remove ~/.claude/commands/super-power/
-#   4. NÃO toca em projetos existentes
-#   5. Faz backup com timestamp em vez de apagar (recuperável se mudares de ideias)
+# Uso (curl|bash sem TTY ou Claude Code):
+#   curl -sSL .../uninstall.sh | bash -s -- --yes              # soft + skip confirm
+#   curl -sSL .../uninstall.sh | bash -s -- --hard --yes        # hard + skip confirm
+#   curl -sSL .../uninstall.sh | bash -s -- --hard --yes --clean-backups
+#
+# Flags:
+#   --soft            (default) Move para .deleted.<timestamp> — recuperável
+#   --hard            Apaga definitivamente (rm -rf) — irreversível
+#   --yes, -y         Skip confirmação (obrigatório quando sem TTY)
+#   --clean-backups   Também apaga .backup.* e .deleted.* acumulados
+#   --help, -h        Mostra esta ajuda
 
 set -euo pipefail
 
 SKILL_DIR="${HOME}/.claude/skills/akita-method"
 COMMANDS_DIR="${HOME}/.claude/commands/super-power"
+
+# Flags (defaults)
+MODE="soft"
+SKIP_CONFIRM=false
+CLEAN_BACKUPS=false
 
 # Cores
 G='\033[0;32m'
@@ -23,10 +33,51 @@ R='\033[0;31m'
 B='\033[0;34m'
 N='\033[0m'
 
+print_help() {
+  cat <<'EOF'
+claude-code-super-power — desinstalador
+
+Uso:
+  uninstall.sh [flags]
+
+Flags:
+  --soft           (default) Move para .deleted.<timestamp> — recuperável
+  --hard           Apaga definitivamente (rm -rf) — irreversível
+  --yes, -y        Skip confirmação (obrigatório sem TTY interactivo)
+  --clean-backups  Também apaga .backup.* e .deleted.* acumulados
+  --help, -h       Mostra esta ajuda
+
+Exemplos:
+  # Terminal real, com confirmação interactiva (soft default)
+  ./uninstall.sh
+
+  # Hard sem confirmação (curl|bash, scripts, Claude Code !)
+  curl -sSL .../uninstall.sh | bash -s -- --hard --yes
+
+  # Limpeza total (apaga tudo + backups antigos acumulados)
+  curl -sSL .../uninstall.sh | bash -s -- --hard --yes --clean-backups
+EOF
+}
+
+# Parse flags
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --hard) MODE="hard"; shift ;;
+    --soft) MODE="soft"; shift ;;
+    --yes|-y) SKIP_CONFIRM=true; shift ;;
+    --clean-backups) CLEAN_BACKUPS=true; shift ;;
+    --help|-h) print_help; exit 0 ;;
+    *) echo -e "${R}Flag desconhecida: $1${N}"; print_help; exit 1 ;;
+  esac
+done
+
 echo ""
 echo -e "${Y}╔════════════════════════════════════════════╗${N}"
 echo -e "${Y}║  🗑️  Claude Code Super Power — desinstalar  ║${N}"
 echo -e "${Y}╚════════════════════════════════════════════╝${N}"
+echo ""
+echo -e "Modo: ${B}${MODE}${N}  $([ "$MODE" = "hard" ] && echo -e "${R}(apaga definitivo)${N}" || echo -e "${G}(backup recuperável)${N}")"
+$CLEAN_BACKUPS && echo -e "Limpeza de backups antigos: ${Y}sim${N}"
 echo ""
 
 # 1. Verificar o que existe
@@ -35,10 +86,20 @@ HAS_COMMANDS=false
 [ -d "$SKILL_DIR" ] && HAS_SKILL=true
 [ -d "$COMMANDS_DIR" ] && HAS_COMMANDS=true
 
-if ! $HAS_SKILL && ! $HAS_COMMANDS; then
-  echo -e "${G}✓${N} Nada para desinstalar. Nem skill nem commands existem."
-  echo "  ${SKILL_DIR}: não existe"
-  echo "  ${COMMANDS_DIR}: não existe"
+# Listar backups acumulados (usar shopt nullglob para evitar match literal se vazio)
+shopt -s nullglob
+SKILL_BACKUP_ARR=( "${SKILL_DIR}.backup."* "${SKILL_DIR}.deleted."* )
+CMD_BACKUP_ARR=( "${COMMANDS_DIR}.backup."* "${COMMANDS_DIR}.deleted."* )
+shopt -u nullglob
+
+SKILL_BACKUPS=""
+[ ${#SKILL_BACKUP_ARR[@]} -gt 0 ] && SKILL_BACKUPS=$(printf '%s\n' "${SKILL_BACKUP_ARR[@]}" | sort)
+
+CMD_BACKUPS=""
+[ ${#CMD_BACKUP_ARR[@]} -gt 0 ] && CMD_BACKUPS=$(printf '%s\n' "${CMD_BACKUP_ARR[@]}" | sort)
+
+if ! $HAS_SKILL && ! $HAS_COMMANDS && [ -z "$SKILL_BACKUPS" ] && [ -z "$CMD_BACKUPS" ]; then
+  echo -e "${G}✓${N} Nada para desinstalar. Sistema já está limpo."
   exit 0
 fi
 
@@ -46,44 +107,98 @@ fi
 echo "Vai ser removido:"
 $HAS_SKILL && echo -e "  ${R}✗${N} ${SKILL_DIR}"
 $HAS_COMMANDS && echo -e "  ${R}✗${N} ${COMMANDS_DIR}"
+
+if $CLEAN_BACKUPS; then
+  if [ -n "$SKILL_BACKUPS" ]; then
+    echo "  Backups da skill:"
+    echo "$SKILL_BACKUPS" | sed "s|^|    ${R}✗${N} |"
+  fi
+  if [ -n "$CMD_BACKUPS" ]; then
+    echo "  Backups dos commands:"
+    echo "$CMD_BACKUPS" | sed "s|^|    ${R}✗${N} |"
+  fi
+fi
+
 echo ""
 echo -e "${Y}Os teus projetos NÃO são tocados. Só removo a skill global e os slash commands.${N}"
 echo ""
 
-# 3. Confirmação (lê de /dev/tty mesmo quando rodado via curl | bash)
-if [ -t 0 ]; then
-  STDIN_SOURCE="/dev/stdin"
-else
-  STDIN_SOURCE="/dev/tty"
+# 3. Confirmação (skip se --yes)
+if ! $SKIP_CONFIRM; then
+  # Detectar TTY disponível
+  TTY_AVAILABLE=false
+  if [ -t 0 ]; then
+    TTY_AVAILABLE=true
+    TTY_SOURCE="/dev/stdin"
+  elif [ -e /dev/tty ] && [ -r /dev/tty ]; then
+    TTY_AVAILABLE=true
+    TTY_SOURCE="/dev/tty"
+  fi
+
+  if ! $TTY_AVAILABLE; then
+    echo -e "${R}✗ Sem terminal interactivo (estás a correr via curl|bash, script, ou ! do Claude Code).${N}"
+    echo ""
+    echo "Para confirmar sem prompt, adiciona ${G}--yes${N}:"
+    echo -e "  ${G}curl -sSL .../uninstall.sh | bash -s -- --${MODE} --yes${N}"
+    if $CLEAN_BACKUPS; then
+      echo -e "  ${G}curl -sSL .../uninstall.sh | bash -s -- --${MODE} --yes --clean-backups${N}"
+    fi
+    echo ""
+    echo "Ou abre um terminal real e corre directamente:"
+    echo -e "  ${G}curl -sSL .../uninstall.sh -o /tmp/u.sh && bash /tmp/u.sh${N}"
+    exit 1
+  fi
+
+  if [ "$MODE" = "hard" ]; then
+    PROMPT="${R}MODO HARD — apaga definitivamente.${N} Digita 'sim apaga tudo': "
+    EXPECTED="sim apaga tudo"
+  else
+    PROMPT="Tens a certeza? (digita 'sim'): "
+    EXPECTED="sim"
+  fi
+
+  read -p "$(echo -e "$PROMPT")" -r CONFIRM < "$TTY_SOURCE"
+
+  if [ "$CONFIRM" != "$EXPECTED" ]; then
+    echo -e "${G}Cancelado.${N} Nada foi removido."
+    exit 0
+  fi
 fi
 
-if [ ! -e "$STDIN_SOURCE" ]; then
-  echo -e "${R}✗ Sem terminal interactivo disponível para confirmação.${N}"
-  echo "  Para desinstalar manualmente, executa:"
-  echo "    rm -rf $SKILL_DIR $COMMANDS_DIR"
-  exit 1
-fi
-
-read -p "Tens a certeza? (digita 'sim' para confirmar): " -r CONFIRM < "$STDIN_SOURCE"
-
-if [ "$CONFIRM" != "sim" ]; then
-  echo -e "${G}Cancelado.${N} Nada foi removido."
-  exit 0
-fi
-
-# 4. Backup com timestamp (não apaga, move — recuperável)
+# 4. Executar a remoção
 TS=$(date +%s)
 
-if $HAS_SKILL; then
-  BACKUP_SKILL="${SKILL_DIR}.deleted.${TS}"
-  mv "$SKILL_DIR" "$BACKUP_SKILL"
-  echo -e "${G}✓${N} Skill movida para: ${BACKUP_SKILL}"
-fi
+remove_path() {
+  local path="$1"
+  local name="$2"
+  if [ ! -e "$path" ]; then
+    return 0
+  fi
+  if [ "$MODE" = "hard" ]; then
+    rm -rf "$path"
+    echo -e "${G}✓${N} ${name} apagado: ${path}"
+  else
+    local backup="${path}.deleted.${TS}"
+    mv "$path" "$backup"
+    echo -e "${G}✓${N} ${name} movido para: ${backup}"
+  fi
+}
 
-if $HAS_COMMANDS; then
-  BACKUP_CMD="${COMMANDS_DIR}.deleted.${TS}"
-  mv "$COMMANDS_DIR" "$BACKUP_CMD"
-  echo -e "${G}✓${N} Commands movidos para: ${BACKUP_CMD}"
+$HAS_SKILL && remove_path "$SKILL_DIR" "Skill"
+$HAS_COMMANDS && remove_path "$COMMANDS_DIR" "Commands"
+
+# 5. Clean backups antigos (sempre rm -rf, é o ponto)
+if $CLEAN_BACKUPS; then
+  if [ -n "$SKILL_BACKUPS" ]; then
+    echo "$SKILL_BACKUPS" | while IFS= read -r bkp; do
+      [ -n "$bkp" ] && rm -rf "$bkp" && echo -e "${G}✓${N} Backup apagado: $bkp"
+    done
+  fi
+  if [ -n "$CMD_BACKUPS" ]; then
+    echo "$CMD_BACKUPS" | while IFS= read -r bkp; do
+      [ -n "$bkp" ] && rm -rf "$bkp" && echo -e "${G}✓${N} Backup apagado: $bkp"
+    done
+  fi
 fi
 
 echo ""
@@ -91,15 +206,18 @@ echo -e "${G}╔═════════════════════�
 echo -e "${G}║  Desinstalação concluída                   ║${N}"
 echo -e "${G}╚════════════════════════════════════════════╝${N}"
 echo ""
-echo "Os ficheiros foram MOVIDOS (não apagados). Se mudares de ideias:"
-echo ""
-$HAS_SKILL && echo "  mv ${BACKUP_SKILL} ${SKILL_DIR}"
-$HAS_COMMANDS && echo "  mv ${BACKUP_CMD} ${COMMANDS_DIR}"
-echo ""
-echo "Para apagar definitivamente os backups:"
-$HAS_SKILL && echo "  rm -rf ${BACKUP_SKILL}"
-$HAS_COMMANDS && echo "  rm -rf ${BACKUP_CMD}"
-echo ""
-echo "Para reinstalar:"
+
+if [ "$MODE" = "soft" ]; then
+  echo "Os ficheiros foram MOVIDOS (não apagados). Recuperar:"
+  $HAS_SKILL && echo "  mv ${SKILL_DIR}.deleted.${TS} ${SKILL_DIR}"
+  $HAS_COMMANDS && echo "  mv ${COMMANDS_DIR}.deleted.${TS} ${COMMANDS_DIR}"
+  echo ""
+  echo "Apagar definitivamente os backups (quando tiveres a certeza):"
+  $HAS_SKILL && echo "  rm -rf ${SKILL_DIR}.deleted.${TS}"
+  $HAS_COMMANDS && echo "  rm -rf ${COMMANDS_DIR}.deleted.${TS}"
+  echo ""
+fi
+
+echo "Reinstalar:"
 echo "  curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash"
 echo ""
