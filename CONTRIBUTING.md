@@ -53,3 +53,17 @@ Compartilhe sua experiência! Abra uma Issue com a tag `experiência` contando:
 ## Dúvidas?
 
 Abra uma Issue ou entre em contacto via [johnnyhelder.com](https://johnnyhelder.com).
+
+---
+
+## ⚡ Apoiar o projecto
+
+Não consegue contribuir com código mas quer apoiar? Toda ajuda é bem-vinda — desde uma estrela ⭐ no repositório até uma doação em Bitcoin:
+
+**Bitcoin (BTC):**
+
+```
+bc1q2n4p3zge5sj2pecjwxwmgape39taydjtq88cm9
+```
+
+Cada satoshi ajuda a manter este e outros projectos públicos. Obrigado.

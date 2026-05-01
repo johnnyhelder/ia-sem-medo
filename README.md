@@ -247,6 +247,38 @@ Este repositório é uma **compilação e adaptação** de trabalho público de 
 
 ---
 
+## ⚡ Apoie o projecto
+
+Se este método te poupou tempo, dor de cabeça, ou um projecto inteiro a explodir em produção, considera apoiar:
+
+**Bitcoin (BTC):**
+
+```
+bc1q2n4p3zge5sj2pecjwxwmgape39taydjtq88cm9
+```
+
+Cada satoshi conta. Os fundos vão para manter este e outros projectos públicos vivos.
+
+---
+
+## 🗑️ Desinstalar
+
+Mudaste de ideias? Sem ressentimentos. Numa linha de terminal:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash
+```
+
+Ou via Claude Code:
+
+```
+/super-power:uninstall
+```
+
+Remove `~/.claude/skills/akita-method/` e `~/.claude/commands/super-power/`. Os teus projetos não são tocados.
+
+---
+
 ## Licença
 
 MIT — use, modifique, distribua. Mantenha os créditos.

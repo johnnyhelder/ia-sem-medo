@@ -39,17 +39,18 @@ Estes 4 são injetados automaticamente no `CLAUDE.md` de cada projeto.
 
 ---
 
-## Os 5 slash commands principais
+## Os 6 slash commands principais
 
 A Skill orquestra os comandos. Detalhes em cada ficheiro `.md`:
 
 | Comando | Faz |
 |---------|-----|
-| `/super-power:research` | Fase 0 — gera 4 prompts de pesquisa em `pesquisas/` |
+| `/super-power:research` | Fase 0 — apresenta menu de tipos de projeto e gera 4 prompts de pesquisa |
 | `/super-power:plan` | Consolida pesquisas em PLAN.md + CLAUDE.md + PROJECT.md + NOW.md |
 | `/super-power:start` | Fase 1 — setup seguro (`.claude/settings.json`, estrutura) |
 | `/super-power:phase N` | Avança para a Fase N (2-7) com regras específicas |
 | `/super-power:status` | Lê CLAUDE.md + NOW.md e resume estado |
+| `/super-power:uninstall` | Remove skill e commands (com backup recuperável) |
 
 ---
 

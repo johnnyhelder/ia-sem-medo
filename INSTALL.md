@@ -106,14 +106,28 @@ Se o agente disser que não pode clonar repositórios, a solução é executar o
 curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash
 ```
 
-### Reverter instalação
+### Reverter instalação (desinstalar)
 
-Se quiser desinstalar:
+**Opção A — Via Claude Code (recomendado):**
+
+```
+/super-power:uninstall
+```
+
+**Opção B — Via terminal:**
+
+```bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash
+```
+
+**Opção C — Manualmente (apaga sem backup):**
 
 ```bash
 rm -rf ~/.claude/skills/akita-method
 rm -rf ~/.claude/commands/super-power
 ```
+
+As opções A e B fazem **backup** com timestamp em vez de apagar — recuperável se mudares de ideias.
 
 ### Atualizar para versão mais recente
 
