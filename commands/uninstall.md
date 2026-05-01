@@ -1,81 +1,67 @@
 ---
-description: Remove a skill e os slash commands — opções soft (backup) ou hard (sem backup)
+description: Remove a skill e os slash commands — soft / hard / clean-all
 argument-hint: "[soft | hard | clean-all]"
 ---
 
 # /super-power:uninstall
 
-Remove o `claude-code-super-power` do sistema. **Não toca em projetos existentes.**
+Remove o `claude-code-super-power` do sistema. Tudo executado via Bash inline directo — sem invocar scripts externos, sem dependências de cache ou TTY.
 
-O agente executa Bash directo (não chama o `uninstall.sh`) — assim funciona mesmo no `!` do Claude Code, sem precisar de TTY interactivo.
+**Não toca em projetos do utilizador.** Só remove `~/.claude/skills/akita-method/` e `~/.claude/commands/super-power/`.
 
-## Modos disponíveis
-
-| Modo | O que faz | Recuperável? |
-|------|-----------|--------------|
-| **soft** (default) | Move para `.deleted.<timestamp>` | ✅ Sim — basta renomear de volta |
-| **hard** | `rm -rf` directo | ❌ Não — apaga definitivamente |
-| **clean-all** | Hard + apaga `.backup.*` e `.deleted.*` acumulados | ❌ Não — limpeza total |
+---
 
 ## O que o agente Claude Code deve fazer
 
-### Passo 1 — Detectar o modo
+### Passo 1 — Detectar modo
 
 Se o utilizador chamou com argumento, usar:
-- `/super-power:uninstall soft` → modo soft
+- `/super-power:uninstall soft` ou `/super-power:uninstall` (default) → modo soft
 - `/super-power:uninstall hard` → modo hard
 - `/super-power:uninstall clean-all` → modo hard + limpar backups
 
-Se chamou **sem argumento**, perguntar:
+Se chamou **sem argumento** OU o utilizador disse algo em linguagem natural ("desinstala isto"), perguntar:
 
 ```
 Como queres desinstalar?
 
   1. SOFT (recomendado) — move para .deleted.<timestamp>, recuperável
   2. HARD — apaga definitivamente (rm -rf)
-  3. CLEAN-ALL — apaga tudo + remove backups antigos acumulados (.backup.*, .deleted.*)
+  3. CLEAN-ALL — apaga tudo + remove backups antigos acumulados
 
 Responde 1, 2 ou 3.
 ```
 
-### Passo 2 — Detectar backups acumulados
+### Passo 2 — Mostrar o que vai ser tocado
 
-Listar (silenciosamente) o que existe:
+Antes de executar, listar o que será removido:
 
 ```bash
-ls -d ~/.claude/skills/akita-method 2>/dev/null
-ls -d ~/.claude/skills/akita-method.backup.* 2>/dev/null
-ls -d ~/.claude/skills/akita-method.deleted.* 2>/dev/null
-ls -d ~/.claude/commands/super-power 2>/dev/null
-ls -d ~/.claude/commands/super-power.backup.* 2>/dev/null
-ls -d ~/.claude/commands/super-power.deleted.* 2>/dev/null
+echo "Vai ser removido:"
+[ -d "$HOME/.claude/skills/akita-method" ] && echo "  ~/.claude/skills/akita-method"
+[ -d "$HOME/.claude/commands/super-power" ] && echo "  ~/.claude/commands/super-power"
 ```
 
-### Passo 3 — Mostrar plano e confirmar
+Se modo for **clean-all**, também listar backups que serão apagados:
 
-Exemplo de mensagem para o utilizador:
-
-```
-Vou desinstalar (modo: HARD):
-
-Vai ser apagado:
-  ~/.claude/skills/akita-method
-  ~/.claude/commands/super-power
-
-Backups antigos detectados (não serão tocados, a não ser que escolhas CLEAN-ALL):
-  ~/.claude/skills/akita-method.backup.1777656584
-  ~/.claude/skills/akita-method.deleted.1777660000
-  ~/.claude/commands/super-power.backup.1777656584
-
-Confirmas? (sim/não)
+```bash
+shopt -s nullglob
+echo "Backups que serão removidos:"
+for p in "$HOME/.claude/skills/akita-method.backup."* "$HOME/.claude/skills/akita-method.deleted."* "$HOME/.claude/commands/super-power.backup."* "$HOME/.claude/commands/super-power.deleted."*; do
+  echo "  $p"
+done
+shopt -u nullglob
 ```
 
-Se utilizador disser **não**: parar.
-Se utilizador disser **sim**: avançar.
+### Passo 3 — Confirmar com o utilizador (excepto soft sem argumento explícito que já confirmou no menu)
+
+Para HARD ou CLEAN-ALL: pedir confirmação clara em linguagem natural.
+
+> "Vou apagar definitivamente os ficheiros listados acima. Confirmas? (sim/não)"
 
 ### Passo 4 — Executar
 
-#### Modo SOFT
+#### SOFT (default)
 
 ```bash
 TS=$(date +%s)
@@ -83,90 +69,56 @@ TS=$(date +%s)
   mv "$HOME/.claude/skills/akita-method" "$HOME/.claude/skills/akita-method.deleted.$TS"
 [ -d "$HOME/.claude/commands/super-power" ] && \
   mv "$HOME/.claude/commands/super-power" "$HOME/.claude/commands/super-power.deleted.$TS"
+echo "✓ Movido para backup recuperável (.deleted.$TS)"
 ```
 
-#### Modo HARD
+#### HARD
 
 ```bash
 rm -rf "$HOME/.claude/skills/akita-method"
 rm -rf "$HOME/.claude/commands/super-power"
+echo "✓ Apagado definitivamente."
 ```
 
-#### Modo CLEAN-ALL
+#### CLEAN-ALL
 
 ```bash
-# Atual
 rm -rf "$HOME/.claude/skills/akita-method"
 rm -rf "$HOME/.claude/commands/super-power"
-
-# Backups antigos
-rm -rf "$HOME"/.claude/skills/akita-method.backup.*
-rm -rf "$HOME"/.claude/skills/akita-method.deleted.*
-rm -rf "$HOME"/.claude/commands/super-power.backup.*
-rm -rf "$HOME"/.claude/commands/super-power.deleted.*
+shopt -s nullglob
+N=0
+for p in "$HOME/.claude/skills/akita-method.backup."* "$HOME/.claude/skills/akita-method.deleted."* "$HOME/.claude/commands/super-power.backup."* "$HOME/.claude/commands/super-power.deleted."*; do
+  rm -rf "$p" && N=$((N+1))
+done
+shopt -u nullglob
+echo "✓ Limpeza total. $N backups antigos também removidos."
 ```
 
-> **Cuidado com expansão de globs:** se não houver matches, `rm -rf` pode dar erro. Usar `shopt -s nullglob` antes ou redirecionar erro.
-
-### Passo 5 — Verificar e reportar
-
-```bash
-ls -d ~/.claude/skills/akita-method 2>/dev/null && echo "AINDA EXISTE" || echo "removido"
-ls -d ~/.claude/commands/super-power 2>/dev/null && echo "AINDA EXISTE" || echo "removido"
-```
-
-Reportar ao utilizador:
+### Passo 5 — Reportar
 
 ```
 ✓ Claude Code Super Power desinstalado.
 
-Modo: [SOFT/HARD/CLEAN-ALL]
+Modo usado: [SOFT/HARD/CLEAN-ALL]
 
-[Se SOFT]
-  Backups criados em:
-    ~/.claude/skills/akita-method.deleted.<TS>
-    ~/.claude/commands/super-power.deleted.<TS>
+[Se SOFT — mostrar backup paths]
+Backup recuperável em:
+  ~/.claude/skills/akita-method.deleted.<TS>
+  ~/.claude/commands/super-power.deleted.<TS>
 
-  Para recuperar:
-    mv ~/.claude/skills/akita-method.deleted.<TS> ~/.claude/skills/akita-method
-    mv ~/.claude/commands/super-power.deleted.<TS> ~/.claude/commands/super-power
+Para recuperar: "recupera o super-power" (eu trato disso)
 
 [Se HARD ou CLEAN-ALL]
-  Apagado definitivamente. Não há recuperação.
-
-Para reinstalar:
-  Cole no Claude Code:
-    Instala o Claude Code Super Power para mim.
-    Repositório: https://github.com/johnnyhelder/claude-code-super-power
-
-  Ou via terminal:
-    curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash
+Para reinstalar, basta dizer:
+  "Instala o claude-code-super-power"
 ```
 
-## Alternativa: terminal directo
-
-### Soft (com backup, terminal interactivo)
-
-```bash
-curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash
-```
-
-### Hard sem confirmação (curl|bash, scripts, Claude Code !)
-
-```bash
-curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash -s -- --hard --yes
-```
-
-### Limpeza total (hard + backups acumulados)
-
-```bash
-curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash -s -- --hard --yes --clean-backups
-```
+---
 
 ## Regras
 
-- **Sempre confirmar** antes de tocar em qualquer ficheiro (a não ser que utilizador tenha passado argumento explícito)
+- **Sempre Bash inline.** Nunca invocar `~/.claude/skills/.../uninstall.sh` ou similar.
+- **Sempre confirmar** acções destrutivas (hard, clean-all)
 - **Default = soft** quando ambíguo (mais seguro)
-- **Hard só com confirmação dupla** ou argumento explícito
-- **Nunca tocar** em ficheiros fora dos caminhos listados
-- **Sempre verificar** após remoção e reportar resultado
+- **Reportar paths concretos** dos backups criados
+- **Compatível com macOS, Linux, WSL** — usar `$HOME` em vez de `~` para robustez

@@ -1,6 +1,6 @@
 ---
 name: akita-method
-description: "Método estruturado para criar e executar projetos Claude Code com disciplina de engenharia sénior. Combina os 4 princípios anti-erro de Karpathy/Anthropic, o Akita Way (Anti-Vibe Coding + XP), e ferramentas auxiliares (Context7, LLM Council, Graphify). Acionar SEMPRE que o utilizador quiser começar um projeto novo, reestruturar um existente, ou pedir ajuda para planear antes de programar. Triggers: 'novo projeto', 'começar do zero', 'criar um site', 'montar uma aplicação', 'CLAUDE.md', 'PLAN.md', 'TDD com IA', 'pair programming com IA', 'método Akita', '/super-power:*'."
+description: "Método estruturado para criar e executar projetos Claude Code com disciplina de engenharia sénior. Combina os 4 princípios anti-erro de Karpathy/Anthropic, o Akita Way (Anti-Vibe Coding + XP), e ferramentas auxiliares (Context7, LLM Council, Graphify). ACIONAR para 2 cenários: (1) GESTÃO DA SKILL — utilizador quer instalar, actualizar, desinstalar, limpar backups, ou ver versão. Triggers: 'atualiza super power', 'actualiza super power', 'desinstala super power', 'remove super power', 'apaga super power', 'limpa backups super power', 'limpa lixo super power', 'qual versão super power', 'reinstala super power', 'update super power', 'uninstall super power'. Quando detectar estes triggers, executar Bash inline directo (sem invocar scripts externos). (2) FLUXO DE PROJETO — utilizador quer começar projeto novo ou reestruturar existente. Triggers: 'novo projeto', 'começar do zero', 'criar um site', 'montar uma aplicação', 'CLAUDE.md', 'PLAN.md', 'TDD com IA', 'pair programming com IA', 'método Akita', '/super-power:*'."
 ---
 
 # Akita Method — Skill Orquestradora
@@ -39,18 +39,123 @@ Estes 4 são injetados automaticamente no `CLAUDE.md` de cada projeto.
 
 ---
 
-## Os 6 slash commands principais
+## Gestão da Skill — Linguagem Natural
+
+Quando o utilizador disser qualquer destes em PT-BR / PT-PT / EN, **executar Bash inline directo** sem invocar scripts externos. Isto evita problemas de cache, parser, TTY.
+
+### Intent: ATUALIZAR / Reinstalar versão mais recente
+
+Triggers: "atualiza", "actualiza", "upgrade", "nova versão", "instala de novo", "update super power"
+
+```bash
+TS=$(date +%s)
+[ -d "$HOME/.claude/skills/akita-method" ] && \
+  mv "$HOME/.claude/skills/akita-method" "$HOME/.claude/skills/akita-method.backup.$TS"
+[ -d "$HOME/.claude/commands/super-power" ] && \
+  mv "$HOME/.claude/commands/super-power" "$HOME/.claude/commands/super-power.backup.$TS"
+
+TMP=$(mktemp -d)
+git clone --depth 1 --quiet https://github.com/johnnyhelder/claude-code-super-power.git "$TMP/repo"
+cp -r "$TMP/repo/skill/akita-method" "$HOME/.claude/skills/akita-method"
+cp -r "$TMP/repo/commands" "$HOME/.claude/commands/super-power"
+rm -rf "$TMP"
+```
+
+Reportar: "✓ Atualizado. Backup da versão anterior em `~/.claude/skills/akita-method.backup.$TS`."
+
+### Intent: DESINSTALAR
+
+Triggers: "desinstala", "remove", "apaga", "tira", "uninstall"
+
+**Perguntar primeiro qual modo:**
+
+```
+Como queres desinstalar?
+
+  1. SOFT (recomendado) — move para .deleted.<timestamp>, recuperável
+  2. HARD — apaga definitivamente
+  3. CLEAN-ALL — apaga tudo + remove backups antigos acumulados
+
+Responde 1, 2 ou 3.
+```
+
+Após resposta, executar Bash directo:
+
+**SOFT:**
+```bash
+TS=$(date +%s)
+mv "$HOME/.claude/skills/akita-method" "$HOME/.claude/skills/akita-method.deleted.$TS" 2>/dev/null
+mv "$HOME/.claude/commands/super-power" "$HOME/.claude/commands/super-power.deleted.$TS" 2>/dev/null
+```
+
+**HARD:**
+```bash
+rm -rf "$HOME/.claude/skills/akita-method"
+rm -rf "$HOME/.claude/commands/super-power"
+```
+
+**CLEAN-ALL** (Hard + apagar todos os backups acumulados):
+```bash
+rm -rf "$HOME/.claude/skills/akita-method"
+rm -rf "$HOME/.claude/commands/super-power"
+shopt -s nullglob
+rm -rf "$HOME/.claude/skills/akita-method.backup."* "$HOME/.claude/skills/akita-method.deleted."*
+rm -rf "$HOME/.claude/commands/super-power.backup."* "$HOME/.claude/commands/super-power.deleted."*
+shopt -u nullglob
+```
+
+### Intent: LIMPAR BACKUPS ACUMULADOS
+
+Triggers: "limpa backups", "limpa lixo", "tira os backups", "remove backups antigos"
+
+```bash
+shopt -s nullglob
+N=0
+for path in "$HOME/.claude/skills/akita-method.backup."* "$HOME/.claude/skills/akita-method.deleted."* "$HOME/.claude/commands/super-power.backup."* "$HOME/.claude/commands/super-power.deleted."*; do
+  rm -rf "$path" && N=$((N+1))
+done
+shopt -u nullglob
+echo "✓ $N backups antigos apagados."
+```
+
+### Intent: VER VERSÃO
+
+Triggers: "qual versão", "que versão tenho", "version"
+
+```bash
+[ -f "$HOME/.claude/skills/akita-method/SKILL.md" ] && \
+  echo "✓ Skill instalada: $(stat -c %y "$HOME/.claude/skills/akita-method/SKILL.md" 2>/dev/null || stat -f %Sm "$HOME/.claude/skills/akita-method/SKILL.md")" || \
+  echo "✗ Skill não está instalada."
+
+[ -d "$HOME/.claude/commands/super-power" ] && \
+  echo "✓ Slash commands: $(ls "$HOME/.claude/commands/super-power" | wc -l) ficheiros" || \
+  echo "✗ Slash commands não instalados."
+```
+
+### Regras de gestão
+
+- **Sempre confirmar** antes de operações destrutivas (HARD / CLEAN-ALL)
+- **Reportar resultado** com paths concretos (utilizador deve saber onde está o backup)
+- **Não invocar `uninstall.sh` ou `install.sh`** — fazer Bash inline aqui mesmo
+- **Detectar plataforma** quando relevante (macOS vs Linux vs WSL — `stat -c` vs `stat -f`)
+
+---
+
+## Os 7 slash commands principais
 
 A Skill orquestra os comandos. Detalhes em cada ficheiro `.md`:
 
 | Comando | Faz |
 |---------|-----|
 | `/super-power:research` | Fase 0 — briefing conversacional + 7 perguntas + pesquisa deep automática |
-| `/super-power:plan` | Consolida pesquisas em PLAN.md + CLAUDE.md + PROJECT.md + NOW.md |
+| `/super-power:plan` | Consolida pesquisa em PLAN.md + CLAUDE.md + PROJECT.md + NOW.md (com framework de marketing digital) |
 | `/super-power:start` | Fase 1 — setup seguro (`.claude/settings.json`, estrutura) |
 | `/super-power:phase N` | Avança para a Fase N (2-7) com regras específicas |
 | `/super-power:status` | Lê CLAUDE.md + NOW.md e resume estado |
-| `/super-power:uninstall` | Remove skill e commands (com backup recuperável) |
+| `/super-power:update` | Atualiza para a versão mais recente (com backup automático) |
+| `/super-power:uninstall` | Remove skill e commands (soft/hard/clean-all) |
+
+**Linguagem natural sempre disponível:** o utilizador pode dizer "atualiza super power", "desinstala isto", "limpa backups", "qual versão tenho" — a skill reconhece os triggers e age. Ver secção "Gestão da Skill — Linguagem Natural" acima.
 
 ---
 

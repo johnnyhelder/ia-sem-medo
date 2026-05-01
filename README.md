@@ -264,41 +264,80 @@ Cada satoshi conta. Os fundos vão para manter este e outros projectos públicos
 
 ---
 
-## 🗑️ Desinstalar
+## 💬 Gestão em linguagem natural
 
-Mudaste de ideias? Sem ressentimentos. Tens **3 opções** (soft / hard / clean-all).
+> **Depois de instalado, fala em PT/EN com o Claude Code. Sem comandos shell, sem flags, sem cache.**
+> O agente entende o que queres, pergunta confirmação se for destrutivo, e executa Bash directo.
 
-### Via Claude Code (recomendado — pergunta-te qual modo)
+### Atualizar para a versão mais recente
+
+Cola no Claude Code (em qualquer pasta):
 
 ```
-/super-power:uninstall
+Atualiza o claude-code-super-power para a versão mais recente
 ```
 
-O agente pergunta `soft` / `hard` / `clean-all` e executa Bash directo (funciona até sem TTY).
+(Aceita variações: "atualiza super power", "actualiza super power", "upgrade super power", "instala a versão nova", etc.)
 
-### Via terminal — soft (com backup recuperável)
+O agente faz backup automático da versão actual e instala a nova.
+
+### Desinstalar
+
+```
+Desinstala o claude-code-super-power
+```
+
+(Aceita: "remove super power", "apaga super power", "tira super power")
+
+O agente pergunta-te o modo:
+- **SOFT** — move para `.deleted.<timestamp>` (recuperável)
+- **HARD** — apaga definitivamente
+- **CLEAN-ALL** — apaga tudo + remove backups antigos acumulados
+
+### Limpar backups antigos acumulados
+
+Se já actualizaste várias vezes e tens muitos `.backup.*` ou `.deleted.*`:
+
+```
+Limpa os backups antigos do super-power
+```
+
+### Ver versão instalada
+
+```
+Que versão do super-power tenho instalada?
+```
+
+### Slash commands (alternativa para quem prefere comandos)
+
+| Comando | O que faz |
+|---|---|
+| `/super-power:research` | Fase 0 — briefing + 7 perguntas + pesquisa deep |
+| `/super-power:plan` | Gera PLAN.md + CLAUDE.md + PROJECT.md + NOW.md |
+| `/super-power:start` | Fase 1 — setup seguro |
+| `/super-power:phase N` | Avança para Fase N (2-7) |
+| `/super-power:status` | Mostra estado do projeto |
+| `/super-power:update` | Atualiza para versão mais recente |
+| `/super-power:uninstall` | Remove (pergunta soft/hard/clean-all) |
+
+### Fallback raro — terminal
+
+Se por algum motivo o Claude Code não estiver acessível, há scripts shell:
 
 ```bash
+# Reinstalar
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash
+
+# Desinstalar (interactivo)
 curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash
-```
 
-(Move para `.deleted.<timestamp>` em vez de apagar. Se mudares de ideias, basta renomear de volta.)
-
-### Via terminal — hard (sem backup, definitivo)
-
-```bash
-curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash -s -- --hard --yes
-```
-
-### Via terminal — limpeza total (hard + remove backups acumulados)
-
-```bash
+# Desinstalar tudo + backups (sem confirmação)
 curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash -s -- --hard --yes --clean-backups
 ```
 
-(Útil se já reinstalaste várias vezes e tens `.backup.*` e `.deleted.*` acumulados.)
+> **Mas usa-os só se mesmo precisares.** A UX recomendada é falar com o Claude.
 
-Em todos os modos: **os teus projetos não são tocados** — só remove a skill global e os slash commands.
+Em qualquer modo: **os teus projetos não são tocados** — só `~/.claude/skills/akita-method/` e `~/.claude/commands/super-power/`.
 
 ---
 
