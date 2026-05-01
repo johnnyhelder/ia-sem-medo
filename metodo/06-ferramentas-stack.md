@@ -50,7 +50,8 @@ O Akita defende simplificação radical:
 
 | Ferramenta | Uso |
 |------------|-----|
-| Docker | Isolar o agente de IA |
-| ai-jail (Rust) | Sandbox avançado para agentes |
+| `.claude/settings.json` | Permissões granulares do agente (allow / ask / deny) |
+| `.claude/CLAUDE.md` | Regras do projeto carregadas automaticamente pelo agente |
+| Docker (opcional) | Isolar projetos de alto risco ou produção |
 | Brakeman / Snyk | Análise de vulnerabilidades |
-| ESLint / Rubocop | Qualidade de código |
+| ESLint / Rubocop / Prettier | Qualidade de código |

@@ -1,6 +1,6 @@
 # Créditos e Referências
 
-Este repositório é uma **homenagem e adaptação** do trabalho de pessoas incríveis que compartilham conhecimento publicamente. Nada aqui existiria sem elas.
+Este repositório é uma **compilação e adaptação** do trabalho público de várias pessoas. Nada aqui existiria sem elas. Os textos deste repositório são originais — apenas os princípios foram estudados, organizados e documentados com nossas próprias palavras. Os links abaixo apontam às fontes originais para você ir direto à fonte.
 
 ---
 
@@ -42,6 +42,51 @@ O método documentado neste repositório foi extraído e adaptado dos princípio
 ## 🎬 Mano Davin
 
 O vídeo ["O Método Fábio Akita para programar com IA"](https://www.youtube.com/watch?v=cWY7iBafw7I) do canal **Mano Davin** foi o ponto de partida para a organização deste método. Ele pegou os conceitos da live com o Akita e estruturou de forma acessível, incluindo o Desafio dos 7 Dias que adaptamos aqui.
+
+---
+
+## 🧠 Andrej Karpathy
+
+[Andrej Karpathy](https://karpathy.ai) — pesquisador, ex-OpenAI, ex-Tesla AI. Em 2026 publicou [observações sobre como LLMs erram em código](https://x.com/karpathy/status/2015883857489522876), dando origem aos 4 princípios universais que estão pré-injetados no nosso `CLAUDE-MD-TEMPLATE.md`:
+
+1. **Pensar antes de codar** — trazer suposições e trade-offs à tona
+2. **Simplicidade primeiro** — código mínimo, sem features especulativas
+3. **Mudanças cirúrgicas** — tocar só no que for necessário
+4. **Execução orientada por objetivo** — definir critérios verificáveis
+
+Detalhe completo: [`principios/4-principios-karpathy.md`](principios/4-principios-karpathy.md)
+
+Karpathy também é o criador da metodologia [LLM Council](https://github.com/karpathy/llm-council) (5 conselheiros revisando decisões caras), que documentamos em [`ferramentas/llm-council.md`](ferramentas/llm-council.md).
+
+---
+
+## 🛠️ Forrest Chang ([@forrestchang](https://github.com/forrestchang))
+
+Forrest empacotou as observações do Karpathy num único `CLAUDE.md` reutilizável e publicou no GitHub em janeiro de 2026. O repositório [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills) tem **104k estrelas** e foi a fonte direta para a Parte A do nosso template de CLAUDE.md.
+
+Licença: MIT.
+
+---
+
+## 🤖 Anthropic
+
+[Anthropic](https://www.anthropic.com) — criadora do Claude e do Claude Code. Publicaram um [artefacto público](https://claude.ai/public/artifacts/39364733-b29a-443b-8ca2-a6e57977fbb0) de template de `CLAUDE.md` com 4 princípios universais + bloco específico de projeto que serviu de base para o nosso template.
+
+---
+
+## 📊 Safi Shamsi ([@safishamsi](https://github.com/safishamsi))
+
+Criador do [graphify](https://github.com/safishamsi/graphify) — skill que transforma qualquer pasta de ficheiros (código, docs, papers, imagens) num grafo de conhecimento navegável com auditoria honesta (EXTRACTED / INFERRED / AMBIGUOUS).
+
+Documentamos como integrar ao método em [`ferramentas/graphify.md`](ferramentas/graphify.md). Especialmente útil na Fase 0 (mapear codebase legacy) e na Fase 5 (validar arquitectura).
+
+---
+
+## 📺 Gestor de Audiência ([@gestordeaudiencia](https://instagram.com/gestordeaudiencia))
+
+Criou a versão PT-BR do LLM Council ([gestordeaudiencia/llm-council-skill-ptbr](https://github.com/gestordeaudiencia/llm-council-skill-ptbr)) e publicou um tutorial passo-a-passo de instalação para utilizadores zero-tech. O estilo visual desse tutorial (quadros DICA / ATENÇÃO / IMPORTANTE) inspirou parte do README deste repositório.
+
+Curso: [cloudcoding.com.br/comece](https://cloudcoding.com.br/comece)
 
 ---
 
