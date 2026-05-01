@@ -45,7 +45,7 @@ A Skill orquestra os comandos. Detalhes em cada ficheiro `.md`:
 
 | Comando | Faz |
 |---------|-----|
-| `/super-power:research` | Fase 0 — apresenta menu de tipos de projeto e gera 4 prompts de pesquisa |
+| `/super-power:research` | Fase 0 — briefing conversacional + 7 perguntas + pesquisa deep automática |
 | `/super-power:plan` | Consolida pesquisas em PLAN.md + CLAUDE.md + PROJECT.md + NOW.md |
 | `/super-power:start` | Fase 1 — setup seguro (`.claude/settings.json`, estrutura) |
 | `/super-power:phase N` | Avança para a Fase N (2-7) com regras específicas |
@@ -57,9 +57,10 @@ A Skill orquestra os comandos. Detalhes em cada ficheiro `.md`:
 ## Fluxo Completo (8 fases)
 
 ### Fase 0 — Pesquisa
-Pesquisa de mercado, SEO, concorrência e ferramentas ANTES de qualquer decisão técnica.
+Briefing conversacional + 7 perguntas + pesquisa deep automática (mercado, persona, concorrência, SEO, envolvidos). **Tudo dentro do Claude Code.**
 - Comando: `/super-power:research`
-- Saída: pasta `pesquisas/` com 4 ficheiros
+- Saída: `pesquisas/00-deep-research.md` (1 ficheiro consolidado, ~5-15 páginas)
+- Opção alternativa: gerar prompt para Gemini Deep Research e importar de volta
 
 ### Fase 1 — Setup Seguro do Claude Code
 Configurar `.claude/settings.json` com permissões, criar estrutura de pastas, inicializar git. ZERO código.

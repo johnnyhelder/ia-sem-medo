@@ -69,7 +69,7 @@ claude
 
 ---
 
-## Passo 4 — Pesquisa antes de programar (Fase 0)
+## Passo 4 — Pesquisa conversacional (Fase 0)
 
 Dentro do Claude Code:
 
@@ -77,30 +77,29 @@ Dentro do Claude Code:
 /super-power:research
 ```
 
-A skill cria 4 ficheiros em `pesquisas/` com prompts prontos para você colar no Gemini Deep Research, ChatGPT ou Perplexity:
+O Claude conversa contigo em **3 etapas** simples:
 
-- `01-mercado.md` — quem são concorrentes, faixas de preço, oportunidades
-- `02-keywords-seo.md` — o que o público busca no Google
-- `03-concorrencia.md` — análise dos top 5 concorrentes
-- `04-ferramentas.md` — qual stack escolher e por quê
+1. **Briefing livre** — escreves em texto corrido sobre o projeto, negócio, envolvidos e problema
+2. **7 perguntas** — Claude pergunta de uma só vez: público, dor, como resolvem hoje, diferencial, canais, modelo de receita, sucesso em 90 dias
+3. **Pesquisa automática** — Claude faz ~10 buscas web cobrindo mercado, concorrência, SEO, perfil dos envolvidos, e tendências. Resultado num único ficheiro: `pesquisas/00-deep-research.md`
 
-Cole cada prompt na ferramenta de pesquisa, copie a resposta de volta para o ficheiro.
+Tudo dentro do Claude Code. Zero copy-paste para outras ferramentas.
+
+> **Opção alternativa:** Se preferires pesquisa MAIS profunda, o Claude oferece-te a opção de gerar 1 prompt para Gemini Deep Research (gratuito), e depois importa o resultado de volta.
 
 ---
 
-## Passo 5 — Consolide as pesquisas em planeamento
-
-Quando os 4 ficheiros tiverem respostas reais:
+## Passo 5 — Consolide a pesquisa em planeamento
 
 ```
 /super-power:plan
 ```
 
-A skill gera **4 ficheiros base** na raiz:
+O Claude lê a pesquisa e gera **4 ficheiros base** na raiz, com **framework de marketing digital aplicado**:
 
-- `PLAN.md` — planta do projeto
+- `PLAN.md` — planta do projeto + persona + jornada + funil TOFU/MOFU/BOFU + KPIs
 - `CLAUDE.md` — cérebro do agente (com 4 princípios Karpathy pré-injetados)
-- `PROJECT.md` — visão e roadmap
+- `PROJECT.md` — visão e roadmap + plano de marketing inicial
 - `NOW.md` — handoff entre sessões
 
 Os 4 princípios universais do CLAUDE.md são:

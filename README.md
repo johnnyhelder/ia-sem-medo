@@ -87,16 +87,18 @@ Depois, dentro do Claude Code:
 
 | Passo | Comando | O que acontece |
 |---|---|---|
-| **1** | `/super-power:research` | Gera 4 prompts de pesquisa em `pesquisas/` (mercado, SEO, concorrência, ferramentas) |
-| **2** | (cole os prompts no Gemini Deep Research, copie as respostas de volta) | |
-| **3** | `/super-power:plan` | Consolida pesquisas em `PLAN.md` + `CLAUDE.md` + `PROJECT.md` + `NOW.md` |
-| **4** | `/super-power:start` | Fase 1 — `.claude/settings.json` com permissões + estrutura inicial |
-| **5** | `/super-power:phase 2` | Fase 2 — Fundação completa (CLAUDE.md 200+ linhas) |
-| **6** | `/super-power:phase 3` | Fase 3 — TDD: todos os testes ANTES de qualquer código |
-| **7** | `/super-power:phase 4` | Fase 4 — código implementado, testes verdes |
-| **8** | `/super-power:phase 5` | Fase 5 — otimização |
-| **9** | `/super-power:phase 6` | Fase 6 — interface e conteúdo |
-| **10** | `/super-power:phase 7` | Fase 7 — deploy com CI/CD |
+| **1** | `/super-power:research` | Conversa contigo (briefing + 7 perguntas) e faz a pesquisa profunda automática (~10 buscas web). Resultado em `pesquisas/00-deep-research.md`. Tudo dentro do Claude Code. |
+| **2** | `/super-power:plan` | Lê a pesquisa e gera `PLAN.md` + `CLAUDE.md` + `PROJECT.md` + `NOW.md` com framework de marketing digital aplicado (persona, jornada, funil, KPIs) |
+| **3** | `/super-power:start` | Fase 1 — `.claude/settings.json` com permissões + estrutura inicial |
+| **4** | `/super-power:phase 2` | Fase 2 — Fundação completa (CLAUDE.md 200+ linhas) |
+| **5** | `/super-power:phase 3` | Fase 3 — TDD: todos os testes ANTES de qualquer código |
+| **6** | `/super-power:phase 4` | Fase 4 — código implementado, testes verdes |
+| **7** | `/super-power:phase 5` | Fase 5 — otimização |
+| **8** | `/super-power:phase 6` | Fase 6 — interface e conteúdo |
+| **9** | `/super-power:phase 7` | Fase 7 — deploy com CI/CD |
+
+> **DICA — PESQUISA EXTERNA OPCIONAL**
+> Se preferires pesquisa MAIS profunda, o `/super-power:research` oferece também a opção de gerar 1 prompt mestre para o **Gemini Deep Research** (gratuito). Esperas o relatório lá, voltas com o link público ou o conteúdo, e o Claude importa. Para o caso de o link ser SPA pesado, podes precisar de [Firecrawl](ferramentas/firecrawl-instalacao.md) (free tier 500 req/mês chega).
 
 > **A QUALQUER momento:** `/super-power:status` mostra onde você está, o que falta, e o que fazer a seguir.
 
@@ -129,6 +131,7 @@ Três ferramentas curadas que se integram ao método. Use quando o cenário pedi
 | **[Context7](ferramentas/context7.md)** | Setup de qualquer lib/framework — busca docs reais ao vivo, sem confiar em training data | Automático (com regra global) |
 | **[LLM Council](ferramentas/llm-council.md)** | Decisões caras com trade-offs (lançar X ou Y? mudar posicionamento?) | `convoca o conselho` |
 | **[Graphify](ferramentas/graphify.md)** | Mapear codebase legacy ou validar arquitectura na Fase 5 | `/graphify .` |
+| **[Firecrawl](ferramentas/firecrawl-instalacao.md)** | Importar pesquisas externas (Gemini Deep Research) via link, scraping de concorrentes | Opcional — só se WebFetch falhar |
 
 ---
 
