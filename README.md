@@ -82,6 +82,46 @@ O `install.sh` faz exactamente o mesmo: clone, copy, configure. Ideal para máqu
 
 ---
 
+## 🌍 Instalação GLOBAL (avançado — todos os projetos)
+
+> **Quando faz sentido?**
+> - Já és utilizador avançado de Claude Code e queres a skill em **todos os projetos** sem instalar em cada um
+> - Tens disposição para autorizar manualmente o auto-mode classifier (vai pedir confirmação)
+> - Estás disposto a usar terminal real (não via `!` no Claude Code)
+
+### Passo a passo (terminal real, fora do Claude Code)
+
+```bash
+# 1. Abre o terminal (Mac: Terminal.app / Linux: gnome-terminal / Windows: WSL ou Git Bash)
+
+# 2. Roda o instalador com flag --global
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash -s -- --global
+
+# 3. Verifica que ficou em ~/.claude/
+ls ~/.claude/skills/akita-method/
+ls ~/.claude/commands/super-power/
+```
+
+A skill fica disponível **em todas as sessões futuras** do Claude Code, em qualquer pasta.
+
+### Trade-offs
+
+| Aspecto | Local (default) | Global |
+|---|---|---|
+| Onde fica | `./.claude/` do projeto | `~/.claude/` do utilizador |
+| Quanto custa instalar | 1 frase no Claude Code (3s) | 1 comando no terminal |
+| Outros projetos vêem? | Não | Sim |
+| Versionada via git? | Sim (vai para o repo do projeto) | Não |
+| Auto-mode classifier? | Sem fricção | Pode pedir autorização |
+| Conflito entre projetos? | Cada um tem versão própria | Versão única para todos |
+| Bom para... | Projetos isolados, equipa | Workflow pessoal único |
+
+### Misturar local e global?
+
+Sim. Se tiveres global instalado e um projeto também tem local, o **local sobrepõe** o global nesse projeto. Útil para testar versão experimental num projeto sem afectar os outros.
+
+---
+
 ## FASE 02 — Primeiro projeto
 
 Crie a pasta do projeto, abra o Claude Code, e execute os comandos por ordem:

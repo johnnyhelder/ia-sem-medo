@@ -1,319 +1,350 @@
 ---
-description: Fase 0 — briefing conversacional + 7 perguntas + pesquisa deep automática
+description: Fase 0 — coleta rica de contexto + briefing extraído + pesquisa profunda customizada
 argument-hint: ""
 ---
 
 # /super-power:research
 
-Conduz a **Fase 0** de forma conversacional. Sem menus, sem copy-paste de prompts, sem ir buscar resultados a outras ferramentas. **Tudo dentro do Claude Code.**
+Conduz a **Fase 0** com filosofia central: **informação antes de planejamento**.
 
-O fluxo é em **3 etapas simples**: briefing → 7 perguntas → pesquisa automática.
-
----
-
-## Etapa 1 — Briefing livre
-
-Pergunte ao utilizador (numa só mensagem):
-
-```
-Antes de começar, conta-me sobre o teu projeto em texto corrido. Sem 
-formato. Inclui o que importa para ti:
-
-  • O que vais criar
-  • Para quem (quem é o cliente)
-  • Quem está envolvido (tu, equipa, parceiros)
-  • Que problema resolve
-  • Qualquer contexto que aches relevante
-
-Pode ser 1 parágrafo ou 5. Não te preocupes com estrutura.
-```
-
-Aguardar a resposta. NÃO avançar até ter texto substancial. Se a resposta for muito curta (<50 palavras), pedir gentilmente mais detalhe.
+O utilizador já tem muito material (PDFs, áudios, perfis sociais, currículos). Em vez de pedir para ele lembrar e escrever um briefing, **fazemos coleta rica primeiro** — depois o agente extrai contexto e só pergunta o que faltar.
 
 ---
 
-## Etapa 2 — As 7 perguntas
+## Fluxo em 7 etapas
 
-Após o briefing, fazer **as 7 perguntas numa só mensagem** (ler tudo num turno é mais eficiente para o utilizador):
+### ETAPA 1 — Tipo de projeto
+
+Pergunta única ao utilizador:
 
 ```
-Boa. Agora 7 perguntas para fazer uma pesquisa que valha mesmo a pena. 
-Responde tudo numa só mensagem (não precisas separar por número se for 
-mais natural responder em texto):
+Antes de mais nada, qual destes descreve melhor o teu projeto?
 
-1. PÚBLICO ESPECÍFICO — quem é a pessoa que vai pagar? 
-   (idade, profissão, localização, hábitos, condição financeira)
+  1. PROJETO PRÓPRIO
+     Vais criar algo para TI: teu negócio, teu portfolio, infoproduto teu.
 
-2. DOR PRINCIPAL — qual é a frustração #1 desta pessoa hoje?
-   (descrita nas palavras dela, não nas tuas)
+  2. CLIENTE TERCEIRIZADO
+     Vais desenvolver PARA OUTRA pessoa ou empresa (és freelancer/agência).
 
-3. COMO RESOLVE HOJE — sem o teu produto, o que esta pessoa faz?
-   (concorrentes diretos + alternativas indiretas)
+  3. EMPRESA ONDE TRABALHO
+     Projeto interno onde és sócio, fundador, CTO ou responsável.
 
-4. TEU DIFERENCIAL — por que tu e não outro? 
-   (não slogan, não "qualidade" — o que é REAL e específico?)
-
-5. CANAIS — onde esta pessoa está online?
-   (Instagram, Google, LinkedIn, TikTok, fóruns, grupos…)
-
-6. MODELO DE RECEITA — como vais ganhar dinheiro?
-   (assinatura, venda única, freemium, consultoria, anúncios…)
-
-7. SUCESSO EM 90 DIAS — qual o número que define vitória?
-   (R$ X de receita? N clientes? N inscritos? autoridade no nicho?)
+Responde: 1, 2 ou 3.
 ```
 
-Se o utilizador responder de forma muito vaga em alguma pergunta crítica (ex: "público": "todos"), pedir esclarecimento pontual ANTES de avançar.
+Guarda a resposta em variável `PROJECT_TYPE`. Vai influenciar Etapa 6.
+
+### ETAPA 2 — Coleta rica de contexto
+
+Criar pasta `docs/` no projeto e gerar `docs/README.md` com checklist:
+
+```bash
+mkdir -p docs
+```
+
+Escrever `docs/README.md`:
+
+```markdown
+# Material para a pesquisa profunda
+
+> Coloca aqui tudo o que tens sobre o projeto, o cliente ou ti mesmo.
+> Quanto mais material → melhor a pesquisa → melhor o plano.
+
+## Documentos (PDFs / Word / Imagens)
+- [ ] Currículo profissional
+- [ ] Currículo Lattes (BR — académico)
+- [ ] Brand guidelines (cores, fontes, tom de voz)
+- [ ] Propostas comerciais anteriores
+- [ ] Brochuras / materiais de marketing
+- [ ] Apresentações de pitch
+- [ ] Relatórios financeiros (se aplicável)
+- [ ] Análises de mercado já feitas
+- [ ] Casos de sucesso anteriores
+- [ ] Depoimentos de clientes (texto ou imagem)
+
+## Áudios / vídeos
+- [ ] Entrevistas em podcasts (MP3)
+- [ ] Gravações de calls com clientes
+- [ ] Vídeos de apresentação
+- [ ] Talks que deste em eventos
+
+## Fotos / imagens
+- [ ] Logo (em vetor se possível)
+- [ ] Mood board
+- [ ] Fotos do produto / serviço
+- [ ] Fotos da equipa
+- [ ] Print de Instagram analytics
+
+## Outros
+- [ ] Lista de clientes actuais
+- [ ] Histórico de projetos
+- [ ] Contratos modelo
+- [ ] Métricas existentes (Google Analytics, etc.)
 
 ---
 
-## Etapa 3 — Confirmação curta
-
-Após as 7 perguntas, confirmar:
-
-```
-Tenho contexto suficiente para fazer a pesquisa. 
-Mais alguma coisa importante que eu deva saber antes de pesquisar?
+Quando tiveres tudo aqui, volta ao Claude Code e diz: **"tenho tudo aí"** ou **"pronto"**.
 ```
 
-Se utilizador disser "não" ou "podes prosseguir": avançar para Etapa 4.
-Se utilizador disser "sim, mais X": absorver e voltar a perguntar até estar pronto.
-
----
-
-## Etapa 4 — Escolher como pesquisar
-
-Apresentar **2 opções** (sem viés — deixar o utilizador decidir):
+Depois pedir ao utilizador (na conversa):
 
 ```
-Tenho duas formas de fazer a pesquisa. Qual preferes?
+Criei a pasta docs/ com uma checklist. Faz isto agora:
 
-🔵 OPÇÃO A — Aqui dentro do Claude Code (recomendado para a maioria)
-   • Eu faço 8-12 buscas web cobrindo mercado, concorrência, SEO, 
-     tendências e perfil dos envolvidos.
-   • Demora ~5-10 minutos.
-   • Resultado em 1 ficheiro: pesquisas/00-deep-research.md
-   • Sem precisares de outra ferramenta.
+1. ABRE A PASTA docs/ NO TEU FINDER (Mac) ou EXPLORADOR (Windows/Linux).
+   Caminho: $(pwd)/docs
 
-🟢 OPÇÃO B — Externamente em Gemini Deep Research (mais profundo)
-   • Pesquisa fica mais densa (relatórios de 30+ páginas).
-   • Eu gero 1 prompt mestre customizado.
-   • Tu colas em gemini.google.com (Deep Research é gratuito).
-   • Esperas 10-30 minutos pelo relatório.
-   • Trazes de volta: ou copias o conteúdo, ou colas o link público.
-   • Eu importo e uso.
+2. ARRASTA TUDO O QUE TENS SOBRE O PROJETO PARA LÁ:
+   - PDFs, Word, imagens, áudios, vídeos
+   - Currículos (teu, dos sócios, dos envolvidos)
+   - Brand guidelines
+   - Apresentações
+   - Tudo o que achares que pode informar o agente
 
-Responde A ou B.
+3. RESPONDE-ME COM A LISTA DE LINKS RELEVANTES (1 por linha):
+   - Site da empresa (se houver)
+   - Site pessoal / portfolio
+   - LinkedIn (teu + sócios + responsável pelo projeto)
+   - Instagram (pessoal + empresa)
+   - Facebook (pessoal + página)
+   - Twitter/X
+   - GitHub
+   - YouTube
+   - TikTok
+   - Currículo Lattes (BR)
+   - Newsletter ou blog
+   - Outros perfis públicos relevantes
+
+⚠️  ESTA ETAPA VAI DEMORAR.
+Não te apresses. Reúne o máximo possível.
+A qualidade da pesquisa depende deste material.
+Quando tiveres tudo, diz "tenho tudo aí" ou "pronto".
+
+Tempo típico: 10-30 minutos.
 ```
 
----
+### ETAPA 3 — Análise dos materiais
 
-## Caminho A — Pesquisa interna (default)
+**Aguardar** o utilizador dizer "pronto" / "tenho tudo aí" / similar antes de avançar.
 
-Use o tool **WebSearch** (built-in do Claude Code) para fazer ~10 queries em paralelo, baseadas no briefing + 7 perguntas. Exemplos de queries (substituir placeholders):
+Depois:
 
-1. `tamanho mercado [nicho] [região] 2026`
-2. `tendências [nicho] 2026 [região]`
-3. `[público] dores frustrações Reddit Quora`
-4. `[público] o que busca Google [nicho]`
-5. `[concorrente 1] análise produto reviews`
-6. `[concorrente 2] pricing modelo negócio`
-7. `[envolvido principal] linkedin perfil autoridade [nicho]`
-8. `best practices marketing [nicho] 2026`
-9. `keywords SEO [nicho] [região] volume busca`
-10. `ferramentas tecnologia [tipo de produto] 2026`
+```bash
+echo "Conteúdo de docs/:"
+ls -la docs/
+```
 
-Se Firecrawl estiver disponível, usar para enriquecer páginas de concorrentes (scrape de homepage, pricing, copy).
+Para cada ficheiro em `docs/`:
+- **PDFs**: usar Read tool (Claude Code lê PDFs nativamente)
+- **Imagens**: usar Read tool (vision)
+- **Áudios/vídeos**: avisar utilizador "preciso da transcrição — podes usar Whisper ou OpenAI transcription, e colocar o `.txt` em docs/"
+- **Texto / Markdown**: Read tool
 
-Compilar tudo num único ficheiro: **`pesquisas/00-deep-research.md`** com esta estrutura:
+Para os links que o utilizador deu:
+- Tentar `WebFetch` primeiro
+- Se for SPA pesado (Instagram, etc.): se Firecrawl disponível, usar `firecrawl_scrape`
+- Se nada funcionar: pedir ao utilizador um screenshot ou copy-paste do conteúdo
+
+Extrair de cada fonte:
+- **Posicionamento percebido** (como a pessoa/empresa se descreve)
+- **Tom de voz** (formal, casual, técnico, emotivo)
+- **Audiência aparente** (a quem se dirige)
+- **Frequência e estilo** de posts/conteúdo
+- **Diferenciadores mencionados**
+- **Histórico relevante** (formação, trajetória, marcos)
+
+### ETAPA 4 — Briefing extraído (NÃO peças ao utilizador para escrever briefing)
+
+Apresentar o que o agente extraiu:
+
+```
+Com base no material que colocaste em docs/ e nos links que partilhaste,
+percebi o seguinte:
+
+📋 SOBRE [TI / O CLIENTE / A EMPRESA]:
+   • Nome / marca: ...
+   • Trajetória: ...
+   • Posicionamento actual: ...
+   • Tom de voz: ...
+   • Diferencial percebido: ...
+
+🎯 SOBRE O PROJETO:
+   • O que parece ser: ...
+   • Para quem aparenta ser dirigido: ...
+   • Que problema parece resolver: ...
+
+🌐 PRESENÇA DIGITAL DETECTADA:
+   • Canais activos: ...
+   • Engagement aparente: ...
+   • Pontos fortes: ...
+   • Pontos fracos / oportunidades: ...
+
+❓ O QUE NÃO CONSEGUI DETECTAR (preciso da tua ajuda):
+   • [pergunta 1]
+   • [pergunta 2]
+   • ...
+
+Confirmas o que entendi? Corriges algo? Adicionas o que falta?
+```
+
+### ETAPA 5 — Perguntas pontuais (só gaps)
+
+Com base na resposta da Etapa 4, identificar quais das 7 perguntas clássicas ainda não foram respondidas pelos materiais:
+
+1. Público específico (provavelmente não detectado nos materiais)
+2. Dor #1 nas palavras do cliente (raramente nos materiais)
+3. Como resolvem hoje (concorrentes — pode estar parcialmente em materiais)
+4. Diferencial real (no materiais provavelmente está como slogan — pedir o real)
+5. Canais (já detectado nos materiais provavelmente)
+6. Modelo de receita (pode não estar claro)
+7. Sucesso em 90 dias (raramente nos materiais)
+
+Perguntar **apenas as que faltam**, não as 7 todas:
+
+```
+Para fechar o briefing, faltam-me [X] respostas:
+
+[lista das que ainda faltam, customizada]
+
+Responde tudo numa só mensagem.
+```
+
+### ETAPA 6 — Pesquisa profunda customizada por tipo
+
+Baseada no `PROJECT_TYPE` da Etapa 1.
+
+#### Se PROJETO PRÓPRIO (1):
+
+Pesquisa foca em:
+- **Sobre o dev (utilizador):**
+  - Autoridade actual no nicho (LinkedIn, posts, citações)
+  - Audiência existente (seguidores, newsletter, eventos)
+  - Histórico relevante (formação, projetos anteriores)
+  - Visibilidade ("dev nome" no Google)
+- **Sobre o mercado-alvo:**
+  - Tamanho, tendências
+  - Comportamento de compra
+  - Onde o público está
+- **Concorrência:**
+  - Top 5 directos
+  - Indirectos relevantes
+  - Gaps de mercado
+- **SEO + canais:**
+  - Keywords
+  - Tipo de conteúdo que funciona
+  - Plataformas dominantes
+
+#### Se CLIENTE TERCEIRIZADO (2):
+
+Pesquisa foca em:
+- **Sobre a empresa cliente:**
+  - História, fundação, marcos
+  - Notícias recentes (últimos 12 meses)
+  - Eventos, prémios, polémicas
+  - Posicionamento actual
+  - Concorrentes percebidos
+- **Sobre os sócios / fundadores:**
+  - Trajetória (LinkedIn deep)
+  - Outras empresas
+  - Valores expressos publicamente
+- **Sobre o RESPONSÁVEL pelo projeto** (CRÍTICO):
+  - Função actual
+  - Posts recentes (últimos 6 meses)
+  - O que valoriza
+  - Estilo de decisão
+  - Receios aparentes
+- **Sobre o mercado do cliente:**
+  - Tendências
+  - Concorrência directa
+  - O que falta no mercado
+
+#### Se EMPRESA ONDE TRABALHO (3):
+
+Mesma estrutura que terceirizado, mas:
+- Adicionar análise interna do papel do utilizador na empresa
+- Pesquisar autoridade interna (papel decisório, alinhamento com a direcção)
+- Identificar bloqueios típicos de projetos internos
+
+### ETAPA 7 — Consolidar em `pesquisas/00-deep-research.md`
+
+Estrutura:
 
 ```markdown
 # Pesquisa Profunda — [Nome do Projeto]
 
-> Gerada em [DATA] via /super-power:research
-> Briefing inicial: [resumir em 2 frases]
+> Tipo: [PROJETO PRÓPRIO / CLIENTE TERCEIRIZADO / EMPRESA TRABALHO]
+> Gerado em [DATA]
+> Baseado em: [N] documentos em docs/ + [N] links analisados
 
 ---
 
-## 1. Mercado
+## 1. Contexto extraído dos materiais (Etapa 3)
+[Resumo dos PDFs, áudios, perfis lidos]
 
-### 1.1 Tamanho e crescimento
-[dados com fontes]
+## 2. Perfis sociais analisados
+[Tabela: link, posicionamento, tom, engagement, observações]
 
-### 1.2 Tendências 2026
-[3-5 tendências com fontes]
+## 3. Sobre [tu / o cliente / a empresa]
+[Trajetória, autoridade, diferencial real]
 
-### 1.3 Faixas de preço praticadas
-| Modelo | Preço típico | Exemplos |
-|---|---|---|
-| ... | ... | ... |
+## 4. Sobre o(s) responsável(eis) pelo projeto
+[Para CLIENTE/EMPRESA: deep research do decisor]
 
----
+## 5. Mercado
+[Tamanho, tendências, faixas de preço]
 
-## 2. Persona — quem é o cliente
+## 6. Persona
+[Demografia, dores específicas, jornada]
 
-### 2.1 Demografia
-[idade, género, localização, renda, profissão]
+## 7. Concorrência
+[Top 5 directos + indirectos + gaps]
 
-### 2.2 Dores específicas (com citações reais quando possível)
-[lista numerada]
+## 8. SEO e canais
+[Keywords + canais + tipo de conteúdo que funciona]
 
-### 2.3 Desejos e aspirações
-[o que esta pessoa quer ter/ser/sentir]
+## 9. Aplicação de Marketing Digital
+[Posicionamento + funil + KPIs + primeiras 3 páginas]
 
-### 2.4 Jornada típica do cliente
-- Awareness: como descobre que tem o problema
-- Consideration: como avalia opções
-- Decision: o que faz a pessoa decidir comprar
-
----
-
-## 3. Concorrência
-
-### 3.1 Top 5 concorrentes diretos
-| Concorrente | Site | Posicionamento | Pricing | Forças | Fraquezas |
-|---|---|---|---|---|---|
-| ... | ... | ... | ... | ... | ... |
-
-### 3.2 Concorrentes indiretos
-[alternativas que o cliente usa hoje]
-
-### 3.3 Gaps de mercado (oportunidades)
-[3-5 lacunas que vimos durante a pesquisa]
-
----
-
-## 4. SEO e canais
-
-### 4.1 Top keywords (volume estimado + concorrência)
-| Termo | Volume mensal | Concorrência | Intenção |
-|---|---|---|---|
-| ... | ... | ... | ... |
-
-### 4.2 Canais onde o público está
-[ranking por relevância para este público específico]
-
-### 4.3 Tipo de conteúdo que funciona
-[exemplos reais de posts/vídeos com tração]
-
----
-
-## 5. Os envolvidos (perfil público)
-
-[Para cada pessoa mencionada no briefing — APENAS info pública: linkedin, posts, autoridade no nicho. Sem inferências sobre vida privada.]
-
----
-
-## 6. Aplicação de Marketing Digital
-
-### 6.1 Posicionamento sugerido
-[1 frase: "para [público] que [dor], [produto] é [categoria] que [diferencial]"]
-
-### 6.2 Funil sugerido (TOFU / MOFU / BOFU)
-- TOFU (descoberta): [conteúdo + canais]
-- MOFU (consideração): [conteúdo + ferramentas]
-- BOFU (decisão): [conteúdo + ofertas]
-
-### 6.3 Proposta de valor (em 1 frase, padrão)
-[Verbo no infinitivo + benefício específico + sem o quê (objeção)]
-
-### 6.4 KPIs primários (3 max)
-[ligados ao "Sucesso em 90 dias" da pergunta 7]
-
-### 6.5 Primeiras 3 páginas a criar (sequência sugerida)
-1. Homepage com proposta de valor + CTA único
-2. Página "[diferencial principal]" (autoridade)
-3. Página "[oferta principal]" (conversão)
-
----
-
-## 7. Stack técnica recomendada
-
-[baseada nos requisitos + custo + facilidade de manutenção com agentes IA]
-
----
+## 10. Stack técnica recomendada
 
 ## Fontes consultadas
-[lista numerada de URLs reais com data de acesso]
 ```
 
 Após gerar, mostrar:
 
 ```
-✓ Pesquisa completa em pesquisas/00-deep-research.md (~[N] páginas)
+✓ Pesquisa profunda completa em pesquisas/00-deep-research.md
+
+Resumo:
+  • [N] documentos analisados em docs/
+  • [N] links explorados
+  • [N] páginas de pesquisa final
 
 Próximo passo:
   /super-power:plan
 
-Isso vai ler a pesquisa e gerar PLAN.md + CLAUDE.md + PROJECT.md + NOW.md.
+Vai consolidar TUDO (pesquisa + materiais) em PLAN.md, CLAUDE.md,
+PROJECT.md e NOW.md, com framework de marketing digital aplicado.
 ```
-
----
-
-## Caminho B — Externo via Gemini Deep Research
-
-Gerar UM prompt mestre customizado e salvar em **`pesquisas/00-prompt-deep-research.md`**:
-
-```markdown
-# Prompt para Gemini Deep Research
-
-> Cola este prompt em gemini.google.com → activa "Deep Research".
-> Espera o relatório (10-30 min). Depois traz de volta.
-
----
-
-[Prompt detalhado de ~500 palavras com TODAS as 7 secções
-de pesquisa que o Caminho A faria, mas formatadas como
-instrução para o Gemini Deep Research. Customizado com 
-os dados do briefing + 7 perguntas.]
-```
-
-Depois mostrar:
-
-```
-✓ Prompt gerado em pesquisas/00-prompt-deep-research.md
-
-Próximos passos:
-  1. Abre gemini.google.com (faz login com Google)
-  2. Activa "Deep Research" no menu
-  3. Cola o prompt do ficheiro acima
-  4. Aguarda o relatório (10-30 min)
-  5. Quando estiver pronto, volta aqui e diz uma destas opções:
-     
-     a) "Cola o conteúdo aqui" — eu importo directamente
-     b) "Aqui está o link público: [URL]" — eu vou buscar online
-        (Para o link, posso usar WebFetch built-in. Se falhar 
-         por ser SPA pesado, instalas o Firecrawl. Vou-te guiar.)
-```
-
-### Quando o utilizador voltar com link
-
-Tentar `WebFetch(url)` primeiro. Se funcionar, importar e processar.
-
-Se `WebFetch` falhar (SPA pesado, JS-rendered):
-- Verificar se Firecrawl MCP está disponível: `gh mcp list` ou `claude mcp list`
-- Se não estiver, instruir instalação rápida (ver `ferramentas/firecrawl-instalacao.md`)
-- Após instalado, usar Firecrawl scrape
-
-### Quando o utilizador colar o conteúdo
-
-Receber o markdown/texto. Salvar em `pesquisas/00-deep-research.md`. Aplicar a estrutura padrão (Caminho A) reorganizando se necessário.
 
 ---
 
 ## Regras
 
-- **Não inventar dados.** Se a pesquisa não cobriu algo, dizer "[dados não encontrados]" em vez de adivinhar.
-- **Citar fontes.** Cada estatística ou afirmação forte deve ter URL.
-- **Privacidade.** Para pesquisar pessoas (envolvidos), usar APENAS info pública (linkedin, posts, entrevistas). Sem inferir sobre vida privada.
-- **Marketing digital aplicado.** A secção 6 do ficheiro final é OBRIGATÓRIA — é o que diferencia este método de "só pesquisar".
-- **Confirmar antes de pesquisar.** Não começar a fazer 10 buscas web sem o utilizador ter dado OK na Etapa 3.
-
----
+- **Aguardar SEMPRE** o utilizador confirmar antes de cada etapa principal (pasta criada → docs colocados → links partilhados → análise pronta → briefing OK).
+- **Avisar tempo** antes de etapas longas: "esta etapa vai demorar X minutos".
+- **Não inventar** dados que não estão nos materiais ou na pesquisa. Se faltar, perguntar.
+- **Privacidade**: para pesquisar pessoas, usar APENAS info pública. Não inferir sobre vida privada.
+- **Aplicar marketing digital sempre** (mesmo para B2B técnico): persona, jornada, funil, KPIs.
 
 ## Tempo total estimado
 
-- **Caminho A:** 8-15 minutos (briefing + 7 perguntas + 5-10min de pesquisa)
-- **Caminho B:** 25-45 minutos (briefing + 7 perguntas + 20-40min Gemini + import)
+- Etapas 1-2 (tipo + coleta): 10-30 minutos (utilizador a juntar materiais)
+- Etapa 3 (análise pelo agente): 5-15 minutos
+- Etapas 4-5 (briefing + perguntas): 5-10 minutos
+- Etapa 6 (pesquisa profunda): 10-20 minutos
+- Etapa 7 (consolidação): 2-5 minutos
 
-A Caminho A é suficiente para 80% dos projetos. Caminho B só faz sentido para projetos onde a profundidade de research justifica o tempo extra (mercados muito competitivos, B2B com decisões caras, etc.).
+**Total: 30-90 minutos** (vs ~10 minutos do método antigo, mas com qualidade muito superior).
+
+A maior parte do tempo é o utilizador a colocar materiais em docs/ — não é tempo do agente.
