@@ -5,192 +5,178 @@
 
 ---
 
-## O que vai ser instalado
+## Filosofia: instalação LOCAL no projeto (default)
 
-| Destino | Conteúdo |
-|---------|----------|
-| `~/.claude/skills/akita-method/` | Skill orquestradora do método (SKILL.md + templates) |
-| `~/.claude/commands/super-power/` | 8 slash commands `/super-power:*` |
+O Claude Code Super Power instala-se por default **na pasta do projeto actual** (`.claude/skills/akita-method/` e `.claude/commands/super-power/`), **não no `~/.claude/` global**.
 
-**Não toca nos seus projetos.** Só configura o `~/.claude/` global do utilizador.
+### Porquê local?
+
+| Vantagem | Detalhe |
+|----------|---------|
+| ✅ Sem auto-mode bloqueio | Não é self-modification global, é só criar ficheiros num projeto |
+| ✅ Cada projeto tem versão própria | Podes ter v1 num projeto e v2 noutro sem conflitos |
+| ✅ Não polui `~/.claude/` | Outros projetos não são afectados |
+| ✅ Replicável via git | Quem clona o projeto recebe a skill automaticamente |
+| ✅ Mais simples conceptualmente | Está aqui na pasta, não escondido |
+
+### Quando usar global?
+
+Se quiseres a skill activa em **todos os projetos** sem instalar em cada um:
+
+```bash
+curl -sSL .../install.sh | bash -s -- --global
+```
+
+(Mas pode ter o problema do auto-mode classifier — terás que autorizar manualmente.)
 
 ---
 
-## ⚠️ Sobre o auto-mode classifier (importante para o agente)
+## O que vai ser instalado
 
-O Claude Code tem proteção contra self-modification: por default bloqueia escrita em `~/.claude/`. **Esta proteção é correcta e a Anthropic deve mantê-la** — uma skill maliciosa podia injectar instruções persistentes.
+| Destino (local) | Conteúdo |
+|---------|----------|
+| `./.claude/skills/akita-method/` | Skill orquestradora (SKILL.md + templates) |
+| `./.claude/commands/super-power/` | 8 slash commands `/super-power:*` |
 
-Quando o utilizador cola o prompt mágico do README, ele **inclui autorização explícita** ("Eu autorizo a instalação — confio no repo. Procede sem precisar de me perguntar a cada passo").
-
-Esta autorização explícita é tu **passes** o auto-mode classifier. Se mesmo assim for bloqueado:
-
-1. **Reportar ao utilizador** o motivo (proteção self-modification)
-2. **Pedir autorização repetida** ("posso prosseguir? confirmas que confias no repositório?")
-3. **Como último recurso**, sugerir alternativa terminal: `curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash`
+**Não toca em `~/.claude/` global.** Não toca noutros projetos.
 
 ---
 
 ## Para o agente Claude Code seguir
 
-### Passo 1 — Confirmar com o utilizador (apenas se NÃO houver autorização explícita)
+### Passo 1 — Confirmar contexto
 
-Se o utilizador colou o prompt mágico do README com autorização explícita ("Eu autorizo a instalação"), saltar esta etapa e avançar para Passo 2.
+Verificar que está na pasta correcta:
 
-Caso contrário, perguntar:
+```bash
+echo "Vou instalar em: $(pwd)/.claude/"
+ls -la 2>/dev/null | head -3
+```
 
-> "Vou instalar o Claude Code Super Power. Isto cria duas pastas em `~/.claude/`:
-> - `~/.claude/skills/akita-method/` (skill orquestradora do método)
-> - `~/.claude/commands/super-power/` (8 slash commands /super-power:*)
->
-> Se já existirem versões anteriores, faço backup automático antes de substituir. Posso prosseguir?"
-
-Se o utilizador confirmar, avançar. Se hesitar, explicar e perguntar de novo.
+Se a pasta parece de projeto válido (tem README, package.json, ou similar — ou está vazia para projeto novo), avançar. Se está em `$HOME` ou `/tmp`, avisar utilizador antes.
 
 ### Passo 2 — Verificar dependências
 
 ```bash
-command -v git || echo "MISSING: git"
-[ -d "$HOME/.claude" ] && echo "OK: ~/.claude existe" || mkdir -p "$HOME/.claude"
-mkdir -p "$HOME/.claude/skills" "$HOME/.claude/commands"
+command -v git >/dev/null || echo "MISSING: git"
+mkdir -p "$(pwd)/.claude/skills" "$(pwd)/.claude/commands"
 ```
-
-Se `git` não estiver instalado, parar e pedir ao utilizador para instalar primeiro.
 
 ### Passo 3 — Backup automático (se já existir)
 
 ```bash
 TS=$(date +%s)
-[ -d "$HOME/.claude/skills/akita-method" ] && mv "$HOME/.claude/skills/akita-method" "$HOME/.claude/skills/akita-method.backup.$TS"
-[ -d "$HOME/.claude/commands/super-power" ] && mv "$HOME/.claude/commands/super-power" "$HOME/.claude/commands/super-power.backup.$TS"
+[ -d "$(pwd)/.claude/skills/akita-method" ] && \
+  mv "$(pwd)/.claude/skills/akita-method" "$(pwd)/.claude/skills/akita-method.backup.$TS"
+[ -d "$(pwd)/.claude/commands/super-power" ] && \
+  mv "$(pwd)/.claude/commands/super-power" "$(pwd)/.claude/commands/super-power.backup.$TS"
 ```
-
-Avisar o utilizador se algum backup foi criado, com o caminho exacto.
 
 ### Passo 4 — Clonar repositório
 
 ```bash
 TMP=$(mktemp -d -t ccsp-install-XXXXXX)
-git clone --depth 1 --branch main --quiet https://github.com/johnnyhelder/claude-code-super-power.git "$TMP/repo"
+git clone --depth 1 --branch main --quiet \
+  https://github.com/johnnyhelder/claude-code-super-power.git "$TMP/repo"
 ```
 
-### Passo 5 — Copiar para os destinos finais
+### Passo 5 — Copiar para destinos locais
 
 ```bash
-cp -r "$TMP/repo/skill/akita-method" "$HOME/.claude/skills/akita-method"
-cp -r "$TMP/repo/commands" "$HOME/.claude/commands/super-power"
+cp -r "$TMP/repo/skill/akita-method" "$(pwd)/.claude/skills/akita-method"
+cp -r "$TMP/repo/commands" "$(pwd)/.claude/commands/super-power"
 rm -rf "$TMP"
 ```
 
 ### Passo 6 — Verificar instalação
 
 ```bash
-ls "$HOME/.claude/skills/akita-method/SKILL.md" >/dev/null && echo "✓ Skill OK"
-ls "$HOME/.claude/commands/super-power/research.md" >/dev/null && echo "✓ Commands OK"
+[ -f "$(pwd)/.claude/skills/akita-method/SKILL.md" ] && echo "✓ Skill OK"
+[ -d "$(pwd)/.claude/commands/super-power" ] && echo "✓ Commands OK"
 ```
-
-Se algo falhar, restaurar o backup e reportar erro ao utilizador.
 
 ### Passo 7 — Reportar sucesso
 
-> "✓ Claude Code Super Power instalado.
+> "✓ Claude Code Super Power instalado **nesta pasta**.
 >
-> **Skill:** `~/.claude/skills/akita-method/`
-> **Slash commands:** 5 disponíveis em `~/.claude/commands/super-power/`
+> **Skill:** `./.claude/skills/akita-method/`
+> **Slash commands:** `./.claude/commands/super-power/` (8 disponíveis)
+>
+> A skill está activa **apenas neste projeto** — outros não são afectados.
 >
 > **Próximos passos:**
-> 1. Abrir o Claude Code numa pasta de projeto novo (`mkdir meu-projeto && cd meu-projeto && claude`)
-> 2. Rodar `/super-power:research` para iniciar a Fase 0 (pesquisa)
+> - "Que versão tenho?" — confirmar instalação
+> - "Começa um projeto novo" — arrancar Fase 0
+> - `/super-power:research` — slash command para pesquisa
 >
-> **Comandos disponíveis:**
-> - `/super-power:research` — pesquisa de mercado, SEO, concorrência, ferramentas
-> - `/super-power:plan` — gera PLAN.md + CLAUDE.md + PROJECT.md + NOW.md
-> - `/super-power:start` — Fase 1: setup seguro
-> - `/super-power:phase N` — avança para fase N (2-7)
-> - `/super-power:status` — mostra estado do projeto
->
-> Documentação: https://github.com/johnnyhelder/claude-code-super-power"
+> **Recomendação:** adicionar `.claude/skills/akita-method/.gitignore` ao teu `.gitignore` se NÃO quiseres versionar a skill (ou deixar versionada para replicar entre dispositivos)."
 
 ---
 
 ## Resolução de problemas
 
-### Permissões do agente impedem clone
+### Auto-mode classifier bloqueia mesmo com instalação local
 
-Se o agente disser que não pode clonar repositórios, a solução é executar o `install.sh` manualmente:
+A instalação local **NÃO deveria** disparar o auto-mode classifier (não é self-modification global). Se mesmo assim bloquear:
+
+1. Confirmar autorização explicitamente: "Sim, autorizo. Procede."
+2. Como último recurso, sair do Claude Code, abrir terminal, e correr:
+   ```bash
+   curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash
+   ```
+   (Default é local — instala na pasta actual.)
+
+### Reverter instalação local
+
+Para desinstalar deste projeto apenas:
+
+```
+Desinstala o super-power deste projeto
+```
+
+Ou manualmente:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash
+rm -rf .claude/skills/akita-method
+rm -rf .claude/commands/super-power
 ```
 
-### Reverter instalação (desinstalar)
+### Instalar globalmente
 
-3 modos disponíveis: **soft** (backup recuperável), **hard** (apaga definitivo), **clean-all** (apaga + remove backups acumulados).
-
-**Opção A — Via Claude Code (recomendado, pergunta-te o modo):**
-
-```
-/super-power:uninstall
-```
-
-**Opção B — Terminal interactivo (soft default):**
+Se mesmo assim queres a skill em todos os projetos (e estás disposto a autorizar o auto-mode):
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash
-```
-
-**Opção C — Hard sem confirmação (curl|bash, scripts, Claude Code `!`):**
-
-```bash
-curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash -s -- --hard --yes
-```
-
-**Opção D — Limpeza total (hard + remove `.backup.*` e `.deleted.*` acumulados):**
-
-```bash
-curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/uninstall.sh | bash -s -- --hard --yes --clean-backups
-```
-
-**Opção E — Manualmente (rm directo):**
-
-```bash
-rm -rf ~/.claude/skills/akita-method
-rm -rf ~/.claude/commands/super-power
-# Limpar backups antigos (opcional)
-rm -rf ~/.claude/skills/akita-method.{backup,deleted}.*
-rm -rf ~/.claude/commands/super-power.{backup,deleted}.*
-```
-
-As opções A e B fazem **backup** com timestamp em vez de apagar — recuperável se mudares de ideias.
-
-### Atualizar para versão mais recente
-
-```bash
-# Re-rodar a instalação faz backup automático e instala a versão atual
-curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power/main/install.sh | bash -s -- --global
 ```
 
 ---
 
-## Estrutura instalada
-
-Após instalação bem-sucedida:
+## Estrutura instalada (local — default)
 
 ```
-~/.claude/
-├── skills/
-│   └── akita-method/
-│       ├── SKILL.md                    Orquestrador do método
-│       └── templates/
-│           ├── PLAN-TEMPLATE.md
-│           ├── CLAUDE-MD-TEMPLATE.md   (com 4 princípios pré-injetados)
-│           ├── DADOS-PROJETO-TEMPLATE.md
-│           ├── TESTES-BASE.md
-│           └── CI-CD-TEMPLATE.md
-└── commands/
-    └── super-power/
-        ├── research.md     /super-power:research
-        ├── plan.md         /super-power:plan
-        ├── start.md        /super-power:start
-        ├── phase.md        /super-power:phase N
-        └── status.md       /super-power:status
+meu-projeto/
+├── .claude/
+│   ├── skills/
+│   │   └── akita-method/
+│   │       ├── SKILL.md                 Orquestrador
+│   │       └── templates/
+│   │           ├── PLAN-TEMPLATE.md
+│   │           ├── CLAUDE-MD-TEMPLATE.md
+│   │           ├── DADOS-PROJETO-TEMPLATE.md
+│   │           ├── TESTES-BASE.md
+│   │           └── CI-CD-TEMPLATE.md
+│   └── commands/
+│       └── super-power/
+│           ├── research.md     /super-power:research
+│           ├── plan.md         /super-power:plan
+│           ├── start.md        /super-power:start
+│           ├── phase.md        /super-power:phase N
+│           ├── status.md       /super-power:status
+│           ├── version.md      /super-power:version
+│           ├── update.md       /super-power:update
+│           └── uninstall.md    /super-power:uninstall
+├── PLAN.md                              (gerado por /super-power:plan)
+├── CLAUDE.md                            (gerado por /super-power:plan)
+├── PROJECT.md                           (gerado por /super-power:plan)
+└── NOW.md                               (gerado por /super-power:plan)
 ```
