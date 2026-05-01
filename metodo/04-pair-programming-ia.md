@@ -28,9 +28,9 @@ A IA funciona melhor quando tem acesso direto ao seu projeto — lê ficheiros, 
 
 Por quê? Se você corrige manualmente, a IA não "aprende" (no contexto da sessão) e vai repetir o mesmo erro. O CLAUDE.md acumula esse conhecimento para sessões futuras.
 
-## Segurança (AI Jail)
+## Setup Seguro do Claude Code
 
-- NUNCA rode o agente direto na sua máquina sem isolamento
-- Use container Docker para o projeto
-- A IA tem acesso apenas ao projeto, não ao resto do computador
-- Revise e aprove cada ação que a IA quer executar
+- Configure `.claude/settings.json` com permissões granulares — `allow` para comandos seguros (npm test, git status), `ask` para destrutivos (`rm`, `push --force`, `db:reset`)
+- Use `.claude/CLAUDE.md` para definir regras do projeto que o agente lê automaticamente
+- Para projetos que lidam com dados sensíveis ou produção, considere Docker como isolamento adicional
+- Revise diffs antes de commit. O agente trabalha rápido, sua revisão é a barreira de qualidade

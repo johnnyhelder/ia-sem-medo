@@ -11,16 +11,18 @@
 
 ---
 
-## Dia 1 — Ambiente Seguro
+## Dia 1 — Setup Seguro do Claude Code
 
-**Objetivo:** Montar o ambiente onde a IA vai trabalhar
+**Objetivo:** Configurar o ambiente onde o agente vai trabalhar
 
 - Criar uma pasta para o projeto
 - Instalar as ferramentas necessárias (Node, Python, etc.)
-- Se souber Docker: criar um container isolado
-- Instalar/configurar o agente de IA (Claude Code, Cursor, etc.)
+- Instalar o `claude-code-poderoso` (`curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-poderoso/main/install.sh | bash`)
+- Abrir Claude Code na pasta e rodar `/poderoso:research` para começar
+- Configurar `.claude/settings.json` (o instalador cria um base que pode ajustar)
+- (Opcional, projetos de alto risco) Configurar Docker como isolamento extra
 
-**Entregável:** Ambiente funcional, pronto para trabalhar.
+**Entregável:** Ambiente funcional, agente configurado, pronto para o Dia 2.
 
 ---
 

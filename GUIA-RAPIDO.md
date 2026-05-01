@@ -7,20 +7,35 @@
 
 ## Pré-requisitos
 
-- Um computador com terminal (Windows, Mac ou Linux)
-- Uma conta no [Claude](https://claude.ai) ou acesso a qualquer agente de IA
+- Computador com terminal (Windows, Mac, Linux)
+- [Claude Code](https://docs.claude.com/claude-code) instalado
+- `git` instalado
 - Vontade de aprender fazendo
 
 Não precisa saber programar para começar. O método guia você.
 
 ---
 
-## Passo 1 — Escolha um projeto pequeno
+## Passo 1 — Instale o claude-code-poderoso
+
+Uma única linha no terminal:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-poderoso/main/install.sh | bash
+```
+
+Em 30 segundos você tem:
+- Skill `akita-method` em `~/.claude/skills/`
+- 5 slash commands `/poderoso:*` em `~/.claude/commands/`
+
+---
+
+## Passo 2 — Escolha um projeto pequeno
 
 Não comece com "um SaaS que vai mudar o mundo". Comece com algo simples:
 
 - Um site pessoal
-- Uma landing page para seu negócio
+- Uma landing page
 - Um blog
 - Uma calculadora útil
 - Um bot simples
@@ -29,75 +44,85 @@ O projeto é para **aprender o método**, não para ganhar dinheiro (ainda).
 
 ---
 
-## Passo 2 — Copie os templates
-
-Pegue os templates deste repositório e coloque no seu projeto:
+## Passo 3 — Crie a pasta e abra o Claude Code
 
 ```bash
-# Clone o repositório
-git clone https://github.com/johnnyhelder/ia-sem-medo.git
-
-# Copie os templates para seu projeto
-cp ia-sem-medo/templates/PLAN-TEMPLATE.md seu-projeto/PLAN.md
-cp ia-sem-medo/templates/CLAUDE-MD-TEMPLATE.md seu-projeto/CLAUDE.md
-cp ia-sem-medo/templates/DADOS-PROJETO-TEMPLATE.md seu-projeto/DADOS-PROJETO.md
+mkdir meu-projeto && cd meu-projeto
+claude
 ```
 
 ---
 
-## Passo 3 — Faça as pesquisas de base
+## Passo 4 — Pesquisa antes de programar (Fase 0)
 
-Antes de preencher o PLAN.md, use IA para pesquisar:
-- O mercado onde o projeto vai existir
-- O que o público busca no Google sobre o tema
-- O que os concorrentes estão fazendo
+Dentro do Claude Code:
 
-Guia completo com prompts prontos: [`metodo/00-fase-pesquisa.md`](metodo/00-fase-pesquisa.md)
+```
+/poderoso:research
+```
 
----
+A skill cria 4 ficheiros em `pesquisas/` com prompts prontos para você colar no Gemini Deep Research, ChatGPT ou Perplexity:
 
-## Passo 4 — Preencha o PLAN.md
+- `01-mercado.md` — quem são concorrentes, faixas de preço, oportunidades
+- `02-keywords-seo.md` — o que o público busca no Google
+- `03-concorrencia.md` — análise dos top 5 concorrentes
+- `04-ferramentas.md` — qual stack escolher e por quê
 
-Abra o PLAN.md e responda com sinceridade:
-
-- **O que você quer criar?** (1-2 frases)
-- **Para quem?** (quem vai usar)
-- **O que precisa funcionar?** (liste todas as funcionalidades)
-- **O que NÃO vai fazer agora?** (isso é tão importante quanto o que vai)
-
-Não precisa ser bonito. Precisa ser claro.
+Cole cada prompt na ferramenta de pesquisa, copie a resposta de volta para o ficheiro.
 
 ---
 
-## Passo 5 — Preencha o CLAUDE.md
+## Passo 5 — Consolide as pesquisas em planeamento
 
-Este é o ficheiro que a IA vai ler para entender seu projeto. Quanto mais detalhado, melhores os resultados. No mínimo, preencha:
+Quando os 4 ficheiros tiverem respostas reais:
 
-- Que tecnologias vai usar (e por quê)
-- Como as pastas estão organizadas
-- Regras que a IA deve seguir
+```
+/poderoso:plan
+```
 
-Se não sabe que tecnologias usar, pergunte à IA: *"Quero criar [seu projeto]. Quais tecnologias você recomenda e por quê?"* — mas a decisão final é sua.
+A skill gera **4 ficheiros base** na raiz:
+
+- `PLAN.md` — planta do projeto
+- `CLAUDE.md` — cérebro do agente (com 4 princípios Karpathy pré-injetados)
+- `PROJECT.md` — visão e roadmap
+- `NOW.md` — handoff entre sessões
+
+Os 4 princípios universais do CLAUDE.md são:
+1. Pensar antes de codar
+2. Simplicidade primeiro
+3. Mudanças cirúrgicas
+4. Execução orientada por objetivo
 
 ---
 
-## Passo 6 — Siga o Desafio dos 7 Dias
+## Passo 6 — Comece a Fase 1
 
-Com o PLAN.md e CLAUDE.md prontos, siga o desafio:
+```
+/poderoso:start
+```
 
-| Dia | O que fazer | Dica |
-|-----|-------------|------|
-| **1** | Monte o ambiente | Crie uma pasta, instale as ferramentas |
-| **2** | Finalize o planejamento | PLAN.md + CLAUDE.md completos. ZERO código |
-| **3** | Escreva os testes | Peça à IA: "escreva os testes para [feature]" |
-| **4** | Escreva o código | Peça à IA: "implemente para que os testes passem" |
-| **5** | Otimize | Melhore o que está feio, verifique performance |
-| **6** | Polir a interface | A cara do projeto: design, textos, detalhes |
-| **7** | Deploy | Coloque no ar com pipeline automática |
+Configura `.claude/settings.json` com permissões granulares, cria estrutura de pastas, inicializa git. **ZERO código de negócio.**
 
-> 💡 **Dica:** 1-2 horas por dia é suficiente. Se um dia precisar de mais tempo, quebre em dois.
+---
 
-Guia completo: [`metodo/07-desafio-7-dias.md`](metodo/07-desafio-7-dias.md)
+## Passo 7 — Avance fase por fase
+
+| Comando | Fase |
+|---------|------|
+| `/poderoso:phase 2` | Fundação — CLAUDE.md 200+ linhas |
+| `/poderoso:phase 3` | Testes — TDD puro, todos falhando |
+| `/poderoso:phase 4` | Implementação — código guiado pelos testes |
+| `/poderoso:phase 5` | Otimização — performance e refactoring |
+| `/poderoso:phase 6` | Interface — polir apresentação |
+| `/poderoso:phase 7` | Deploy — CI/CD automatizado |
+
+A qualquer momento:
+
+```
+/poderoso:status
+```
+
+Mostra onde você está, o que falta, e o próximo comando recomendado.
 
 ---
 
@@ -118,9 +143,9 @@ Quando a IA fizer algo errado, não vá lá e mude o código na mão. Explique o
 
 Depois de completar o Desafio dos 7 Dias:
 
-1. **Leia os documentos do método** na pasta `metodo/` para entender a teoria por trás
-2. **Use a Skill** (pasta `skill/`) se você usa Claude — ela automatiza o fluxo
-3. **Aplique num projeto real** — agora com confiança
+1. **Leia os documentos do método** na pasta `metodo/` para entender a teoria
+2. **Aplique num projeto real** — agora com confiança
+3. **Use as ferramentas auxiliares**: `convoca o conselho` (LLM Council), `/graphify .` (mapear codebase), Context7 (docs ao vivo)
 4. **Contribua** — compartilhe sua experiência em [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ---
@@ -128,13 +153,16 @@ Depois de completar o Desafio dos 7 Dias:
 ## Dúvidas frequentes
 
 **"Qual IA devo usar?"**
-Qualquer uma funciona. O método não depende de uma IA específica. Claude, ChatGPT, Gemini, Copilot — o princípio é o mesmo: você pensa, ela executa.
+Este repo é optimizado para **Claude Code**. O método funciona com outras IAs (ChatGPT, Cursor, etc.), mas os slash commands `/poderoso:*` são específicos do Claude Code.
 
 **"Preciso saber programar?"**
-Ajuda, mas não é obrigatório. O método ensina você a **pensar como engenheiro** mesmo antes de escrever código. A IA faz a parte técnica, você faz a parte estratégica.
+Ajuda, mas não é obrigatório. O método ensina você a **pensar como engenheiro** antes de escrever código. A IA faz a parte técnica, você faz a parte estratégica.
 
 **"Quanto tempo leva?"**
 O Desafio dos 7 Dias pode ser feito em 7-14 dias reais, dedicando 1-2 horas por dia. Depois disso, cada novo projeto fica mais rápido.
 
 **"E se eu já sei programar?"**
 Melhor ainda. Pule o básico e foque nos testes (Fase 3) e no CI/CD (Fase 7) — que é provavelmente o que está faltando nos seus projetos.
+
+**"Posso usar isso em projetos existentes?"**
+Sim. Em vez de `/poderoso:research`, comece com `/graphify .` para mapear o que já existe, depois rode `/poderoso:plan` para gerar PLAN.md/CLAUDE.md retroactivamente.

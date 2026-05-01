@@ -15,11 +15,16 @@ Nenhuma linha de código é gerada antes do planejamento estar completo.
 ### Fase 0 — Coleta e Inteligência (pré-projeto)
 A fase mais subestimada e mais importante. Pesquisar o mercado, o público, as palavras-chave, a concorrência e as ferramentas ANTES de qualquer decisão técnica. Guia completo com exemplos de prompts: [`metodo/00-fase-pesquisa.md`](00-fase-pesquisa.md). Template de coleta: `DADOS-PROJETO-TEMPLATE.md`.
 
-### Fase 1 — Isolamento (AI Jail)
-Criar ambiente seguro. Container Docker ou pasta isolada. A IA não precisa de acesso a tudo.
+### Fase 1 — Setup Seguro do Claude Code
+Configurar o ambiente onde o agente vai trabalhar. O foco aqui é dar ao agente exactamente o que ele precisa, nem mais, nem menos:
+
+- Configurar `.claude/settings.json` com permissões granulares — `allow` para comandos seguros (lint, testes, git status), `ask` para destrutivos (`rm`, `git push --force`)
+- Criar `.claude/CLAUDE.md` com regras claras do projeto (o agente lê isso automaticamente)
+- Usar `~/.claude/skills/` para skills reutilizáveis entre projetos
+- Para projetos que lidam com dados sensíveis ou produção, considerar Docker como camada extra de isolamento
 
 ### Fase 2 — Fundação (ZERO código)
-Criar PLAN.md (planta) e CLAUDE.md (cérebro do agente, 200+ linhas). Estrutura de diretórios. Docker Compose. NENHUMA linha de código de negócio.
+Criar PLAN.md (planta) e CLAUDE.md (cérebro do agente, 200+ linhas). Estrutura de diretórios. Docker Compose se aplicável. NENHUMA linha de código de negócio.
 
 O CLAUDE.md deve conter: visão da arquitetura, stack com versões, variáveis de ambiente, estrutura de diretórios, regras de código, regras de domínio, seção de erros da IA.
 
@@ -42,6 +47,6 @@ Pipeline automatizada: lint → testes → build → deploy. Nunca mais deploy s
 
 **Prompt Refinement**: prompts são código. Cada ajuste é um commit.
 
-**Sandbox**: NUNCA rodar o agente direto na máquina. Container Docker.
+**Permissões**: Nunca aceitar tudo cegamente. Configurar `.claude/settings.json` para pedir confirmação em comandos destrutivos. Para projetos de alto risco (produção, dados sensíveis), adicionar Docker como camada extra.
 
 **Desapego**: Se a IA erra, explicar o erro. NUNCA corrigir à mão. Documentar no CLAUDE.md.

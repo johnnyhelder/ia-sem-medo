@@ -2,13 +2,41 @@
 
 ## O cenário
 
-Você já tem um projeto rodando — talvez até em produção. O problema: sem testes, sem CI/CD, sem documentação. Qualquer mudança pode quebrar algo.
+Você já tem um projeto a rodar — talvez até em produção. O problema: sem testes, sem CI/CD, sem documentação. Qualquer mudança pode quebrar algo.
+
+## Pré-requisito: instalar o `claude-code-poderoso`
+
+```bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-poderoso/main/install.sh | bash
+```
 
 ## O fluxo de resgate
 
-### 1. Diagnóstico
+### 1. Mapear o que já existe — Graphify
 
-Mapeie o estado real do projeto:
+Antes de tocar em qualquer coisa, ver o que está lá:
+
+```bash
+cd projeto-existente
+claude
+```
+
+Dentro do Claude Code:
+
+```
+/graphify .
+```
+
+Em 5-10 minutos você tem:
+- `graph.html` — mapa visual de dependências (abrir no browser)
+- `GRAPH_REPORT.md` — god-nodes (candidatos a refactor), comunidades, ligações surpreendentes
+- Perguntas sugeridas como "Como o auth conecta ao admin panel?"
+
+Isto é Fase 0 retroactiva: pesquisa antes de tocar.
+
+### 2. Diagnóstico do estado actual
+
+Compare o seu projeto contra esta tabela:
 
 | O que verificar | Existe? |
 |-----------------|---------|
@@ -16,9 +44,10 @@ Mapeie o estado real do projeto:
 | Pipeline CI/CD | ❌ / ✅ |
 | CLAUDE.md ou documentação | ❌ / ✅ |
 | Lint / formatação | ❌ / ✅ |
+| `.claude/settings.json` com permissões | ❌ / ✅ |
 | Deploy automatizado | ❌ / ✅ |
 
-### 2. Sprint 1 — Testes (PRIORIDADE MÁXIMA)
+### 3. Sprint 1 — Testes (PRIORIDADE MÁXIMA)
 
 Instale um framework de testes e crie 15-20 testes básicos que cobrem:
 - Build compila sem erros
@@ -29,30 +58,62 @@ Instale um framework de testes e crie 15-20 testes básicos que cobrem:
 
 **Por que é prioridade:** Sem testes, tudo o resto é arriscado. Os testes são a rede de segurança que permite fazer tudo o que vem depois com confiança.
 
-### 3. Sprint 2 — CI/CD
+Use o template como referência:
 
-Crie uma pipeline que bloqueia deploy se algo falhar:
+```bash
+cat ~/.claude/skills/akita-method/templates/TESTES-BASE.md
 ```
-push → lint → testes → build → deploy
-```
 
-### 4. Sprint 3 — Documentação retroativa
+### 4. Sprint 2 — Documentação retroactiva
 
-Crie o CLAUDE.md documentando o projeto COMO ELE É HOJE:
-- Stack atual
+Em vez de `/poderoso:plan` (que assume projeto novo), crie o CLAUDE.md à mão documentando o projeto COMO ELE É HOJE:
+- Stack actual (versões exactas)
 - Estrutura de pastas
 - APIs e endpoints
 - Regras de negócio
 - Decisões já tomadas (e por quê)
 
-### 5. A partir daqui: método normal
+Use o template como base — copie a Parte A (4 princípios Karpathy) literalmente, preencha a Parte B com a realidade actual:
 
-Com testes, CI/CD e documentação, o projeto está "resgatado". Novas features seguem o fluxo normal: teste primeiro, depois código.
+```bash
+cp ~/.claude/skills/akita-method/templates/CLAUDE-MD-TEMPLATE.md CLAUDE.md
+```
 
-## Caso real
+### 5. Sprint 3 — Setup Seguro retroactivo
 
-Testamos este processo em dois projetos reais:
+```
+/poderoso:start
+```
+
+Vai criar `.claude/settings.json` com permissões. Adapte à stack do seu projeto.
+
+### 6. Sprint 4 — CI/CD
+
+Crie pipeline que bloqueia deploy se algo falhar:
+
+```
+push → lint → testes → build → deploy
+```
+
+Templates: `~/.claude/skills/akita-method/templates/CI-CD-TEMPLATE.md`
+
+### 7. Sprint 5 — Continuar com método normal
+
+Com testes, CI/CD, CLAUDE.md e settings configurados, o projeto está "resgatado". Novas features seguem o fluxo normal:
+
+```
+/poderoso:phase 3    # Escrever teste
+/poderoso:phase 4    # Implementar
+```
+
+## Casos reais
+
+Testámos este processo em dois projetos reais:
 - **Site estático (Astro):** de 0 testes para 15+ testes em 1 sprint
 - **App completa (Next.js + Prisma + AI SDK):** de 0 testes para 28+ testes em 1 sprint
 
 Ambos os projetos estavam em produção e funcionavam. Mas qualquer mudança era "no escuro". Depois do resgate, mudanças passaram a ser validadas automaticamente.
+
+## Quando NÃO resgatar
+
+Se o projeto está abandonado e você não vai mantê-lo, não vale a pena. Resgate é para projetos vivos onde você vai continuar a trabalhar.

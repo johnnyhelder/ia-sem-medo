@@ -1,195 +1,236 @@
-# 🛡️ IA Sem Medo
+# claude-code-poderoso
 
-### Um método prático para criar projetos com Inteligência Artificial — sem virar refém dela.
+### Comece seu projeto Claude Code já poderoso desde o primeiro commit.
 
-[![Licença MIT](https://img.shields.io/badge/licença-MIT-green.svg)](LICENSE)
+[![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-green.svg)](LICENSE)
 [![PRs Bem-vindos](https://img.shields.io/badge/PRs-bem--vindos-brightgreen.svg)](CONTRIBUTING.md)
 
----
-
-## O que é isso aqui?
-
-Este repositório é um **método passo a passo** para você criar projetos de software usando IA como parceira — não como muleta.
-
-Se você já tentou usar ChatGPT, Claude ou Cursor para criar algo e sentiu que:
-
-- 🤯 "A IA fez um monte de código e eu não entendi nada"
-- 😰 "Funcionou... mas eu tenho medo de mexer e quebrar tudo"
-- 🔄 "Cada vez que peço uma coisa nova, outra para de funcionar"
-- 🎰 "Parece que estou jogando na loteria — às vezes funciona, às vezes não"
-
-...então este método é para você.
+> **Anti-vibe coding em uma linha de comando.**
+> Em 5 minutos você instala um sistema completo: skill que orquestra 7 fases de engenharia, slash commands para pesquisa antes de programar, princípios anti-erro do Karpathy, e ferramentas auxiliares (Context7, LLM Council, Graphify).
 
 ---
 
-## De onde veio isso?
+## Por que existe
 
-Este método foi **extraído e adaptado** dos princípios do [Fábio Akita](https://akitaonrails.com) — um dos programadores mais respeitados do Brasil, com mais de 30 anos de experiência. Em 2026, ele demonstrou publicamente como criou **4 aplicações em 8 dias** usando IA, com **1.323 testes automatizados** como rede de segurança.
+| Problema clássico de "vibe coding" | O que o claude-code-poderoso resolve |
+|--|--|
+| "A IA fez um monte de código e eu não entendi nada" | Você decide. A IA executa. Pair programming real. |
+| "Funcionou... mas tenho medo de mexer" | TDD obrigatório. Testes primeiro, código depois. |
+| "Cada feature nova quebra outra" | Rede de testes garante que mudanças não quebram nada. |
+| "Parece loteria" | Método replicável. Próximo projeto vai mais rápido. |
 
-O que ele mostrou não tem nada a ver com "vibe coding" (jogar prompts e torcer para funcionar). É o oposto: **disciplina, planejamento e engenharia** aplicados ao uso de IA.
+Este repositório compila num só lugar:
 
-Nós estudamos os artigos dele, vídeos, newsletter, participações em podcasts — e organizamos tudo num método prático que qualquer pessoa pode seguir. Veja como fizemos isso em [COMO-FOI-FEITO.md](COMO-FOI-FEITO.md).
-
-> **Todos os créditos e referências ao trabalho original do Akita estão em [CREDITOS.md](CREDITOS.md).**
-
----
-
-## Para quem é?
-
-✅ Você quer criar um site, app ou sistema usando IA, mas quer fazer **do jeito certo**
-
-✅ Você já programa e quer usar IA **sem perder o controle** do projeto
-
-✅ Você está começando e quer aprender **o método antes da ferramenta**
-
-✅ Você já tentou "vibe coding" e se frustrou com os resultados
-
-❌ Não é para quem quer um prompt mágico que faz tudo sozinho — isso não existe.
+- **O Método Akita** — anti-vibe coding em 7+1 fases
+- **Os 4 Princípios Karpathy** — anti-erro de LLM em código
+- **Template Anthropic** — `CLAUDE.md` como cérebro do agente
+- **Ferramentas curadas** — Context7, LLM Council, Graphify
 
 ---
 
-## Os 12 Princípios
+## Instalação em 1 linha
 
-| # | Princípio | Em uma frase |
-|---|-----------|-------------|
-| 1 | **Você é o arquiteto** | A IA escreve código, você toma as decisões |
-| 2 | **Planeje antes de pedir** | Nenhum prompt antes do planejamento estar pronto |
-| 3 | **Teste antes de criar** | Escreva os testes primeiro, depois peça o código |
-| 4 | **Documente tudo** | Seu CLAUDE.md é a memória do projeto |
-| 5 | **Um passo de cada vez** | Nada de "crie um SaaS" num único prompt |
-| 6 | **Se a IA errar, explique** | Nunca corrija à mão — ensine a IA |
-| 7 | **Isole o ambiente** | A IA não precisa de acesso a tudo |
-| 8 | **Automatize a segurança** | Testes + CI/CD = rede de segurança |
-| 9 | **Priorize o que importa** | Faça o essencial primeiro, o resto depois |
-| 10 | **Refatore com confiança** | Com testes, mudar código não dá medo |
-| 11 | **Deploy não é o fim** | É o começo da melhoria contínua |
-| 12 | **O método é replicável** | Funciona para o próximo projeto também |
-
----
-
-## Como usar em 5 minutos
-
-### 1. Clone este repositório
+> **DICA — O QUE VOCÊ VAI CONSEGUIR FAZER**
+> Configurar Claude Code globalmente com método, princípios e slash commands. Tudo em ~30 segundos. Não toca nos seus projetos existentes — só configura o `~/.claude/`.
 
 ```bash
-git clone https://github.com/johnnyhelder/ia-sem-medo.git
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-poderoso/main/install.sh | bash
 ```
 
-### 2. Copie os templates para o seu projeto
+O instalador:
+- ✓ Verifica dependências (git, claude-code)
+- ✓ Instala a skill `akita-method` em `~/.claude/skills/`
+- ✓ Instala 5 slash commands em `~/.claude/commands/poderoso/`
+- ✓ Faz backup automático se já tiver versão anterior
+
+---
+
+## FASE 01 — Você no terminal
+
+| Passo | Acção |
+|---|---|
+| **1** | Abra o terminal e cole o `curl` acima |
+| **2** | Espere 30 segundos |
+| **3** | Pronto. A skill e os comandos estão instalados globalmente |
+
+---
+
+## FASE 02 — Primeiro projeto
+
+Crie a pasta do projeto, abra o Claude Code, e execute os comandos por ordem:
 
 ```bash
-cp ia-sem-medo/templates/* seu-projeto/
+mkdir meu-projeto && cd meu-projeto
+claude
 ```
 
-### 3. Preencha o PLAN.md
+Depois, dentro do Claude Code:
 
-Abra o `PLAN-TEMPLATE.md` e responda as perguntas sobre o seu projeto. Não precisa ser perfeito — precisa ser honesto.
+| Passo | Comando | O que acontece |
+|---|---|---|
+| **1** | `/poderoso:research` | Gera 4 prompts de pesquisa em `pesquisas/` (mercado, SEO, concorrência, ferramentas) |
+| **2** | (cole os prompts no Gemini Deep Research, copie as respostas de volta) | |
+| **3** | `/poderoso:plan` | Consolida pesquisas em `PLAN.md` + `CLAUDE.md` + `PROJECT.md` + `NOW.md` |
+| **4** | `/poderoso:start` | Fase 1 — `.claude/settings.json` com permissões + estrutura inicial |
+| **5** | `/poderoso:phase 2` | Fase 2 — Fundação completa (CLAUDE.md 200+ linhas) |
+| **6** | `/poderoso:phase 3` | Fase 3 — TDD: todos os testes ANTES de qualquer código |
+| **7** | `/poderoso:phase 4` | Fase 4 — código implementado, testes verdes |
+| **8** | `/poderoso:phase 5` | Fase 5 — otimização |
+| **9** | `/poderoso:phase 6` | Fase 6 — interface e conteúdo |
+| **10** | `/poderoso:phase 7` | Fase 7 — deploy com CI/CD |
 
-### 4. Preencha o CLAUDE.md
-
-Abra o `CLAUDE-MD-TEMPLATE.md` e documente as decisões técnicas. Essa é a "memória" que a IA vai usar.
-
-### 5. Siga o Desafio dos 7 Dias
-
-Leia o [`metodo/07-desafio-7-dias.md`](metodo/07-desafio-7-dias.md) e faça um projeto pequeno seguindo o método completo. **Depois disso, tudo muda.**
-
-> 📖 Para um guia mais detalhado, leia o [GUIA-RAPIDO.md](GUIA-RAPIDO.md)
+> **A QUALQUER momento:** `/poderoso:status` mostra onde você está, o que falta, e o que fazer a seguir.
 
 ---
 
-## O que tem neste repositório
+## FASE 03 — Os 4 princípios universais
+
+Toda vez que `/poderoso:plan` gera um `CLAUDE.md`, estes 4 princípios são pré-injetados no topo. O agente lê e segue automaticamente:
+
+| Princípio | O que faz |
+|---|---|
+| **1. Pensar antes de codar** | Trazer suposições, trade-offs e dúvidas à tona — não escolher em silêncio |
+| **2. Simplicidade primeiro** | Código mínimo. Sem features especulativas. Sem abstrações para uso único. |
+| **3. Mudanças cirúrgicas** | Tocar só no que for necessário. Não "melhorar" código adjacente. |
+| **4. Execução orientada por objetivo** | Definir critérios verificáveis. Iterar até o teste passar. |
+
+Detalhe completo: [`principios/4-principios-karpathy.md`](principios/4-principios-karpathy.md)
+
+> **ATENÇÃO — TRADE-OFF**
+> Estes princípios privilegiam **cautela sobre velocidade**. Para tarefas triviais (typo, one-liner óbvio), use bom senso. O objetivo é reduzir erros caros em trabalho não-trivial.
+
+---
+
+## FASE 04 — Ferramentas auxiliares
+
+Três ferramentas curadas que se integram ao método. Use quando o cenário pedir:
+
+| Ferramenta | Quando usar | Como invocar |
+|---|---|---|
+| **[Context7](ferramentas/context7.md)** | Setup de qualquer lib/framework — busca docs reais ao vivo, sem confiar em training data | Automático (com regra global) |
+| **[LLM Council](ferramentas/llm-council.md)** | Decisões caras com trade-offs (lançar X ou Y? mudar posicionamento?) | `convoca o conselho` |
+| **[Graphify](ferramentas/graphify.md)** | Mapear codebase legacy ou validar arquitectura na Fase 5 | `/graphify .` |
+
+---
+
+## O que tem dentro deste repositório
 
 ```
-ia-sem-medo/
+claude-code-poderoso/
 │
-├── 📖 metodo/                    O MÉTODO COMPLETO
-│   ├── 00-fase-pesquisa.md       Como pesquisar ANTES de programar
-│   ├── 01-filosofia.md           Por que a IA precisa de disciplina
-│   ├── 02-fluxo-completo.md      As 7+1 fases: do zero à produção
-│   ├── 03-tdd-com-ia.md          Testes como rede de segurança
-│   ├── 04-pair-programming-ia.md Você pensa, a IA executa
-│   ├── 05-gestao-estimativas.md  Como gerir projetos de verdade
-│   ├── 06-ferramentas-stack.md   O que usar (e o que evitar)
-│   └── 07-desafio-7-dias.md      O desafio prático — comece por aqui!
+├── install.sh                       INSTALADOR (curl-able)
+├── README.md                        este ficheiro
 │
-├── 📋 templates/                 TEMPLATES PRONTOS (copie e use)
-│   ├── PLAN-TEMPLATE.md          Planta do projeto
-│   ├── CLAUDE-MD-TEMPLATE.md     Memória do agente de IA
-│   ├── DADOS-PROJETO-TEMPLATE.md Coleta de informações
-│   ├── TESTES-BASE.md            Exemplos de testes por tipo de projeto
-│   └── CI-CD-TEMPLATE.md         Pipelines de deploy automatizado
+├── principios/                      PRINCÍPIOS UNIVERSAIS
+│   └── 4-principios-karpathy.md     Os 4 princípios anti-erro de LLM
 │
-├── 🔧 skill/                    SKILL PARA CLAUDE (uso avançado)
-│   └── SKILL.md                  Instrução que o Claude segue automaticamente
+├── metodo/                          MÉTODO COMPLETO (8 docs)
+│   ├── 00-fase-pesquisa.md          Como pesquisar antes de programar
+│   ├── 01-filosofia.md              Anti-Vibe Coding e XP
+│   ├── 02-fluxo-completo.md         As 7+1 fases
+│   ├── 03-tdd-com-ia.md             Testes como rede de segurança
+│   ├── 04-pair-programming-ia.md    Você navega, a IA pilota
+│   ├── 05-gestao-estimativas.md     Pessoas > métricas
+│   ├── 06-ferramentas-stack.md      Stacks recomendadas
+│   └── 07-desafio-7-dias.md         Imersão prática
 │
-├── 💡 exemplos/                  CASOS PRÁTICOS
-│   ├── projeto-novo-do-zero.md   Como criar um projeto novo com o método
-│   └── resgate-projeto-existente.md Como blindar um projeto que já existe
+├── ferramentas/                     FERRAMENTAS AUXILIARES
+│   ├── context7.md                  Docs sempre frescas via MCP
+│   ├── llm-council.md               5 conselheiros para decisões caras
+│   └── graphify.md                  Mapear corpus em grafo
 │
-├── 📚 fontes/                    MATERIAL DE PESQUISA
-│   ├── README.md                 Índice das fontes originais
-│   └── pesquisa-resumo.md        Resumo da pesquisa sobre o método Akita
+├── skill/akita-method/              SKILL DO CLAUDE CODE
+│   ├── SKILL.md                     Orquestrador
+│   └── templates/                   Templates copiáveis
+│       ├── PLAN-TEMPLATE.md
+│       ├── CLAUDE-MD-TEMPLATE.md    (4 princípios pré-injetados)
+│       ├── DADOS-PROJETO-TEMPLATE.md
+│       ├── TESTES-BASE.md
+│       └── CI-CD-TEMPLATE.md
 │
-├── COMO-FOI-FEITO.md             A história de como criamos este método
-├── CREDITOS.md                   Homenagem ao Akita + referências
-├── GUIA-RAPIDO.md                Versão express para começar agora
-├── CONTRIBUTING.md               Como contribuir
-└── LICENSE                       MIT — use à vontade
+├── commands/                        SLASH COMMANDS
+│   ├── research.md                  /poderoso:research
+│   ├── plan.md                      /poderoso:plan
+│   ├── start.md                     /poderoso:start
+│   ├── phase.md                     /poderoso:phase N
+│   └── status.md                    /poderoso:status
+│
+├── exemplos/                        CASOS PRÁTICOS
+├── fontes/                          MATERIAL DE PESQUISA
+├── COMO-FOI-FEITO.md                história deste método
+├── CREDITOS.md                      Akita + Karpathy + Anthropic + Safi + outros
+├── GUIA-RAPIDO.md                   versão express
+├── CONTRIBUTING.md                  como contribuir
+└── LICENSE                          MIT
 ```
 
 ---
 
-## O Desafio dos 7 Dias
+## Para quem é
 
-O coração deste repositório é o **Desafio dos 7 Dias** — uma imersão prática proposta pelo Akita onde você cria um projeto do zero até a produção usando IA, mas com método.
+- ✓ Quer criar um projeto Claude Code **sem vibe coding**
+- ✓ Já tentou IA para programar e se frustrou com a inconsistência
+- ✓ Quer um método que **funciona no segundo projeto também**
+- ✓ Está começando e quer **aprender o método antes da ferramenta**
+- ✓ Já programa e quer **acelerar com segurança**
 
-| Dia | Foco | O que você faz |
-|-----|------|----------------|
-| 1 | Ambiente | Monta o ambiente seguro para a IA trabalhar |
-| 2 | Fundação | Planeja TUDO antes de escrever código |
-| 3 | Testes | Escreve os testes ANTES do código |
-| 4 | Código | Agora sim, a IA escreve — guiada pelos testes |
-| 5 | Melhoria | Otimiza e refatora com segurança |
-| 6 | Interface | Polir a cara do projeto |
-| 7 | Deploy | Colocar no ar com pipeline automática |
-
-> 💡 Não precisa ser 7 dias corridos. Pode ser 1-2 horas por dia, no seu ritmo. O importante é seguir a ordem.
-
-Leia o guia completo: [`metodo/07-desafio-7-dias.md`](metodo/07-desafio-7-dias.md)
+❌ NÃO é para quem quer um prompt mágico. Isso não existe.
 
 ---
 
 ## "Mas eu não sei programar..."
 
-Tudo bem. Este método foi pensado para funcionar em diferentes níveis:
+Tudo bem. O método foi pensado para vários níveis:
 
-- **Se você está começando:** Siga o Desafio dos 7 Dias com um projeto simples (um site pessoal, por exemplo). Os templates vão guiar você.
-- **Se você já programa:** Use os templates e a Skill para acelerar seus projetos com mais segurança.
-- **Se você lidera equipes:** Os princípios de gestão e estimativas vão mudar como você vê produtividade.
+- **Iniciante:** Siga os comandos por ordem. Os templates guiam você.
+- **Já programa:** Use a skill como aceleração. Pule o que já sabe.
+- **Lidera equipa:** Os princípios de gestão (`metodo/05`) mudam como você vê produtividade.
 
 A diferença entre "usar IA" e "usar IA com método" é a diferença entre **torcer para funcionar** e **saber que funciona**.
 
 ---
 
+## O Desafio dos 7 Dias
+
+O coração deste método é o **Desafio dos 7 Dias** proposto pelo Akita: criar um projeto pequeno do zero à produção em 7 dias (1-2h por dia), seguindo TODAS as fases.
+
+| Dia | Foco | Comando |
+|-----|------|---------|
+| 1 | Setup seguro | `/poderoso:start` |
+| 2 | Fundação completa | `/poderoso:phase 2` |
+| 3 | Testes (Red) | `/poderoso:phase 3` |
+| 4 | Código (Green) | `/poderoso:phase 4` |
+| 5 | Otimização | `/poderoso:phase 5` |
+| 6 | Interface | `/poderoso:phase 6` |
+| 7 | Deploy + CI/CD | `/poderoso:phase 7` |
+
+Detalhe: [`metodo/07-desafio-7-dias.md`](metodo/07-desafio-7-dias.md)
+
+---
+
 ## Contribua
 
-Encontrou algo que pode melhorar? Tem uma experiência para compartilhar? Quer adicionar templates para uma nova stack?
-
-Leia o [CONTRIBUTING.md](CONTRIBUTING.md) e participe.
+Encontrou um bug? Tem uma melhoria? Completou o desafio? Leia [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
 ## Créditos
 
-Este trabalho é uma **homenagem e adaptação** dos princípios de **Fábio Akita** — e não existiria sem o conteúdo que ele disponibiliza publicamente há décadas.
+Este repositório é uma **compilação e adaptação** de trabalho público de várias pessoas. Veja [CREDITOS.md](CREDITOS.md) para a lista completa, com links às fontes originais:
 
-Todos os créditos, referências e links para os conteúdos originais estão em [CREDITOS.md](CREDITOS.md).
+- **Fábio Akita** — Método Anti-Vibe Coding e princípios de engenharia
+- **Andrej Karpathy** — Os 4 princípios de comportamento de LLMs em código
+- **Forrest Chang** — Empacotamento Karpathy → CLAUDE.md (104k stars)
+- **Anthropic** — Template público de CLAUDE.md
+- **Safi Shamsi** — Skill `graphify` para mapeamento de corpus
+- **Gestor de Audiência** — Versão PT-BR do LLM Council e tutorial de instalação
+- **Mano Davin** — Vídeo que organizou o método Akita pela primeira vez
 
 ---
 
 ## Licença
 
-MIT — use, modifique, distribua. Só mantenha os créditos.
+MIT — use, modifique, distribua. Mantenha os créditos.
 
 ---
 
@@ -199,5 +240,5 @@ MIT — use, modifique, distribua. Só mantenha os créditos.
 </p>
 
 <p align="center">
-  Feito com método por <a href="https://johnnyhelder.com">Johnny Helder</a>
+  Compilado por <a href="https://johnnyhelder.com">Johnny Helder</a>
 </p>

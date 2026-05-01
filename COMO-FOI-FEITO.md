@@ -83,7 +83,45 @@ Com o método testado na prática, decidimos abrir tudo:
 - Adicionamos exemplos práticos de uso
 - Documentamos todos os créditos e referências
 
-O resultado é este repositório.
+---
+
+## Reestruturação para `claude-code-poderoso`
+
+Em maio de 2026, fizemos uma reestruturação completa para transformar o repositório de uma documentação do método Akita num **kit de instalação único para Claude Code**. Os passos:
+
+### 1. Compilar fontes externas
+Identificamos quatro fontes públicas de alta qualidade que complementam o método Akita e integramos a todas:
+
+- **Andrej Karpathy** — observações sobre erros de LLM em código → 4 princípios universais
+- **Forrest Chang** ([forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills), 104k stars) — empacotamento dos 4 princípios como CLAUDE.md
+- **Anthropic** — template público de CLAUDE.md (Parte A + Parte B)
+- **Safi Shamsi** ([graphify](https://github.com/safishamsi/graphify)) — skill de mapeamento de corpus em grafo
+- **Gestor de Audiência** ([llm-council-skill-ptbr](https://github.com/gestordeaudiencia/llm-council-skill-ptbr)) — versão PT-BR do LLM Council + tutorial visual de instalação
+
+### 2. Criar instalador one-liner
+Escrevemos um `install.sh` que pode ser executado via:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-poderoso/main/install.sh | bash
+```
+
+O script clona o repositório, instala a skill em `~/.claude/skills/akita-method/` e os slash commands em `~/.claude/commands/poderoso/`. Uma única linha resolve toda a configuração.
+
+### 3. Criar 5 slash commands
+
+- `/poderoso:research` — gera prompts de pesquisa Fase 0
+- `/poderoso:plan` — consolida pesquisas em PLAN.md + CLAUDE.md + PROJECT.md + NOW.md
+- `/poderoso:start` — Fase 1 (setup seguro)
+- `/poderoso:phase N` — avança para fase N (2-7)
+- `/poderoso:status` — mostra estado actual
+
+### 4. Genericizar referências a infra própria
+A versão original do método Akita falava em "AI Jail" e Docker como camada obrigatória. Para tornar acessível a iniciantes, transformamos isto em "Setup Seguro do Claude Code" focado em `.claude/settings.json` com permissões granulares. Docker passou a ser opcional para projetos de alto risco.
+
+### 5. Adoptar estilo visual didático
+Inspirados no tutorial PT-BR do Gestor de Audiência, adoptamos quadros visuais (DICA / ATENÇÃO / IMPORTANTE), tabelas numeradas por fase, e instruções passo-a-passo no README. Isto baixa drasticamente a barreira de entrada para quem nunca usou GitHub.
+
+O resultado é este repositório: um kit completo, instalável em uma linha, que combina o melhor de cinco fontes públicas + o método Akita original.
 
 ---
 
