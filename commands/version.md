@@ -40,15 +40,19 @@ fi
 
 ### Passo 2 — Detectar backups acumulados
 
-```bash
-shopt -s nullglob
-BACKUPS=( "$HOME/.claude/skills/akita-method.backup."* "$HOME/.claude/skills/akita-method.deleted."* "$HOME/.claude/commands/super-power.backup."* "$HOME/.claude/commands/super-power.deleted."* )
-shopt -u nullglob
+Usar `find` para portabilidade bash/zsh:
 
-if [ ${#BACKUPS[@]} -gt 0 ]; then
+```bash
+BACKUPS=$(find "$HOME/.claude/skills" "$HOME/.claude/commands" -maxdepth 1 -type d \
+  \( -name "akita-method.backup.*" -o -name "akita-method.deleted.*" \
+     -o -name "super-power.backup.*" -o -name "super-power.deleted.*" \) \
+  2>/dev/null)
+
+if [ -n "$BACKUPS" ]; then
+  N=$(echo "$BACKUPS" | wc -l | tr -d ' ')
   echo ""
-  echo "⚠ ${#BACKUPS[@]} backups antigos detectados:"
-  for b in "${BACKUPS[@]}"; do echo "    $b"; done
+  echo "⚠ $N backups antigos detectados:"
+  echo "$BACKUPS" | sed 's/^/    /'
   echo ""
   echo "  Para limpar: \"limpa os backups\" ou /super-power:uninstall backups-only"
 fi

@@ -98,10 +98,10 @@ rm -rf "$HOME/.claude/commands/super-power"
 ```bash
 rm -rf "$HOME/.claude/skills/akita-method"
 rm -rf "$HOME/.claude/commands/super-power"
-shopt -s nullglob
-rm -rf "$HOME/.claude/skills/akita-method.backup."* "$HOME/.claude/skills/akita-method.deleted."*
-rm -rf "$HOME/.claude/commands/super-power.backup."* "$HOME/.claude/commands/super-power.deleted."*
-shopt -u nullglob
+find "$HOME/.claude/skills" "$HOME/.claude/commands" -maxdepth 1 -type d \
+  \( -name "akita-method.backup.*" -o -name "akita-method.deleted.*" \
+     -o -name "super-power.backup.*" -o -name "super-power.deleted.*" \) \
+  -exec rm -rf {} + 2>/dev/null
 ```
 
 ### Intent: LIMPAR BACKUPS ACUMULADOS
@@ -109,12 +109,14 @@ shopt -u nullglob
 Triggers: "limpa backups", "limpa lixo", "tira os backups", "remove backups antigos"
 
 ```bash
-shopt -s nullglob
-N=0
-for path in "$HOME/.claude/skills/akita-method.backup."* "$HOME/.claude/skills/akita-method.deleted."* "$HOME/.claude/commands/super-power.backup."* "$HOME/.claude/commands/super-power.deleted."*; do
-  rm -rf "$path" && N=$((N+1))
-done
-shopt -u nullglob
+N=$(find "$HOME/.claude/skills" "$HOME/.claude/commands" -maxdepth 1 -type d \
+  \( -name "akita-method.backup.*" -o -name "akita-method.deleted.*" \
+     -o -name "super-power.backup.*" -o -name "super-power.deleted.*" \) \
+  2>/dev/null | wc -l | tr -d ' ')
+find "$HOME/.claude/skills" "$HOME/.claude/commands" -maxdepth 1 -type d \
+  \( -name "akita-method.backup.*" -o -name "akita-method.deleted.*" \
+     -o -name "super-power.backup.*" -o -name "super-power.deleted.*" \) \
+  -exec rm -rf {} + 2>/dev/null
 echo "✓ $N backups antigos apagados."
 ```
 

@@ -45,15 +45,14 @@ echo "Vai ser removido:"
 [ -d "$HOME/.claude/commands/super-power" ] && echo "  ~/.claude/commands/super-power"
 ```
 
-Se modo for **clean-all**, também listar backups que serão apagados:
+Se modo for **clean-all**, também listar backups que serão apagados (usar `find` para portabilidade bash/zsh):
 
 ```bash
-shopt -s nullglob
 echo "Backups que serão removidos:"
-for p in "$HOME/.claude/skills/akita-method.backup."* "$HOME/.claude/skills/akita-method.deleted."* "$HOME/.claude/commands/super-power.backup."* "$HOME/.claude/commands/super-power.deleted."*; do
-  echo "  $p"
-done
-shopt -u nullglob
+find "$HOME/.claude/skills" "$HOME/.claude/commands" -maxdepth 1 -type d \
+  \( -name "akita-method.backup.*" -o -name "akita-method.deleted.*" \
+     -o -name "super-power.backup.*" -o -name "super-power.deleted.*" \) \
+  2>/dev/null | sed 's/^/  /'
 ```
 
 ### Passo 3 — Confirmar com o utilizador (excepto soft sem argumento explícito que já confirmou no menu)
@@ -88,24 +87,28 @@ echo "✓ Apagado definitivamente."
 ```bash
 rm -rf "$HOME/.claude/skills/akita-method"
 rm -rf "$HOME/.claude/commands/super-power"
-shopt -s nullglob
-N=0
-for p in "$HOME/.claude/skills/akita-method.backup."* "$HOME/.claude/skills/akita-method.deleted."* "$HOME/.claude/commands/super-power.backup."* "$HOME/.claude/commands/super-power.deleted."*; do
-  rm -rf "$p" && N=$((N+1))
-done
-shopt -u nullglob
+N=$(find "$HOME/.claude/skills" "$HOME/.claude/commands" -maxdepth 1 -type d \
+  \( -name "akita-method.backup.*" -o -name "akita-method.deleted.*" \
+     -o -name "super-power.backup.*" -o -name "super-power.deleted.*" \) \
+  2>/dev/null | wc -l | tr -d ' ')
+find "$HOME/.claude/skills" "$HOME/.claude/commands" -maxdepth 1 -type d \
+  \( -name "akita-method.backup.*" -o -name "akita-method.deleted.*" \
+     -o -name "super-power.backup.*" -o -name "super-power.deleted.*" \) \
+  -exec rm -rf {} + 2>/dev/null
 echo "✓ Limpeza total. $N backups antigos também removidos."
 ```
 
 #### BACKUPS-ONLY (mantém skill activa, só remove backups)
 
 ```bash
-shopt -s nullglob
-N=0
-for p in "$HOME/.claude/skills/akita-method.backup."* "$HOME/.claude/skills/akita-method.deleted."* "$HOME/.claude/commands/super-power.backup."* "$HOME/.claude/commands/super-power.deleted."*; do
-  rm -rf "$p" && N=$((N+1))
-done
-shopt -u nullglob
+N=$(find "$HOME/.claude/skills" "$HOME/.claude/commands" -maxdepth 1 -type d \
+  \( -name "akita-method.backup.*" -o -name "akita-method.deleted.*" \
+     -o -name "super-power.backup.*" -o -name "super-power.deleted.*" \) \
+  2>/dev/null | wc -l | tr -d ' ')
+find "$HOME/.claude/skills" "$HOME/.claude/commands" -maxdepth 1 -type d \
+  \( -name "akita-method.backup.*" -o -name "akita-method.deleted.*" \
+     -o -name "super-power.backup.*" -o -name "super-power.deleted.*" \) \
+  -exec rm -rf {} + 2>/dev/null
 if [ "$N" -gt 0 ]; then
   echo "✓ $N backups antigos removidos. Skill activa intacta."
 else
