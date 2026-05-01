@@ -1,13 +1,13 @@
 ---
-description: Remove a skill e os slash commands — soft / hard / clean-all
-argument-hint: "[soft | hard | clean-all]"
+description: Remove a skill / commands / backups — soft / hard / clean-all / backups-only
+argument-hint: "[soft | hard | clean-all | backups-only]"
 ---
 
 # /super-power:uninstall
 
 Remove o `claude-code-super-power` do sistema. Tudo executado via Bash inline directo — sem invocar scripts externos, sem dependências de cache ou TTY.
 
-**Não toca em projetos do utilizador.** Só remove `~/.claude/skills/akita-method/` e `~/.claude/commands/super-power/`.
+**Não toca em projetos do utilizador.** Só toca em `~/.claude/skills/akita-method/` e `~/.claude/commands/super-power/`.
 
 ---
 
@@ -19,6 +19,9 @@ Se o utilizador chamou com argumento, usar:
 - `/super-power:uninstall soft` ou `/super-power:uninstall` (default) → modo soft
 - `/super-power:uninstall hard` → modo hard
 - `/super-power:uninstall clean-all` → modo hard + limpar backups
+- `/super-power:uninstall backups-only` → **NÃO desinstala**, só remove backups antigos (mantém skill activa)
+
+Se utilizador disse "limpa backups" / "limpa lixo" / "remove backups antigos" → assumir `backups-only` directamente.
 
 Se chamou **sem argumento** OU o utilizador disse algo em linguagem natural ("desinstala isto"), perguntar:
 
@@ -93,6 +96,24 @@ done
 shopt -u nullglob
 echo "✓ Limpeza total. $N backups antigos também removidos."
 ```
+
+#### BACKUPS-ONLY (mantém skill activa, só remove backups)
+
+```bash
+shopt -s nullglob
+N=0
+for p in "$HOME/.claude/skills/akita-method.backup."* "$HOME/.claude/skills/akita-method.deleted."* "$HOME/.claude/commands/super-power.backup."* "$HOME/.claude/commands/super-power.deleted."*; do
+  rm -rf "$p" && N=$((N+1))
+done
+shopt -u nullglob
+if [ "$N" -gt 0 ]; then
+  echo "✓ $N backups antigos removidos. Skill activa intacta."
+else
+  echo "✓ Nenhum backup para remover. Sistema já está limpo."
+fi
+```
+
+> **Importante:** modo `backups-only` NÃO toca em `~/.claude/skills/akita-method/` nem `~/.claude/commands/super-power/`. Só limpa os `.backup.*` e `.deleted.*` acumulados.
 
 ### Passo 5 — Reportar
 

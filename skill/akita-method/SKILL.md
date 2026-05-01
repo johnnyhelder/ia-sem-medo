@@ -1,6 +1,6 @@
 ---
 name: akita-method
-description: "Método estruturado para criar e executar projetos Claude Code com disciplina de engenharia sénior. Combina os 4 princípios anti-erro de Karpathy/Anthropic, o Akita Way (Anti-Vibe Coding + XP), e ferramentas auxiliares (Context7, LLM Council, Graphify). ACIONAR para 2 cenários: (1) GESTÃO DA SKILL — utilizador quer instalar, actualizar, desinstalar, limpar backups, ou ver versão. Triggers: 'atualiza super power', 'actualiza super power', 'desinstala super power', 'remove super power', 'apaga super power', 'limpa backups super power', 'limpa lixo super power', 'qual versão super power', 'reinstala super power', 'update super power', 'uninstall super power'. Quando detectar estes triggers, executar Bash inline directo (sem invocar scripts externos). (2) FLUXO DE PROJETO — utilizador quer começar projeto novo ou reestruturar existente. Triggers: 'novo projeto', 'começar do zero', 'criar um site', 'montar uma aplicação', 'CLAUDE.md', 'PLAN.md', 'TDD com IA', 'pair programming com IA', 'método Akita', '/super-power:*'."
+description: "Método estruturado para criar e executar projetos Claude Code com disciplina de engenharia sénior. Combina os 4 princípios anti-erro de Karpathy/Anthropic, o Akita Way (Anti-Vibe Coding + XP), e ferramentas auxiliares (Context7, LLM Council, Graphify). ACIONAR para 2 cenários: (1) GESTÃO DA SKILL — utilizador quer instalar, actualizar, desinstalar, limpar backups, ou ver versão. Triggers: 'atualiza super power', 'actualiza super power', 'desinstala super power', 'remove super power', 'apaga super power', 'limpa backups super power', 'limpa lixo super power', 'remove backups antigos', 'qual versão super power', 'que versão tenho', 'qual a versão', 'reinstala super power', 'update super power', 'uninstall super power', 'version super power'. Quando detectar trigger de gestão, mapear para slash command equivalente (/super-power:update, /super-power:uninstall, /super-power:uninstall backups-only, /super-power:version) e executar Bash inline directo. (2) FLUXO DE PROJETO — utilizador quer começar projeto novo ou reestruturar existente. Triggers: 'novo projeto', 'começar do zero', 'criar um site', 'montar uma aplicação', 'CLAUDE.md', 'PLAN.md', 'TDD com IA', 'pair programming com IA', 'método Akita', '/super-power:*'."
 ---
 
 # Akita Method — Skill Orquestradora
@@ -141,7 +141,7 @@ Triggers: "qual versão", "que versão tenho", "version"
 
 ---
 
-## Os 7 slash commands principais
+## Os 8 slash commands principais
 
 A Skill orquestra os comandos. Detalhes em cada ficheiro `.md`:
 
@@ -151,9 +151,10 @@ A Skill orquestra os comandos. Detalhes em cada ficheiro `.md`:
 | `/super-power:plan` | Consolida pesquisa em PLAN.md + CLAUDE.md + PROJECT.md + NOW.md (com framework de marketing digital) |
 | `/super-power:start` | Fase 1 — setup seguro (`.claude/settings.json`, estrutura) |
 | `/super-power:phase N` | Avança para a Fase N (2-7) com regras específicas |
-| `/super-power:status` | Lê CLAUDE.md + NOW.md e resume estado |
+| `/super-power:status` | Lê CLAUDE.md + NOW.md e resume estado do projeto |
+| `/super-power:version` | Mostra versão da skill instalada + backups acumulados + versão remota |
 | `/super-power:update` | Atualiza para a versão mais recente (com backup automático) |
-| `/super-power:uninstall` | Remove skill e commands (soft/hard/clean-all) |
+| `/super-power:uninstall [modo]` | Remove (soft / hard / clean-all / backups-only) |
 
 **Linguagem natural sempre disponível:** o utilizador pode dizer "atualiza super power", "desinstala isto", "limpa backups", "qual versão tenho" — a skill reconhece os triggers e age. Ver secção "Gestão da Skill — Linguagem Natural" acima.
 

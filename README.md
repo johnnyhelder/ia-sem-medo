@@ -317,8 +317,9 @@ Que versão do super-power tenho instalada?
 | `/super-power:start` | Fase 1 — setup seguro |
 | `/super-power:phase N` | Avança para Fase N (2-7) |
 | `/super-power:status` | Mostra estado do projeto |
+| `/super-power:version` | Mostra versão instalada + backups acumulados |
 | `/super-power:update` | Atualiza para versão mais recente |
-| `/super-power:uninstall` | Remove (pergunta soft/hard/clean-all) |
+| `/super-power:uninstall [modo]` | Remove (soft / hard / clean-all / backups-only) |
 
 ### Fallback raro — terminal
 
