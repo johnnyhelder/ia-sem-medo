@@ -28,11 +28,12 @@ Este repositório compila num só lugar:
 
 ---
 
-## ✨ FASE 01 — Instale (no projeto, sem fricção)
+## ✨ FASE 01 — Instale (no projeto)
 
 > **A skill instala-se na pasta do TEU projeto** (`.claude/` local), não no `~/.claude/` global.
-> Sem auto-mode bloqueio. Sem permissões para autorizar. Sem ambiguidade.
-> Cada projeto onde queres usar a skill, instalas lá uma vez (3 segundos via 1 frase).
+> Cada projeto onde queres usar a skill, instalas lá uma vez (10 segundos via 1 frase).
+
+> ⚠️ **Limitação conhecida:** o Claude Code tem proteção contra "self-modification" que pode bloquear o `cp` final para `.claude/skills/` e `.claude/commands/`. Por isso o prompt mágico inclui aprovação explícita ("Aprovo. Procede"). Se mesmo assim bloquear, ver [TROUBLESHOOTING.md](TROUBLESHOOTING.md#1--auto-mode-classifier-bloqueia-instalação).
 
 ### Passo único
 
@@ -52,7 +53,8 @@ Este repositório compila num só lugar:
    Cria .claude/skills/akita-method/ e .claude/commands/super-power/
    AQUI nesta pasta (não em ~/.claude global).
 
-   Eu autorizo. Procede.
+   Aprovo explicitamente o cp para essas pastas.
+   Procede sem precisar de me perguntar a cada passo.
    ```
 
 3. **Pronto.** O agente vai:
@@ -275,6 +277,20 @@ O coração deste método é o **Desafio dos 7 Dias** proposto pelo Akita: criar
 | 7 | Deploy + CI/CD | `/super-power:phase 7` |
 
 Detalhe: [`metodo/07-desafio-7-dias.md`](metodo/07-desafio-7-dias.md)
+
+---
+
+## ⚠️ Limitações conhecidas
+
+| Limitação | Status | Detalhe |
+|---|---|---|
+| Auto-mode classifier bloqueia `cp` final | Workaround disponível | Aprovação explícita no prompt resolve. [Detalhe](TROUBLESHOOTING.md#1--auto-mode-classifier-bloqueia-instalação) |
+| zsh vs bash glob matching | ✅ Resolvido | Usado `find` POSIX em todos os commands |
+| Triggers naturais ambíguos | Workaround disponível | Incluir "super-power" na frase. [Detalhe](TROUBLESHOOTING.md#3--os-triggers-em-linguagem-natural-não-activam) |
+
+**Solução de longo prazo:** transformar em [Plugin Claude Code marketplace](https://github.com/johnnyhelder/claude-code-super-power/issues/1). Plugins têm permissões pre-aprovadas — eliminam o problema do auto-mode classifier.
+
+Para resolução completa de problemas: [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
 
 ---
 
