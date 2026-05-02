@@ -11,7 +11,7 @@
 Ao colar o prompt de instalação no Claude Code, o agente clona o repositório, faz backup, e tenta copiar para `.claude/skills/` ou `~/.claude/skills/`. Aparece:
 
 ```
-⏺ Bash(...cp -r .../skill/akita-method ~/.claude/skills/akita-method...)
+⏺ Bash(...cp -r .../skills/akita-method ~/.claude/skills/akita-method...)
   ⎿ Denied by auto mode classifier ∙ see https://code.claude.com/docs/s/claude-code-auto-mode
 ```
 
@@ -56,18 +56,20 @@ curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power
 
 **Tempo:** 30 segundos. **Funciona sempre.**
 
-#### Solução 3 — Plugin Claude Code marketplace (futuro)
+#### Solução 3 — Plugin Claude Code marketplace ✅ DISPONÍVEL
 
-Estamos a estudar transformar este repositório num **plugin oficial do Claude Code marketplace**. Plugins têm permissões pre-aprovadas — não disparam o auto-mode classifier.
+**Esta é agora a forma RECOMENDADA.** O repositório foi convertido em plugin oficial Claude Code marketplace. Plugins têm permissões pre-aprovadas — não disparam o auto-mode classifier.
 
-Quando estiver pronto, instalação será:
+Dentro do Claude Code, em qualquer pasta, cola:
 
 ```
 /plugin marketplace add johnnyhelder/claude-code-super-power
 /plugin install claude-code-super-power
 ```
 
-Ver [#2](https://github.com/johnnyhelder/claude-code-super-power/issues/2) para acompanhar o progresso.
+**Pronto.** A skill e os 8 slash commands ficam disponíveis em todas as sessões. Sem terminal, sem auto-mode bloqueio, sem fricção.
+
+Ver [issue #2](https://github.com/johnnyhelder/claude-code-super-power/issues/2) para detalhes da implementação.
 
 ---
 

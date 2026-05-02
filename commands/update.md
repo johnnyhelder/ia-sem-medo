@@ -54,7 +54,7 @@ git clone --depth 1 --branch main --quiet \
 ### Passo 4 — Verificar conteúdo esperado
 
 ```bash
-if [ ! -d "$TMP/repo/skill/akita-method" ] || [ ! -d "$TMP/repo/commands" ]; then
+if [ ! -d "$TMP/repo/skills/akita-method" ] || [ ! -d "$TMP/repo/commands" ]; then
   echo "✗ Estrutura do repositório inesperada. Restaurar backup..."
   rm -rf "$TMP"
   mv "$HOME/.claude/skills/akita-method.backup.$TS" "$HOME/.claude/skills/akita-method"
@@ -67,7 +67,7 @@ fi
 
 ```bash
 mkdir -p "$HOME/.claude/skills" "$HOME/.claude/commands"
-cp -r "$TMP/repo/skill/akita-method" "$HOME/.claude/skills/akita-method"
+cp -r "$TMP/repo/skills/akita-method" "$HOME/.claude/skills/akita-method"
 cp -r "$TMP/repo/commands" "$HOME/.claude/commands/super-power"
 rm -rf "$TMP"
 ```

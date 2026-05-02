@@ -92,7 +92,7 @@ echo -e "${B}→${N} A clonar repositório..."
 git clone --depth 1 --branch "$BRANCH" --quiet "$REPO" "$TMP_DIR/repo"
 
 # Verificar conteúdo esperado
-if [ ! -d "$TMP_DIR/repo/skill/akita-method" ] || [ ! -d "$TMP_DIR/repo/commands" ]; then
+if [ ! -d "$TMP_DIR/repo/skills/akita-method" ] || [ ! -d "$TMP_DIR/repo/commands" ]; then
   echo -e "${R}✗ Estrutura do repositório inesperada.${N}"
   exit 1
 fi
@@ -113,7 +113,7 @@ fi
 # Instalar
 echo -e "${B}→${N} A instalar skill..."
 mkdir -p "$SKILLS_DIR"
-cp -r "$TMP_DIR/repo/skill/akita-method" "$TARGET_SKILL"
+cp -r "$TMP_DIR/repo/skills/akita-method" "$TARGET_SKILL"
 
 echo -e "${B}→${N} A instalar commands..."
 mkdir -p "$COMMANDS_DIR"

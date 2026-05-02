@@ -1,0 +1,37 @@
+{
+  "name": "claude-code-super-power",
+  "id": "claude-code-super-power",
+  "owner": {
+    "name": "Johnny Helder",
+    "url": "https://johnnyhelder.com"
+  },
+  "metadata": {
+    "description": "Método anti-vibe coding para Claude Code: pesquisa profunda antes de programar, TDD obrigatório, marketing digital aplicado, princípios anti-erro de Karpathy/Anthropic.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "claude-code-super-power",
+      "source": "./",
+      "description": "Skill akita-method + 8 slash commands /super-power:* (research, plan, start, phase, status, version, update, uninstall). Fluxo conversacional: coleta rica de contexto (docs/ + links sociais) → briefing extraído → pesquisa profunda customizada por tipo de projeto.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Johnny Helder",
+        "url": "https://johnnyhelder.com"
+      },
+      "keywords": [
+        "akita-method",
+        "anti-vibe-coding",
+        "tdd",
+        "marketing-digital",
+        "fase-0",
+        "pesquisa-profunda",
+        "karpathy",
+        "engenharia-software",
+        "pt-br",
+        "claude-code"
+      ],
+      "category": "workflow"
+    }
+  ]
+}

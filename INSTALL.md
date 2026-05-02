@@ -83,7 +83,7 @@ git clone --depth 1 --branch main --quiet \
 ### Passo 5 — Copiar para destinos locais
 
 ```bash
-cp -r "$TMP/repo/skill/akita-method" "$(pwd)/.claude/skills/akita-method"
+cp -r "$TMP/repo/skills/akita-method" "$(pwd)/.claude/skills/akita-method"
 cp -r "$TMP/repo/commands" "$(pwd)/.claude/commands/super-power"
 rm -rf "$TMP"
 ```

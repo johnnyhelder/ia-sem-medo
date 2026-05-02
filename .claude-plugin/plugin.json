@@ -1,0 +1,22 @@
+{
+  "name": "claude-code-super-power",
+  "description": "Método estruturado para criar projetos Claude Code com disciplina de engenharia sénior. Combina os 4 princípios anti-erro de Karpathy/Anthropic, o Akita Way (Anti-Vibe Coding + XP), e ferramentas auxiliares (Context7, LLM Council, Graphify). Inclui slash commands para Fase 0 (pesquisa profunda com coleta rica), planeamento, e gestão do método.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Johnny Helder",
+    "url": "https://johnnyhelder.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "akita-method",
+    "anti-vibe-coding",
+    "tdd",
+    "marketing-digital",
+    "fase-0",
+    "pesquisa-profunda",
+    "karpathy",
+    "engenharia-software"
+  ],
+  "skills": ["./skills/akita-method"],
+  "commands": ["./commands"]
+}

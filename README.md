@@ -28,7 +28,24 @@ Este repositório compila num só lugar:
 
 ---
 
-## ✨ FASE 01 — Instale (no projeto)
+## 🚀 FASE 01 — Instale via Plugin Marketplace (recomendado)
+
+> **NOVO:** instalação como plugin oficial do Claude Code. Sem auto-mode classifier. Sem terminal. 1 comando.
+
+Dentro do Claude Code, em qualquer pasta:
+
+```
+/plugin marketplace add johnnyhelder/claude-code-super-power
+/plugin install claude-code-super-power
+```
+
+**Pronto.** A skill e os 8 slash commands ficam disponíveis em todas as sessões (globalmente, sem fricção).
+
+> **Como funciona?** Plugins do Claude Code têm permissões pre-aprovadas pelo classifier. Resolvem o problema de auto-mode descrito abaixo.
+
+---
+
+## 📦 FASE 01 (alternativa) — Instalação local manual
 
 > **A skill instala-se na pasta do TEU projeto** (`.claude/` local), não no `~/.claude/` global.
 > Cada projeto onde queres usar a skill, instalas lá uma vez (10 segundos via 1 frase).
@@ -211,7 +228,7 @@ claude-code-super-power/
 │   ├── llm-council.md               5 conselheiros para decisões caras
 │   └── graphify.md                  Mapear corpus em grafo
 │
-├── skill/akita-method/              SKILL DO CLAUDE CODE
+├── skills/akita-method/             SKILL DO CLAUDE CODE
 │   ├── SKILL.md                     Orquestrador
 │   └── templates/                   Templates copiáveis
 │       ├── PLAN-TEMPLATE.md
