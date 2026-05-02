@@ -30,18 +30,29 @@ Este repositório compila num só lugar:
 
 ## 🚀 FASE 01 — Instale via Plugin Marketplace (recomendado)
 
-> **NOVO:** instalação como plugin oficial do Claude Code. Sem auto-mode classifier. Sem terminal. 1 comando.
+> **Validado em produção:** instalação como plugin oficial do Claude Code. Sem auto-mode classifier. Sem terminal. Sem paths hardcoded.
 
-Dentro do Claude Code, em qualquer pasta:
+Dentro do Claude Code (em qualquer pasta), cola estes **2 comandos pela ordem certa**:
+
+### Passo 1 — Adicionar o marketplace
 
 ```
 /plugin marketplace add johnnyhelder/claude-code-super-power
+```
+
+Resposta esperada: `Successfully added marketplace: claude-code-super-power`
+
+### Passo 2 — Instalar o plugin
+
+```
 /plugin install claude-code-super-power
 ```
 
-**Pronto.** A skill e os 8 slash commands ficam disponíveis em todas as sessões (globalmente, sem fricção).
+> ⚠️ **A ordem importa.** Se rodares `/plugin install` antes de `/plugin marketplace add`, vai dar `Plugin not found in any marketplace`. Adiciona o marketplace primeiro, depois instala.
 
-> **Como funciona?** Plugins do Claude Code têm permissões pre-aprovadas pelo classifier. Resolvem o problema de auto-mode descrito abaixo.
+**Pronto.** A skill e os 8 slash commands `/super-power:*` ficam disponíveis em todas as sessões, todas as pastas. Sem auto-mode bloqueando.
+
+> **Como funciona?** Plugins oficiais do Claude Code têm permissões pre-aprovadas pelo classifier — não precisam de `cp` para `~/.claude/`, são geridos internamente pelo Claude Code.
 
 ---
 

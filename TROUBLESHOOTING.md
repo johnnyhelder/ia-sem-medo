@@ -56,18 +56,29 @@ curl -sSL https://raw.githubusercontent.com/johnnyhelder/claude-code-super-power
 
 **Tempo:** 30 segundos. **Funciona sempre.**
 
-#### Solução 3 — Plugin Claude Code marketplace ✅ DISPONÍVEL
+#### Solução 3 — Plugin Claude Code marketplace ✅ VALIDADO
 
-**Esta é agora a forma RECOMENDADA.** O repositório foi convertido em plugin oficial Claude Code marketplace. Plugins têm permissões pre-aprovadas — não disparam o auto-mode classifier.
+**Esta é a forma RECOMENDADA.** Validado em produção (Linux + Macbook).
 
-Dentro do Claude Code, em qualquer pasta, cola:
+Dentro do Claude Code, em qualquer pasta, cola **estes 2 comandos pela ordem certa**:
 
 ```
 /plugin marketplace add johnnyhelder/claude-code-super-power
 /plugin install claude-code-super-power
 ```
 
-**Pronto.** A skill e os 8 slash commands ficam disponíveis em todas as sessões. Sem terminal, sem auto-mode bloqueio, sem fricção.
+**Resposta esperada:**
+- Comando 1 → `Successfully added marketplace: claude-code-super-power`
+- Comando 2 → instala o plugin
+
+> ⚠️ **A ordem importa.** Se rodares `/plugin install` ANTES de `/plugin marketplace add`, vai falhar com `Plugin "claude-code-super-power" not found in any marketplace`. Cola o `marketplace add` primeiro.
+
+**Vantagens:**
+- ✅ Sem auto-mode classifier bloqueando
+- ✅ Sem terminal externo
+- ✅ Sem paths hardcoded
+- ✅ Instalação global automática (todas as sessões)
+- ✅ Updates futuros via `/plugin update`
 
 Ver [issue #2](https://github.com/johnnyhelder/claude-code-super-power/issues/2) para detalhes da implementação.
 

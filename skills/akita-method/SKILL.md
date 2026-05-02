@@ -17,14 +17,21 @@ Se o utilizador disser que algo está bloqueado ("permission denied", "auto mode
 
 ### Solução 1 (RECOMENDADA — sem auto-mode bloqueio): Plugin Marketplace
 
-Pedir ao utilizador para colar **dentro do Claude Code**:
+Pedir ao utilizador para colar **dentro do Claude Code**, **pela ordem certa**:
 
 ```
 /plugin marketplace add johnnyhelder/claude-code-super-power
+```
+
+Esperar resposta: `Successfully added marketplace: claude-code-super-power`. Depois:
+
+```
 /plugin install claude-code-super-power
 ```
 
-Plugins têm permissões pre-aprovadas pelo Claude Code — passam o classifier sem fricção. Esta é a forma "oficial".
+> **A ordem importa.** Se o utilizador rodar `/plugin install` antes de `/plugin marketplace add`, vai falhar com "Plugin not found in any marketplace". Sempre adicionar o marketplace primeiro.
+
+Plugins têm permissões pre-aprovadas pelo Claude Code — passam o classifier sem fricção. Esta é a forma "oficial" e validada em produção.
 
 ### Solução 2 (sempre funciona): Terminal externo
 
