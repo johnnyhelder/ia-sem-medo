@@ -67,7 +67,7 @@ Quando estiver pronto, instalação será:
 /plugin install claude-code-super-power
 ```
 
-Ver [#1](https://github.com/johnnyhelder/claude-code-super-power/issues/1) para acompanhar o progresso.
+Ver [#2](https://github.com/johnnyhelder/claude-code-super-power/issues/2) para acompanhar o progresso.
 
 ---
 

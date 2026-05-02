@@ -288,7 +288,7 @@ Detalhe: [`metodo/07-desafio-7-dias.md`](metodo/07-desafio-7-dias.md)
 | zsh vs bash glob matching | ✅ Resolvido | Usado `find` POSIX em todos os commands |
 | Triggers naturais ambíguos | Workaround disponível | Incluir "super-power" na frase. [Detalhe](TROUBLESHOOTING.md#3--os-triggers-em-linguagem-natural-não-activam) |
 
-**Solução de longo prazo:** transformar em [Plugin Claude Code marketplace](https://github.com/johnnyhelder/claude-code-super-power/issues/1). Plugins têm permissões pre-aprovadas — eliminam o problema do auto-mode classifier.
+**Solução de longo prazo:** transformar em [Plugin Claude Code marketplace](https://github.com/johnnyhelder/claude-code-super-power/issues/2). Plugins têm permissões pre-aprovadas — eliminam o problema do auto-mode classifier.
 
 Para resolução completa de problemas: [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
 
